@@ -6,6 +6,8 @@ import { wastZone, eastZone } from "@/data";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -20,6 +22,7 @@ const Page = () => {
     zone: { value: "All", label: "All" },
     ward: { value: "All", label: "All" },
   });
+  const router = useRouter();
 
   // Comprehensive filtering function
   const applyFilters = () => {
@@ -116,11 +119,18 @@ const Page = () => {
                 <Filter className="h-4 w-4" />
                 <span className="sr-only">Toggle filters</span>
               </Button>
+              <Button
+                onClick={() => {
+                  Cookies.remove("isAuthenticated");
+                  router.push("/");
+                }}
+              >
+                Logout
+              </Button>
             </div>
           </div>
         </div>
       </header>
-
       <main className="container mx-auto px-4 py-8">
         <div className="mt-4">
           <ExpandableTable data={filteredData} />
