@@ -27,6 +27,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
@@ -60,6 +61,7 @@ export function AppSidebar({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
   const submenuRef = React.useRef<HTMLDivElement>(null);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -92,6 +94,11 @@ export function AppSidebar({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // If the current path is root, just return children without sidebar
+  if (pathname === "/") {
+    return <>{children}</>;
+  }
 
   return (
     <SidebarProvider>

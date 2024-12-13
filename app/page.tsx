@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie"; // Import js-cookie for client-side cookie management
+import Image from "next/image";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -61,7 +62,14 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <Image
+        src="/image.png"
+        width={160}
+        height={160}
+        alt="logo"
+        className="rounded-full mb-5"
+      />
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Login</CardTitle>
