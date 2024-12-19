@@ -14,6 +14,7 @@ const Page = () => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState(wastZone);
   const [searchTerm, setSearchTerm] = useState("");
+  const [vehicleSearchTerm, setVehicleSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [formData, setFormData] = useState({
     company: [{ value: "BMC", label: "BMC" }],
@@ -45,6 +46,15 @@ const Page = () => {
       );
     }
 
+    console.log("vehicleSearchTerm", vehicleSearchTerm);
+    if (vehicleSearchTerm) {
+      result = result.filter((job) =>
+        job.more_details.some((detail) =>
+          detail.Vehicle.toLowerCase().includes(vehicleSearchTerm.toLowerCase())
+        )
+      );
+    }
+
     // Filter by date range
     if (dateRange?.from && dateRange?.to) {
       result = result
@@ -70,7 +80,7 @@ const Page = () => {
   // Apply filters when dependencies change
   useEffect(() => {
     applyFilters();
-  }, [checkedItems, formData.zone, searchTerm, dateRange]);
+  }, [checkedItems, formData.zone, searchTerm, dateRange, vehicleSearchTerm]);
 
   // Reset dependent fields when zone changes
   useEffect(() => {
@@ -112,6 +122,16 @@ const Page = () => {
                   className="border rounded px-2 py-1 pr-8 w-48"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              </div>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search Vehicle Number"
+                  className="border rounded px-2 py-1 pr-8 w-48"
+                  value={vehicleSearchTerm}
+                  onChange={(e) => setVehicleSearchTerm(e.target.value)}
                 />
                 <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>

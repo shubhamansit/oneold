@@ -30,7 +30,6 @@ interface JobData {
 }
 
 interface MoreDetails {
-  Status: string;
   Date: string;
   Vehicle: string;
   "Start Time": string;
@@ -72,6 +71,16 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
     );
   };
 
+  function findMissedCheckPoints(moreDetails: MoreDetails[]) {
+    let count = 0;
+    for (let index = 0; index < moreDetails.length; index++) {
+      if (moreDetails[index]["Checkpoints Complete Status(%)"] == 100) {
+        count++;
+      }
+    }
+    return count;
+  }
+
   return (
     <div className="container mx-auto py-10">
       <Table>
@@ -106,9 +115,14 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
                 <TableCell>{row.Ward}</TableCell>
                 <TableCell>{row["Job Name"]}</TableCell>
                 <TableCell>{row["Job Type"]}</TableCell>
-                <TableCell>{row["Total Jobs"]}</TableCell>
-                <TableCell>{row.Completed}</TableCell>
-                <TableCell>{row["Completed With Issue"]}</TableCell>
+                <TableCell>{row["more_details"].length}</TableCell>
+                <TableCell>
+                  {findMissedCheckPoints(row["more_details"])}
+                </TableCell>
+                <TableCell>
+                  {row["more_details"].length -
+                    findMissedCheckPoints(row["more_details"])}
+                </TableCell>
                 <TableCell>{row.Failed}</TableCell>
                 <TableCell>{row.Penalty}</TableCell>
                 <TableCell>{row["Assigned Helpers"]}</TableCell>
