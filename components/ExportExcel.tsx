@@ -62,7 +62,15 @@ interface ExportExcelProps {
 
 const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
   const [isExporting, setIsExporting] = useState(false);
-
+  function findMissedCheckPoints(moreDetails: MoreDetails[]) {
+    let count = 0;
+    for (let index = 0; index < moreDetails.length; index++) {
+      if (moreDetails[index]["Checkpoints Complete Status(%)"] == 100) {
+        count++;
+      }
+    }
+    return count;
+  }
   const handleExportExcel = async () => {
     if (!data || data.length === 0) {
       toast.error("No data to export");
@@ -135,9 +143,10 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
           job.Ward,
           job["Job Name"],
           job["Job Type"],
-          job["Total Jobs"],
-          job.Completed,
-          job["Completed With Issue"],
+          job.more_details.length,
+          findMissedCheckPoints(job["more_details"]),
+          job["more_details"].length -
+            findMissedCheckPoints(job["more_details"]),
           job.Failed,
           job.Penalty,
           job["Assigned Helpers"],

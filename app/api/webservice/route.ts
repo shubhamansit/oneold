@@ -11,7 +11,6 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  console.log(searchParams.toString());
   const res = await fetch(
     "http://one.ansitindia.com/webservice?" + searchParams.toString()
   );

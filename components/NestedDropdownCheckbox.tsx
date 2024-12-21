@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Camera, ChevronDown, ChevronRight } from "lucide-react";
-import { eastZone, wastZone } from "@/data";
+import { eastZone, wastZone, general, BRIGRAJSINH } from "@/data";
 
 interface NestedItem {
   id: string;
@@ -12,7 +12,7 @@ interface NestedItem {
 }
 
 const createNestedData = (
-  data: typeof wastZone | typeof eastZone
+  data: typeof wastZone | typeof eastZone | typeof BRIGRAJSINH
 ): NestedItem[] => {
   const nestedData: NestedItem[] = [];
   const zoneMap = new Map<string, NestedItem>();
@@ -54,6 +54,7 @@ const createNestedData = (
 
 const nestedData = createNestedData(wastZone);
 const nestedData2 = createNestedData(eastZone);
+const nestedData3 = createNestedData(general);
 
 const collectItemIds = (item: NestedItem): string[] => {
   const ids = [item.label];
@@ -139,6 +140,7 @@ const NestedDropdownItem: React.FC<{
 };
 
 export const NestedDropdownCheckbox = (props: {
+  town: { value: string; label: string };
   zone: { value: string; label: string };
   ward: { value: string; label: string };
   onCheckedItemsChange?: (items: string[]) => void;
@@ -147,8 +149,6 @@ export const NestedDropdownCheckbox = (props: {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log("ADADADAWDAD");
-
     setCheckedItems([]);
   }, [props.validate]);
 
@@ -177,17 +177,27 @@ export const NestedDropdownCheckbox = (props: {
   };
 
   let filteredData: NestedItem[] = [];
+  if (props.town.value == "BRIGRAJSINH") {
+    if (props.zone.value === "WEST_ZONE") {
+      filteredData = createNestedData(BRIGRAJSINH);
+    }
+    if (props.ward.value === "All") {
+      return renderDropdown(filteredData);
+    }
+  } else {
+    if (props.zone.value === "WEST_ZONE") {
+      filteredData = nestedData;
+    } else if (props.zone.value === "EAST_ZONE") {
+      filteredData = nestedData2;
+    } else if (props.zone.value === "GENERAL") {
+      filteredData = nestedData3;
+    } else if (props.zone.value === "All") {
+      filteredData = [...nestedData, ...nestedData2, ...nestedData3];
+    }
 
-  if (props.zone.value === "WEST_ZONE") {
-    filteredData = nestedData;
-  } else if (props.zone.value === "EAST_ZONE") {
-    filteredData = nestedData2;
-  } else if (props.zone.value === "All") {
-    filteredData = [...nestedData, ...nestedData2];
-  }
-
-  if (props.ward.value === "All") {
-    return renderDropdown(filteredData);
+    if (props.ward.value === "All") {
+      return renderDropdown(filteredData);
+    }
   }
 
   // If ward.value is not "All", filter based on the specific ward label

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar, Filter, Search } from "lucide-react";
-import { wastZone, eastZone } from "@/data";
+import { wastZone, eastZone, general, BRIGRAJSINH } from "@/data"; // Add general import
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -19,7 +19,7 @@ const Page = () => {
   const [formData, setFormData] = useState({
     company: [{ value: "BMC", label: "BMC" }],
     branch: [{ value: "BMC", label: "BMC" }],
-    town: [{ value: "BHAVNAGAR_OSC", label: "BHAVNAGAR_OSC" }],
+    town: { value: "BHAVNAGAR_OSC", label: "BHAVNAGAR_OSC" },
     zone: { value: "All", label: "All" },
     ward: { value: "All", label: "All" },
   });
@@ -27,12 +27,25 @@ const Page = () => {
 
   // Comprehensive filtering function
   const applyFilters = () => {
-    let result =
-      formData.zone.value === "WEST_ZONE"
-        ? [...wastZone]
-        : formData.zone.value === "EAST_ZONE"
-        ? [...eastZone]
-        : [...wastZone, ...eastZone];
+    let result;
+    // Updated zone filtering logic to include general zone
+    if (formData.town.value == "BRIGRAJSINH") {
+      result = BRIGRAJSINH;
+    } else {
+      switch (formData.zone.value) {
+        case "WEST_ZONE":
+          result = [...wastZone];
+          break;
+        case "EAST_ZONE":
+          result = [...eastZone];
+          break;
+        case "GENERAL":
+          result = [...general];
+          break;
+        default:
+          result = [...wastZone, ...eastZone, ...general];
+      }
+    }
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -46,7 +59,7 @@ const Page = () => {
       );
     }
 
-    console.log("vehicleSearchTerm", vehicleSearchTerm);
+    // Filter by vehicle search term
     if (vehicleSearchTerm) {
       result = result.filter((job) =>
         job.more_details.some((detail) =>
@@ -55,24 +68,32 @@ const Page = () => {
       );
     }
 
-    // Filter by date range
+    // Date range filter
     if (dateRange?.from && dateRange?.to) {
+      const fromDate = new Date(dateRange.from);
+      const toDate = new Date(dateRange.to);
+
+      // Set the time to start of day for fromDate and end of day for toDate
+      fromDate.setHours(0, 0, 0, 0);
+      toDate.setHours(23, 59, 59, 999);
+
       result = result
         .map((job) => {
-          // Filter more_details to only include entries within the date range
           const filteredMoreDetails = job.more_details.filter((detail) => {
             const jobDate = new Date(detail.Date);
-            // @ts-ignore
-            return jobDate >= dateRange.from && jobDate <= dateRange.to;
+            // Set the time to noon to avoid timezone issues
+            jobDate.setHours(12, 0, 0, 0);
+
+            return jobDate >= fromDate && jobDate <= toDate;
           });
 
-          // Only return the job if it has matching more_details
           return filteredMoreDetails.length > 0
             ? { ...job, more_details: filteredMoreDetails }
             : null;
         })
-        .filter(Boolean) as typeof result; // Remove null entries
+        .filter(Boolean) as typeof result;
     }
+
     // @ts-ignore
     setFilteredData(result);
   };
@@ -80,7 +101,14 @@ const Page = () => {
   // Apply filters when dependencies change
   useEffect(() => {
     applyFilters();
-  }, [checkedItems, formData.zone, searchTerm, dateRange, vehicleSearchTerm]);
+  }, [
+    checkedItems,
+    formData.zone,
+    searchTerm,
+    dateRange,
+    vehicleSearchTerm,
+    formData.town,
+  ]);
 
   // Reset dependent fields when zone changes
   useEffect(() => {
@@ -164,6 +192,7 @@ const Page = () => {
       >
         <FiltersForm
           filteredData={filteredData}
+          // @ts-ignore
           formData={formData}
           onClose={toggleFilter}
           onCheckedItemsChange={handleCheckedItemsChange}
