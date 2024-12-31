@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Filter, Search } from "lucide-react";
-import { wastZone, eastZone, general, BRIGRAJSINH } from "@/data"; // Add general import
+import { Filter, Search } from "lucide-react";
+import { wastZone, eastZone, general, BRIGRAJSINH } from "@/data/index"; // Add general import
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -77,6 +77,8 @@ const Page = () => {
       fromDate.setHours(0, 0, 0, 0);
       toDate.setHours(23, 59, 59, 999);
 
+      console.log("fromDate", fromDate, toDate);
+
       result = result
         .map((job) => {
           const filteredMoreDetails = job.more_details.filter((detail) => {
@@ -136,6 +138,7 @@ const Page = () => {
     setCheckedItems(items);
   };
 
+  console.log(dateRange);
   return (
     <div className="relative min-h-screen w-full">
       <header className="sticky top-0 z-10 bg-white border-b">

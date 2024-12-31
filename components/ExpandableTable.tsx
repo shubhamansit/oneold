@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { wastZone } from "@/data/index";
+import { wastZone } from "@/data/index2";
 
 interface JobData {
   Branch: string;

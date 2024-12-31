@@ -209,7 +209,7 @@ import SelectBox from "react-select";
 import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { NestedDropdownCheckbox } from "./NestedDropdownCheckbox";
-import { BRIGRAJSINH, eastZone, wastZone } from "@/data";
+import { BRIGRAJSINH, eastZone, wastZone } from "@/data/index";
 import { Calendar } from "./ui/calendar";
 import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
