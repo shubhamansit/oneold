@@ -148,7 +148,7 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
                               {Object.values(detail).map(
                                 (value, valueIndex) => (
                                   <TableCell key={valueIndex}>
-                                    {value}
+                                    {value || "--"}
                                   </TableCell>
                                 )
                               )}
