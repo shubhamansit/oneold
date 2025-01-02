@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Camera, ChevronDown, ChevronRight } from "lucide-react";
-import { eastZone, wastZone, general, BRIGRAJSINH } from "@/data/index2";
+import { eastZone, wastZone, general, BRIGRAJSINH } from "@/data/index";
 
 interface NestedItem {
   id: string;
