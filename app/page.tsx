@@ -61,7 +61,7 @@ const LoginPage = () => {
       if (email.toLowerCase() === "bhavnagar@gmail.com") {
         router.push("/jobsummary");
       } else {
-        router.push("/worksummary");-
+        router.push("/worksummary");
       }
     } else {
       // Error notification for incorrect credentials

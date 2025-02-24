@@ -35,6 +35,33 @@ interface customeJwtPayload extends JwtPayload {
   email: string;
 }
 
+const menuItems = [
+  { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
+  { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
+  {
+    id: "menu_03",
+    title: "Reports",
+    icon: FileText,
+    href: "#",
+    subMenu: [
+      {
+        title: "Job",
+        items: [
+          {
+            name: "Job Summary",
+            href: "/jobsummary",
+          },
+          {
+            name: "Job Details Summary",
+            href: "/jobdetailssummary",
+          },
+        ],
+      },
+    ],
+  },
+  { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
+];
+
 export function AppSidebar({
   children,
 }: Readonly<{
