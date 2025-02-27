@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie"; // Import js-cookie for client-side cookie management
+import Cookies from "js-cookie";
 import Image from "next/image";
 import jwt from "jsonwebtoken";
 
