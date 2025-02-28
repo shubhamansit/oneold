@@ -67,7 +67,7 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
 
   const toggleRow = (index: number) => {
     setExpandedRows((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
 
@@ -150,7 +150,7 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
                                   <TableCell key={valueIndex}>
                                     {value || "--"}
                                   </TableCell>
-                                )
+                                ),
                               )}
                             </TableRow>
                           ))}

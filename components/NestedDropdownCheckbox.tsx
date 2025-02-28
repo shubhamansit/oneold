@@ -12,7 +12,7 @@ interface NestedItem {
 }
 
 const createNestedData = (
-  data: typeof wastZone | typeof eastZone | typeof BRIGRAJSINH
+  data: typeof wastZone | typeof eastZone | typeof BRIGRAJSINH,
 ): NestedItem[] => {
   const nestedData: NestedItem[] = [];
   const zoneMap = new Map<string, NestedItem>();
@@ -205,7 +205,7 @@ export const NestedDropdownCheckbox = (props: {
     return {
       ...zone,
       children: zone.children?.filter(
-        (child) => child.label === props.ward.label
+        (child) => child.label === props.ward.label,
       ),
     };
   });

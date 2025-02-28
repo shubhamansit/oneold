@@ -12,7 +12,7 @@ export async function OPTIONS() {
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const res = await fetch(
-    "http://one.ansitindia.com/webservice?" + searchParams.toString()
+    "http://one.ansitindia.com/webservice?" + searchParams.toString(),
   );
   const data = await res.json();
 

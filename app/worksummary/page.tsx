@@ -210,17 +210,44 @@ const WorkHourSummary = () => {
           </TableHeader>
           <TableBody>
             {Object.entries(
-              filteredData.reduce(
-                (acc: { [key: string]: DisplayTrip[] }, trip) => {
+              filteredData
+                // Sort all data by Start Datetime before grouping
+                .sort((a, b) => {
+                  const dateA = parse(
+                    a["Start Datetime"],
+                    "yyyy-MM-dd HH:mm:ss",
+                    new Date()
+                  );
+                  const dateB = parse(
+                    b["Start Datetime"],
+                    "yyyy-MM-dd HH:mm:ss",
+                    new Date()
+                  );
+                  return dateA.getTime() - dateB.getTime();
+                })
+                .reduce((acc: { [key: string]: DisplayTrip[] }, trip) => {
                   if (!acc[trip.vehicleNumber]) {
                     acc[trip.vehicleNumber] = [];
                   }
                   acc[trip.vehicleNumber].push(trip);
                   return acc;
-                },
-                {}
-              )
+                }, {})
             ).map(([vehicleNumber, trips]) => {
+              // Sort trips within each vehicle group by Start Datetime
+              trips.sort((a, b) => {
+                const dateA = parse(
+                  a["Start Datetime"],
+                  "yyyy-MM-dd HH:mm:ss",
+                  new Date()
+                );
+                const dateB = parse(
+                  b["Start Datetime"],
+                  "yyyy-MM-dd HH:mm:ss",
+                  new Date()
+                );
+                return dateA.getTime() - dateB.getTime();
+              });
+
               const isExpanded = expandedRows.includes(vehicleNumber);
               const totalDistance = trips
                 .reduce(

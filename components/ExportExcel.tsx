@@ -83,7 +83,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
       const worksheet = workbook.addWorksheet(
         exportMode === "summary"
           ? "Summary Report"
-          : "Detail With Summary Report"
+          : "Detail With Summary Report",
       );
 
       // Add company logo
@@ -205,13 +205,13 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
           exportMode === "summary"
             ? "Summary Report"
             : "Detail With Summary Report"
-        }.xlsx`
+        }.xlsx`,
       );
 
       toast.success(
         `${
           exportMode === "summary" ? "Summary" : "Detailed"
-        } report exported successfully`
+        } report exported successfully`,
       );
     } catch (error) {
       console.error("Error exporting Excel:", error);
@@ -230,8 +230,8 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
       {isExporting
         ? "Exporting..."
         : exportMode === "summary"
-        ? "Summary"
-        : "Details With Summary"}
+          ? "Summary"
+          : "Details With Summary"}
     </Button>
   );
 };

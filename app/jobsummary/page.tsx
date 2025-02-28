@@ -55,7 +55,7 @@ const Page = () => {
     // Filter by job name search term
     if (searchTerm) {
       result = result.filter((job) =>
-        job["Job Name"].toLowerCase().includes(searchTerm.toLowerCase())
+        job["Job Name"].toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -63,8 +63,10 @@ const Page = () => {
     if (vehicleSearchTerm) {
       result = result.filter((job) =>
         job.more_details.some((detail) =>
-          detail.Vehicle.toLowerCase().includes(vehicleSearchTerm.toLowerCase())
-        )
+          detail.Vehicle.toLowerCase().includes(
+            vehicleSearchTerm.toLowerCase(),
+          ),
+        ),
       );
     }
 

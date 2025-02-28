@@ -42,7 +42,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
       const worksheet = workbook.addWorksheet(
         exportMode === "summary"
           ? "Work Hour Summary"
-          : "Work Hour Summary Details"
+          : "Work Hour Summary Details",
       );
 
       // Add company logo (optional, adjust path as needed)
@@ -150,18 +150,18 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
                   parse(
                     trip["Start Datetime"],
                     "yyyy-MM-dd HH:mm:ss",
-                    new Date()
+                    new Date(),
                   ),
-                  "dd-MM-yyyy HH:mm:ss a"
+                  "dd-MM-yyyy HH:mm:ss a",
                 ),
                 trip["Start Location"],
                 format(
                   parse(
                     trip["End Datetime"],
                     "yyyy-MM-dd HH:mm:ss",
-                    new Date()
+                    new Date(),
                   ),
-                  "dd-MM-yyyy HH:mm:ss a"
+                  "dd-MM-yyyy HH:mm:ss a",
                 ),
                 trip["End Location"],
                 trip.Driver,
@@ -202,13 +202,13 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
           exportMode === "summary"
             ? "Work Hour Summary"
             : "Work Hour Summary Details"
-        }.xlsx`
+        }.xlsx`,
       );
 
       toast.success(
         `${
           exportMode === "summary" ? "Summary" : "Detailed"
-        } report exported successfully`
+        } report exported successfully`,
       );
     } catch (error) {
       console.error("Error exporting Excel:", error);
@@ -227,8 +227,8 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
       {isExporting
         ? "Exporting..."
         : exportMode === "summary"
-        ? "Summary"
-        : "Details With Summary"}
+          ? "Summary"
+          : "Details With Summary"}
     </Button>
   );
 };

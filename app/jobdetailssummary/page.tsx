@@ -27,8 +27,8 @@ const Page = () => {
       formData.zone.value === "WEST_ZONE"
         ? [...wastZone]
         : formData.zone.value === "EAST_ZONE"
-        ? [...eastZone]
-        : [...wastZone, ...eastZone];
+          ? [...eastZone]
+          : [...wastZone, ...eastZone];
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -38,7 +38,7 @@ const Page = () => {
     // Filter by job name search term
     if (searchTerm) {
       result = result.filter((job) =>
-        job["Job Name"].toLowerCase().includes(searchTerm.toLowerCase())
+        job["Job Name"].toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
