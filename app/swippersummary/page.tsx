@@ -7255,12 +7255,12 @@ const WorkHourSummary = () => {
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<ShiftRecord[]>([]);
   const [vehicleSummaries, setVehicleSummaries] = useState<VehicleSummary[]>(
-    []
+    [],
   );
 
   // Helper function to parse time string (HH:MM or H:MM format)
   const parseTimeString = (
-    timeStr: string
+    timeStr: string,
   ): { hours: number; minutes: number } => {
     const parts = timeStr.split(":");
     return {
@@ -7303,13 +7303,13 @@ const WorkHourSummary = () => {
         const totalKmsLogbook = records.reduce(
           (sum, record) =>
             sum + parseFloat(record["Kms. As per Logbook"] || "0"),
-          0
+          0,
         );
 
         const totalKmsGPS = records.reduce(
           (sum, record) =>
             sum + parseFloat(record["Kms. As per GPS System"] || "0"),
-          0
+          0,
         );
 
         const shiftHours = records.map((record) => record["Shift Hours"]);
@@ -7329,7 +7329,7 @@ const WorkHourSummary = () => {
         };
       });
     },
-    []
+    [],
   );
 
   // Parse and format date
@@ -7352,7 +7352,7 @@ const WorkHourSummary = () => {
     // Apply search filter
     if (searchTerm) {
       results = results.filter((record) =>
-        record["Veh. No"].toLowerCase().includes(searchTerm.toLowerCase())
+        record["Veh. No"].toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -7368,14 +7368,14 @@ const WorkHourSummary = () => {
     // Apply vehicle number filter
     if (filters.vehicleNumber) {
       results = results.filter(
-        (record) => record["Veh. No"] === filters.vehicleNumber
+        (record) => record["Veh. No"] === filters.vehicleNumber,
       );
     }
 
     // Apply shift type filter
     if (filters.shiftType) {
       results = results.filter(
-        (record) => record["Day/Night"] === filters.shiftType
+        (record) => record["Day/Night"] === filters.shiftType,
       );
     }
 
@@ -7401,7 +7401,7 @@ const WorkHourSummary = () => {
     setExpandedRows((prev) =>
       prev.includes(vehicleNumber)
         ? prev.filter((v) => v !== vehicleNumber)
-        : [...prev, vehicleNumber]
+        : [...prev, vehicleNumber],
     );
   };
 

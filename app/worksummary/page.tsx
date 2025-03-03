@@ -1343,7 +1343,7 @@ const WorkHourSummary = () => {
       results = results.filter(
         (trip) =>
           trip.vehicleNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          trip.Driver.toLowerCase().includes(searchTerm.toLowerCase())
+          trip.Driver.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -1352,7 +1352,7 @@ const WorkHourSummary = () => {
       const tripStart = parse(
         trip["Start Datetime"],
         "yyyy-MM-dd HH:mm:ss",
-        new Date()
+        new Date(),
       );
 
       return (
@@ -1364,7 +1364,7 @@ const WorkHourSummary = () => {
     // Apply vehicle number filter
     if (filters.vehicleNumber) {
       results = results.filter(
-        (trip) => trip.vehicleNumber === filters.vehicleNumber
+        (trip) => trip.vehicleNumber === filters.vehicleNumber,
       );
     }
 
@@ -1379,7 +1379,7 @@ const WorkHourSummary = () => {
     setExpandedRows((prev) =>
       prev.includes(vehicleNumber)
         ? prev.filter((v) => v !== vehicleNumber)
-        : [...prev, vehicleNumber]
+        : [...prev, vehicleNumber],
     );
   };
 
@@ -1470,12 +1470,12 @@ const WorkHourSummary = () => {
                   const dateA = parse(
                     a["Start Datetime"],
                     "yyyy-MM-dd HH:mm:ss",
-                    new Date()
+                    new Date(),
                   );
                   const dateB = parse(
                     b["Start Datetime"],
                     "yyyy-MM-dd HH:mm:ss",
-                    new Date()
+                    new Date(),
                   );
                   return dateA.getTime() - dateB.getTime();
                 })
@@ -1485,19 +1485,19 @@ const WorkHourSummary = () => {
                   }
                   acc[trip.vehicleNumber].push(trip);
                   return acc;
-                }, {})
+                }, {}),
             ).map(([vehicleNumber, trips]) => {
               // Sort trips within each vehicle group by Start Datetime
               trips.sort((a, b) => {
                 const dateA = parse(
                   a["Start Datetime"],
                   "yyyy-MM-dd HH:mm:ss",
-                  new Date()
+                  new Date(),
                 );
                 const dateB = parse(
                   b["Start Datetime"],
                   "yyyy-MM-dd HH:mm:ss",
-                  new Date()
+                  new Date(),
                 );
                 return dateA.getTime() - dateB.getTime();
               });
@@ -1506,7 +1506,7 @@ const WorkHourSummary = () => {
               const totalDistance = trips
                 .reduce(
                   (sum, trip) => sum + parseFloat(trip.Distance || "0"),
-                  0
+                  0,
                 )
                 .toFixed(2);
               const totalDuration = trips.reduce((sum, trip) => {
@@ -1571,9 +1571,9 @@ const WorkHourSummary = () => {
                                     parse(
                                       trip["Start Datetime"],
                                       "yyyy-MM-dd HH:mm:ss",
-                                      new Date()
+                                      new Date(),
                                     ),
-                                    "dd-MM-yyyy HH:mm:ss a"
+                                    "dd-MM-yyyy HH:mm:ss a",
                                   )}
                                 </TableCell>
                                 <TableCell>{trip["Start Location"]}</TableCell>
@@ -1582,9 +1582,9 @@ const WorkHourSummary = () => {
                                     parse(
                                       trip["End Datetime"],
                                       "yyyy-MM-dd HH:mm:ss",
-                                      new Date()
+                                      new Date(),
                                     ),
-                                    "dd-MM-yyyy HH:mm:ss a"
+                                    "dd-MM-yyyy HH:mm:ss a",
                                   )}
                                 </TableCell>
                                 <TableCell>{trip["End Location"]}</TableCell>
@@ -1672,7 +1672,7 @@ const WorkHourSummary = () => {
                 >
                   <option value="">All</option>
                   {Array.from(
-                    new Set(flattenData().map((trip) => trip.vehicleNumber))
+                    new Set(flattenData().map((trip) => trip.vehicleNumber)),
                   ).map((vehicleNumber) => (
                     <option key={vehicleNumber} value={vehicleNumber}>
                       {vehicleNumber}

@@ -19,8 +19,7 @@ export async function GET(request: NextRequest) {
   const updatedData = data.data.vehicles.map((vehicle: any) => {
     const { jobs, ...rest } = vehicle; // Destructure to separate jobs from the rest
     const job = jobs[0];
-    console.log(job); // Assume the first job object
-    return { ...rest, jobs: job }; // Merge vehicle and job objects
+    return { ...rest, ...job }; // Merge vehicle and job objects
   });
   return NextResponse.json({
     data: {

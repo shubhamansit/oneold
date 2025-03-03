@@ -24,7 +24,7 @@ export function TimeField({
 
   const updateTime = (
     type: "hours" | "minutes" | "seconds",
-    newValue: number
+    newValue: number,
   ) => {
     const newDate = new Date(value);
 

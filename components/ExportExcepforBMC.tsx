@@ -55,7 +55,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
       const worksheet = workbook.addWorksheet(
         exportMode === "summary"
           ? "Swipper Summary"
-          : "Swipper Summary Details"
+          : "Swipper Summary Details",
       );
 
       // Add company logo (optional, adjust path as needed)
@@ -106,7 +106,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
             .reduce(
               (sum, trip) =>
                 sum + parseFloat(trip["Kms. As per GPS System"] || "0"),
-              0
+              0,
             )
             .toFixed(2);
           const totalDuration = trips.reduce((sum, trip) => {
@@ -201,13 +201,13 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
           exportMode === "summary"
             ? "Swipper Summary"
             : "Swipper Summary Details"
-        }.xlsx`
+        }.xlsx`,
       );
 
       toast.success(
         `${
           exportMode === "summary" ? "Summary" : "Detailed"
-        } report exported successfully`
+        } report exported successfully`,
       );
     } catch (error) {
       console.error("Error exporting Excel:", error);
