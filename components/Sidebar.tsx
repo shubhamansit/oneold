@@ -105,6 +105,10 @@ export function AppSidebar({
                       name: "Work Hour Summary",
                       href: "/worksummary",
                     },
+                    {
+                      name: "Swipper Summary",
+                      href: "/swippersummary",
+                    },
                   ],
                 },
               ],
