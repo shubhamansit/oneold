@@ -604,7 +604,7 @@
 // };
 
 // export default EnhancedWorkHourSummary;
-
+"useclient";
 import React, { useState, useEffect, useRef } from "react";
 import {
   Table,
@@ -685,11 +685,17 @@ interface VehicleSummary {
 
 // Playback controller component
 const PlaybackControls = ({
-  onPlay,
-  onPause,
-  onReset,
-  onSpeedChange,
-  isPlaying,
+    // @ts-ignore
+    onPlay,
+    // @ts-ignore
+    onPause,
+    // @ts-ignore
+    onReset,
+    // @ts-ignore
+    onSpeedChange,
+    // @ts-ignore
+    isPlaying,
+    // @ts-ignore
   playbackSpeed,
 }) => {
   return (
@@ -998,8 +1004,11 @@ const samplePathData: LocationPoint[] = [
 
 // Main component
 const EnhancedWorkHourSummary = ({
+  // @ts-ignore
   vehicleSummaries,
+  // @ts-ignore
   expandedRows,
+  // @ts-ignore
   toggleRow,
 }) => {
   const [activePlayback, setActivePlayback] = useState<string | null>(null);
@@ -1068,7 +1077,9 @@ const EnhancedWorkHourSummary = ({
 
   // Convert path data to GPS track for each record
   useEffect(() => {
+    // @ts-ignore
     vehicleSummaries.forEach((summary) => {
+      // @ts-ignore
       summary.records.forEach((record) => {
         if (!record.gpsTrack) {
           // Parse dates from record
@@ -1111,7 +1122,7 @@ const EnhancedWorkHourSummary = ({
     }
 
     const summary = vehicleSummaries.find(
-      (s) => s.vehicleNumber === vehicleNumber
+      (s:any) => s.vehicleNumber === vehicleNumber
     );
     if (!summary) return;
 
@@ -1166,7 +1177,7 @@ const EnhancedWorkHourSummary = ({
 
     const [vehicleNumber, recordIndex] = activePlayback.split("-");
     const summary = vehicleSummaries.find(
-      (s) => s.vehicleNumber === vehicleNumber
+      (s:any) => s.vehicleNumber === vehicleNumber
     );
     if (!summary) return;
 
@@ -1177,7 +1188,7 @@ const EnhancedWorkHourSummary = ({
 
     // Find current index
     const currentIndex = track.findIndex(
-      (p) => p.lat === currentPosition.lat && p.lng === currentPosition.lng
+      (p:any) => p.lat === currentPosition.lat && p.lng === currentPosition.lng
     );
 
     if (currentIndex === -1 || currentIndex >= track.length - 1) return;
@@ -1207,7 +1218,7 @@ const EnhancedWorkHourSummary = ({
 
     const [vehicleNumber, recordIndex] = activePlayback.split("-");
     const summary = vehicleSummaries.find(
-      (s) => s.vehicleNumber === vehicleNumber
+      (s:any) => s.vehicleNumber === vehicleNumber
     );
     if (!summary) return;
 
@@ -1377,7 +1388,7 @@ const EnhancedWorkHourSummary = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {vehicleSummaries.map((summary) => {
+          {vehicleSummaries.map((summary:any) => {
             const isExpanded = expandedRows.includes(summary.vehicleNumber);
 
             return (
@@ -1428,7 +1439,7 @@ const EnhancedWorkHourSummary = ({
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {summary.records.map((record, index) => {
+                          {summary.records.map((record:any, index:any) => {
                             const isActive =
                               activePlayback ===
                               `${summary.vehicleNumber}-${index}`;
