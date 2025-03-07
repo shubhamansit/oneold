@@ -330,9 +330,21 @@ const EnhancedWorkHourSummary = ({
 
     setIsPlaying(true);
 
-    const [vehicleNumber, recordIndex] = activePlayback.split("-");
+    // const [vehicleNumber, recordIndex] = activePlayback.split("-");
+
+    const vehicleNumberarr = activePlayback.split("-");
+    const recordIndex = vehicleNumberarr[4];
+
     const summary = vehicleSummaries.find(
-      (s: any) => s.vehicleNumber === vehicleNumber
+      (s: any) =>
+        s.vehicleNumber ===
+        vehicleNumberarr[0] +
+          "-" +
+          vehicleNumberarr[1] +
+          "-" +
+          vehicleNumberarr[2] +
+          "-" +
+          vehicleNumberarr[3]
     );
     if (!summary) return;
 
@@ -455,7 +467,7 @@ const EnhancedWorkHourSummary = ({
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                attribution="ANS IT INDIA"
               />
 
               {/* Current position marker */}
@@ -535,7 +547,6 @@ const EnhancedWorkHourSummary = ({
             <TableHead className="w-12"></TableHead>
             <TableHead>Vehicle No.</TableHead>
             <TableHead>Total Shift Hours</TableHead>
-            <TableHead>Kms. (Logbook)</TableHead>
             <TableHead>Kms. (GPS)</TableHead>
             <TableHead>Running Hours</TableHead>
             <TableHead>Idle Time</TableHead>
@@ -564,7 +575,6 @@ const EnhancedWorkHourSummary = ({
                   </TableCell>
                   <TableCell>{summary.vehicleNumber}</TableCell>
                   <TableCell>{summary.totalShiftHours}</TableCell>
-                  <TableCell>{summary.totalKmsLogbook.toFixed(2)}</TableCell>
                   <TableCell>{summary.totalKmsGPS.toFixed(2)}</TableCell>
                   <TableCell>{summary.totalRunningHours}</TableCell>
                   <TableCell>{summary.totalIdleTime}</TableCell>
