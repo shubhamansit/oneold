@@ -53,9 +53,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
     try {
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet(
-        exportMode === "summary"
-          ? "Swipper Summary"
-          : "Swipper Summary Details",
+        exportMode === "summary" ? "Swipper Summary" : "Swipper Summary Details"
       );
 
       // Add company logo (optional, adjust path as needed)
@@ -106,7 +104,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
             .reduce(
               (sum, trip) =>
                 sum + parseFloat(trip["Kms. As per GPS System"] || "0"),
-              0,
+              0
             )
             .toFixed(2);
           const totalDuration = trips.reduce((sum, trip) => {
@@ -155,19 +153,39 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
             currentRow++;
 
             trips.forEach((trip) => {
-              const detailRow = [
-                trip["Date"],
-                trip["Veh. No"],
-                trip["Day/Night"],
-                format(parse(trip["Start Time"], "HH:mm", new Date()), "HH:mm"),
-                format(parse(trip["End Time"], "HH:mm", new Date()), "HH:mm"),
-                trip["Shift Hours"],
-                trip["Kms. As per Logbook"],
-                trip["Kms. As per GPS System"],
-                trip["Running hours."],
-                trip["Idel "],
-                trip["Stopage"],
-              ];
+              var detailRow;
+              if (trip["Start Time"] == "--") {
+                detailRow = [
+                  trip["Date"],
+                  trip["Veh. No"],
+                  trip["Day/Night"],
+                  trip["Start Time"],
+                  trip["End Time"],
+                  trip["Shift Hours"],
+                  trip["Kms. As per Logbook"],
+                  trip["Kms. As per GPS System"],
+                  trip["Running hours."],
+                  trip["Idel "],
+                  trip["Stopage"],
+                ];
+              } else {
+                detailRow = [
+                  trip["Date"],
+                  trip["Veh. No"],
+                  trip["Day/Night"],
+                  format(
+                    parse(trip["Start Time"], "HH:mm", new Date()),
+                    "HH:mm"
+                  ),
+                  format(parse(trip["End Time"], "HH:mm", new Date()), "HH:mm"),
+                  trip["Shift Hours"],
+                  trip["Kms. As per Logbook"],
+                  trip["Kms. As per GPS System"],
+                  trip["Running hours."],
+                  trip["Idel "],
+                  trip["Stopage"],
+                ];
+              }
               worksheet.addRow(detailRow);
               currentRow++;
             });
@@ -201,13 +219,13 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
           exportMode === "summary"
             ? "Swipper Summary"
             : "Swipper Summary Details"
-        }.xlsx`,
+        }.xlsx`
       );
 
       toast.success(
         `${
           exportMode === "summary" ? "Summary" : "Detailed"
-        } report exported successfully`,
+        } report exported successfully`
       );
     } catch (error) {
       console.error("Error exporting Excel:", error);

@@ -209,7 +209,7 @@ const EnhancedWorkHourSummary = ({
   useEffect(() => {
     // @ts-ignore
     console.log(vehicleSummaries);
-
+    // @ts-ignore
     vehicleSummaries.forEach((summary) => {
       // @ts-ignore
       summary.records.forEach((record) => {
@@ -223,47 +223,48 @@ const EnhancedWorkHourSummary = ({
             const [hours, minutes] = timeStr.split(":");
             return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
           };
+          if (record["Start Time"] != "--") {
+            const startTime = new Date(
+              `${formattedDate}T${formatTimeString(record["Start Time"])}`
+            );
+            const endTime = new Date(
+              `${formattedDate}T${formatTimeString(record["End Time"])}`
+            );
+            if (endTime < startTime) {
+              endTime.setDate(endTime.getDate() + 1);
+            }
 
-          const startTime = new Date(
-            `${formattedDate}T${formatTimeString(record["Start Time"])}`
-          );
-          const endTime = new Date(
-            `${formattedDate}T${formatTimeString(record["End Time"])}`
-          );
+            if (record["Veh. No"] == "GJ-06-JF-3619") {
+              record.gpsTrack = generateGpsTrackFromLocations(
+                samplePathData3619,
+                startTime,
+                endTime
+              );
+            }
+            if (record["Veh. No"] == "GJ-04-GB-0399") {
+              record.gpsTrack = generateGpsTrackFromLocations(
+                samplePathData0399,
+                startTime,
+                endTime
+              );
+            }
+            if (record["Veh. No"] == "GJ-04-GB-0108") {
+              record.gpsTrack = generateGpsTrackFromLocations(
+                samplePathData0108,
+                startTime,
+                endTime
+              );
+            }
+            if (record["Veh. No"] == "GJ-06-JF-3991") {
+              record.gpsTrack = generateGpsTrackFromLocations(
+                samplePathData3991,
+                startTime,
+                endTime
+              );
+            }
+          }
 
           // Handle cases where end time is on the next day
-          if (endTime < startTime) {
-            endTime.setDate(endTime.getDate() + 1);
-          }
-
-          if (record["Veh. No"] == "GJ-06-JF-3619") {
-            record.gpsTrack = generateGpsTrackFromLocations(
-              samplePathData3619,
-              startTime,
-              endTime
-            );
-          }
-          if (record["Veh. No"] == "GJ-04-GB-0399") {
-            record.gpsTrack = generateGpsTrackFromLocations(
-              samplePathData0399,
-              startTime,
-              endTime
-            );
-          }
-          if (record["Veh. No"] == "GJ-04-GB-0108") {
-            record.gpsTrack = generateGpsTrackFromLocations(
-              samplePathData0108,
-              startTime,
-              endTime
-            );
-          }
-          if (record["Veh. No"] == "GJ-06-JF-3991") {
-            record.gpsTrack = generateGpsTrackFromLocations(
-              samplePathData3991,
-              startTime,
-              endTime
-            );
-          }
           // Generate track from sample locations
         }
       });
@@ -633,6 +634,7 @@ const EnhancedWorkHourSummary = ({
                                 <TableCell>{record.Stopage}</TableCell>
                                 <TableCell>
                                   <Button
+                                    disabled={record["Start Time"] == "--"}
                                     variant={isActive ? "secondary" : "outline"}
                                     size="sm"
                                     onClick={() => {

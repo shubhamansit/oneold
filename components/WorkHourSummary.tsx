@@ -56,8 +56,8 @@ const WorkHourSummary = () => {
 
   // Use full Date objects for both start and end times
   const [dateRange, setDateRange] = useState({
-    startDateTime: new Date("2024-07-01T00:00:00"),
-    endDateTime: new Date("2024-07-31T23:59:59"),
+    startDateTime: new Date("2024-07-07T00:00:00"),
+    endDateTime: new Date("2024-08-28T23:59:59"),
   });
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -168,10 +168,11 @@ const WorkHourSummary = () => {
     // Apply date range filter
     results = results.filter((record) => {
       const recordDate = parseDate(record.Date);
-      return (
-        recordDate >= new Date(dateRange.startDateTime.setHours(0, 0, 0, 0)) &&
-        recordDate <= new Date(dateRange.endDateTime.setHours(23, 59, 59, 999))
-      );
+      const startOfDay = new Date(dateRange.startDateTime);
+      startOfDay.setHours(0, 0, 0, 0);
+      const endOfDay = new Date(dateRange.endDateTime);
+      endOfDay.setHours(23, 59, 59, 999);
+      return recordDate >= startOfDay && recordDate <= endOfDay;
     });
 
     // Apply vehicle number filter
@@ -216,8 +217,9 @@ const WorkHourSummary = () => {
 
   // Format the date range for display in header
   const getFormattedDateRangeHeader = () => {
-    return `${format(dateRange.startDateTime, "dd-MM-yyyy")} - ${format(dateRange.endDateTime, "dd-MM-yyyy")}`;
+    return `${format(dateRange.startDateTime, "dd-MM-yyyy HH:mm:ss a")} - ${format(dateRange.endDateTime, "dd-MM-yyyy HH:mm:ss a")}`;
   };
+  console.log(dateRange);
 
   // Prepare data for Excel export
   const prepareExportData = () => {
@@ -362,33 +364,46 @@ const WorkHourSummary = () => {
                 </select>
               </div>
 
-              <div>
-                <label className="text-sm font-medium">Start Date</label>
+              <div className="ml-10">
+                <label className="text-sm font-medium">Start Date & Time</label>
                 <div className="mt-1">
                   <DatePicker
+                    key={dateRange.startDateTime.toString()}
                     selected={dateRange.startDateTime}
-                    onChange={(date) =>
-                      date &&
-                      setDateRange({ ...dateRange, startDateTime: date })
-                    }
-                    dateFormat="dd-MM-yyyy"
+                    onChange={(date) => {
+                      // Create a new date object to avoid mutating the original
+                      const newDate = new Date(date);
+                      setDateRange({ ...dateRange, startDateTime: newDate });
+                    }}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    dateFormat="dd-MM-yyyy HH:mm"
                     className="w-full rounded-md border border-input bg-background p-2"
-                    placeholderText="Select start date"
+                    placeholderText="Select start date and time"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-sm font-medium">End Date</label>
+              <div className="ml-10">
+                <label className="text-sm font-medium">End Date & Time</label>
                 <div className="mt-1">
                   <DatePicker
+                    key={dateRange.endDateTime.toString()}
                     selected={dateRange.endDateTime}
-                    onChange={(date) =>
-                      date && setDateRange({ ...dateRange, endDateTime: date })
-                    }
-                    dateFormat="dd-MM-yyyy"
+                    onChange={(date) => {
+                      // Create a new date object to avoid mutating the original
+                      const newDate = new Date(date);
+                      console.log(newDate);
+
+                      setDateRange({ ...dateRange, endDateTime: newDate });
+                    }}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    dateFormat="dd-MM-yyyy HH:mm"
                     className="w-full rounded-md border border-input bg-background p-2"
-                    placeholderText="Select end date"
+                    placeholderText="Select end date and time"
                     minDate={dateRange.startDateTime}
                   />
                 </div>
@@ -412,10 +427,10 @@ const WorkHourSummary = () => {
                       vehicleNumber: "",
                       shiftType: "",
                     });
-                    setDateRange({
-                      startDateTime: new Date("2024-07-01T00:00:00"),
-                      endDateTime: new Date("2024-07-31T23:59:59"),
-                    });
+                    // setDateRange({
+                    //   startDateTime: new Date("2024-07-01T00:00:00"),
+                    //   endDateTime: new Date("2024-07-31T23:59:59"),
+                    // });
                     setSearchTerm("");
                   }}
                 >
