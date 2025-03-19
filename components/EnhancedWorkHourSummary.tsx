@@ -533,7 +533,7 @@ const EnhancedWorkHourSummary = ({
                     {currentPosition.status.charAt(0).toUpperCase() +
                       currentPosition.status.slice(1)}
                   </span>
-                  <span>{currentPosition.speed.toFixed(1)} km/h</span>
+                  <span>{(currentPosition.speed / 6).toFixed(1)} km/h</span>
                 </div>
               )}
             </div>
