@@ -477,7 +477,9 @@ const EnhancedWorkHourSummary = ({
                   <Popup>
                     <div>
                       <p className="font-bold">Current Position</p>
-                      <p>Speed: {currentPosition.speed.toFixed(1)} km/h</p>
+                      <p>
+                        Speed: {(currentPosition.speed / 6).toFixed(1)} km/h
+                      </p>
                       <p>Status: {currentPosition.status}</p>
                       <p>
                         Time:{" "}
@@ -506,7 +508,7 @@ const EnhancedWorkHourSummary = ({
           </div>
 
           {/* Playback controls overlay */}
-          <div className="absolute bottom-4 left-4 z-50 bg-white p-2 rounded-md shadow-md z-50">
+          <div className="absolute bottom-4 left-4 bg-white p-2 rounded-md shadow-md z-50">
             <div className="flex flex-col space-y-2">
               <PlaybackControls
                 onPlay={resumePlayback}
