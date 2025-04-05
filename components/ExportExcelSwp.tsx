@@ -116,7 +116,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
             "BMCSWIPPER",
             vehicleNumber,
             "Swipper Machine",
-            "12e2r3",
+            "DULEVO 6000",
             trips[0].Driver,
             totalDistance,
             formattedDuration,
