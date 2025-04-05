@@ -38,9 +38,10 @@ interface Trip {
 interface ExportExcelProps {
   data: VehicleData[];
   exportMode: "summary" | "details";
+  dateRange: any;
 }
 
-const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
+const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode, dateRange }) => {
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExportExcel = async () => {
@@ -75,8 +76,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
 
       worksheet.mergeCells("A2:J2");
       const durationCell = worksheet.getCell("A2");
-      durationCell.value =
-        "Duration: from 07-07-2024 12:00:00 AM to 27-07-2024 11:59:00 PM";
+      durationCell.value = `Duration: from ${format(new Date(dateRange.startDateTime), "dd/MM/yyyy HH:mm:ss")} to ${format(new Date(dateRange.endDateTime), "dd/MM/yyyy HH:mm:ss")}`;
       durationCell.font = { size: 12, italic: true };
       durationCell.alignment = { horizontal: "center" };
 
@@ -86,7 +86,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
         "totalDistance",
         "formattedDuration",
         "vehicleNumber",
-        "Ambulance",
+        "Swipper Machine",
         "totalDistance",
       ];
 
@@ -123,7 +123,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
             totalDistance,
             formattedDuration,
             vehicleNumber,
-            "Ambulance",
+            "Swipper Machine",
             totalDistance,
           ];
           worksheet.addRow(summaryRow);

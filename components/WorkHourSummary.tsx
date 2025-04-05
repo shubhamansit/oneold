@@ -219,7 +219,6 @@ const WorkHourSummary = () => {
   const getFormattedDateRangeHeader = () => {
     return `${format(dateRange.startDateTime, "dd-MM-yyyy HH:mm:ss a")} - ${format(dateRange.endDateTime, "dd-MM-yyyy HH:mm:ss a")}`;
   };
-  console.log(dateRange);
 
   // Prepare data for Excel export
   const prepareExportData = () => {
@@ -394,7 +393,6 @@ const WorkHourSummary = () => {
                     onChange={(date) => {
                       // Create a new date object to avoid mutating the original
                       const newDate = new Date(date);
-                      console.log(newDate);
 
                       setDateRange({ ...dateRange, endDateTime: newDate });
                     }}
@@ -443,10 +441,12 @@ const WorkHourSummary = () => {
                   <ExportExcel
                     data={prepareExportData()}
                     exportMode="summary"
+                    dateRange={dateRange}
                   />
                   <ExportExcel
                     data={prepareExportData()}
                     exportMode="details"
+                    dateRange={dateRange}
                   />
                 </div>
               </div>

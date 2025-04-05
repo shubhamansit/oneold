@@ -208,7 +208,6 @@ const EnhancedWorkHourSummary = ({
   // Convert path data to GPS track for each record
   useEffect(() => {
     // @ts-ignore
-    console.log(vehicleSummaries);
     // @ts-ignore
     vehicleSummaries.forEach((summary) => {
       // @ts-ignore

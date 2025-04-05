@@ -70,7 +70,6 @@ export function AppSidebar({
   const value = getCookie("isAuthenticated")?.toString();
   var menuItems;
   const router = useRouter();
-  console.log(value, "value");
 
   if (value) {
     const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;

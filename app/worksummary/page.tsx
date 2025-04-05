@@ -299,7 +299,7 @@ const WorkHourSummary = () => {
                       </Button>
                     </TableCell>
                     <TableCell>{vehicleNumber}</TableCell>
-                    <TableCell>Ambulance</TableCell>
+                    <TableCell>Swipper Machine</TableCell>
                     <TableCell>12e2r3</TableCell>
                     <TableCell>{trips[0].Driver}</TableCell>
                     <TableCell>{totalDistance}</TableCell>

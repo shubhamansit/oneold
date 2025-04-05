@@ -79,7 +79,6 @@ const Page = () => {
       fromDate.setHours(0, 0, 0, 0);
       toDate.setHours(23, 59, 59, 999);
 
-      console.log("fromDate", fromDate, toDate);
 
       result = result
         .map((job) => {
@@ -140,7 +139,6 @@ const Page = () => {
     setCheckedItems(items);
   };
 
-  console.log(dateRange);
   return (
     <div className="relative min-h-screen w-full">
       <header className="sticky top-0 z-10 bg-white border-b">
