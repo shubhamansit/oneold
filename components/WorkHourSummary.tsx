@@ -21,7 +21,7 @@ interface ShiftRecord {
   "Start Time": string;
   "End Time": string;
   "Shift Hours": string;
-  "Kms. As per Logbook": string;
+  "Kms. As per Logbook"?: string;
   "Kms. As per GPS System": string;
   "Running hours.": string;
   "Idel ": string;

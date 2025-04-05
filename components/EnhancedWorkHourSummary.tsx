@@ -196,7 +196,7 @@ const EnhancedWorkHourSummary = ({
       track.push({
         lat,
         lng,
-        timestamp: timestamp.toISOString(),
+        timestamp: timestamp?.toISOString(),
         speed,
         status,
       });
@@ -221,7 +221,7 @@ const EnhancedWorkHourSummary = ({
           // Ensure time strings have proper format (HH:MM)
           const formatTimeString = (timeStr: string) => {
             const [hours, minutes] = timeStr.split(":");
-            return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+            return `${hours?.padStart(2, "0")}:${minutes?.padStart(2, "0")}`;
           };
           if (record["Start Time"] != "--") {
             const startTime = new Date(

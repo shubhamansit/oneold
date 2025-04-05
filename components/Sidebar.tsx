@@ -70,6 +70,8 @@ export function AppSidebar({
   const value = getCookie("isAuthenticated")?.toString();
   var menuItems;
   const router = useRouter();
+  console.log(value, "value");
+
   if (value) {
     const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
     menuItems = [
@@ -189,7 +191,7 @@ export function AppSidebar({
                 {item.subMenu && openSubmenu === item.id && (
                   <div
                     ref={submenuRef}
-                    className="absolute left-full top-52 ml-2 w-64 bg-white shadow-lg rounded-md overflow-hidden z-50"
+                    className="absolute left-full top-52 ml-2 w-64 bg-white shadow-lg rounded-md overflow-hidden z-999"
                     onMouseEnter={() => handleMouseEnter(item.id)}
                     onMouseLeave={handleMouseLeave}
                   >
