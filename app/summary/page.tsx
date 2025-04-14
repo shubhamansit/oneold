@@ -13,7 +13,7 @@ const LoadingComponent = () => (
 
 // Dynamically import the component with no SSR
 const WorkHourSummaryNoSSR = dynamic(
-  () => import("@/components/WorkHourSummary"),
+  () => import("@/components/WorkHourSummary2"),
   {
     ssr: false,
     loading: () => <LoadingComponent />,

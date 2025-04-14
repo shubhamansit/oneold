@@ -42,7 +42,9 @@ const LoginPage = () => {
     if (
       (email.toLowerCase() === "bhavnagar@gmail.com" &&
         password === "Bhadresh@1234") ||
-      (email.toLowerCase() === "bmcswippr@gmail.com" && password == "Ans@1234")
+      (email.toLowerCase() === "bmcswippr@gmail.com" &&
+        password == "Ans@1234") ||
+      (email.toLowerCase() === "osc@swm.com" && password === "98765432")
     ) {
       // Set authentication token in cookies
       // The 'expires' option sets the cookie to expire in 1 day
@@ -60,8 +62,10 @@ const LoginPage = () => {
       // Redirect after successful login
       if (email.toLowerCase() === "bhavnagar@gmail.com") {
         router.push("/jobsummary");
-      } else {
+      } else if (email.toLowerCase() == "bmcswippr@gmail.com") {
         router.push("/worksummary");
+      } else {
+        router.push("/summary");
       }
     } else {
       // Error notification for incorrect credentials

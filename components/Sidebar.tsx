@@ -98,21 +98,33 @@ export function AppSidebar({
                   ],
                 },
               ]
-            : [
-                {
-                  title: "Job",
-                  items: [
-                    {
-                      name: "Work Hour Summary",
-                      href: "/worksummary",
-                    },
-                    {
-                      name: "Swipper Summary",
-                      href: "/swippersummary",
-                    },
-                  ],
-                },
-              ],
+            : data.email == "bhavnagar@gmail.com"
+              ? [
+                  {
+                    title: "Job",
+                    items: [
+                      {
+                        name: "Work Hour Summary",
+                        href: "/worksummary",
+                      },
+                      {
+                        name: "Swipper Summary",
+                        href: "/swippersummary",
+                      },
+                    ],
+                  },
+                ]
+              : [
+                  {
+                    title: "Job",
+                    items: [
+                      {
+                        name: "Summary",
+                        href: "/summary",
+                      },
+                    ],
+                  },
+                ],
       },
       { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
     ];
