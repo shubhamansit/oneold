@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -67,6 +66,14 @@ export function AppSidebar({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [data, setData] = React.useState<customeJwtPayload>();
+  React.useEffect(() => {
+    const value = getCookie("isAuthenticated")?.toString();
+    if (value) {
+      const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
+      setData(data);
+    }
+  }, []);
   const value = getCookie("isAuthenticated")?.toString();
   var menuItems;
   const router = useRouter();
@@ -175,7 +182,11 @@ export function AppSidebar({
       <Sidebar className=" bg-[#f2f2f2] text-gray-700">
         <SidebarHeader className="p-2">
           <Avatar className="w-16 h-16 mx-auto">
-            <AvatarImage src="/image.png" alt="Logo" />
+            {data?.email == "osc@swm.com" ? (
+              <AvatarImage src="/image2.png" alt="Logo" />
+            ) : (
+              <AvatarImage src="/image.png" alt="Logo" />
+            )}
             <AvatarFallback>Logo</AvatarFallback>
           </Avatar>
         </SidebarHeader>

@@ -258,13 +258,6 @@ const WorkHourSummary2 = () => {
     };
   };
 
-  // Handle export button click
-  // const handleExport = () => {
-  //   const data = prepareExportData();
-  //   setExportData(data);
-  //   setShowExport(true);
-  // };
-
   // Get all unique vehicle numbers for filter dropdown
   const getUniqueVehicleNumbers = () => {
     return Array.from(
@@ -434,7 +427,7 @@ const WorkHourSummary2 = () => {
                       {summary.totalIdleTime}
                     </div>
                   </div>
-                  <div>
+                  <div> 
                     <div className="font-medium">Stop Time</div>
                     <div className="text-muted-foreground">
                       {summary.totalStopTime}
@@ -451,7 +444,6 @@ const WorkHourSummary2 = () => {
                   {expandedRows.includes(summary.vehicleNumber) ? "▲" : "▼"}
                 </div>
               </div>
-
               {/* Detail records */}
               {expandedRows.includes(summary.vehicleNumber) && (
                 <div className="p-4">
@@ -599,9 +591,10 @@ const WorkHourSummary2 = () => {
                     key={dateRange.startDateTime.toString()}
                     selected={dateRange.startDateTime}
                     onChange={(date) => {
-                      // Create a new date object to avoid mutating the original
-                      const newDate = new Date(date);
-                      setDateRange({ ...dateRange, startDateTime: newDate });
+                      if (date != null) {
+                        const newDate = new Date(date);
+                        setDateRange({ ...dateRange, startDateTime: newDate });
+                      }
                     }}
                     dateFormat="dd-MM-yyyy"
                     className="w-full rounded-md border border-input bg-background p-2"
@@ -618,8 +611,10 @@ const WorkHourSummary2 = () => {
                     selected={dateRange.endDateTime}
                     onChange={(date) => {
                       // Create a new date object to avoid mutating the original
-                      const newDate = new Date(date);
-                      setDateRange({ ...dateRange, endDateTime: newDate });
+                      if (date != null) {
+                        const newDate = new Date(date);
+                        setDateRange({ ...dateRange, endDateTime: newDate });
+                      }
                     }}
                     dateFormat="dd-MM-yyyy"
                     className="w-full rounded-md border border-input bg-background p-2"

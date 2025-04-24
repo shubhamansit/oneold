@@ -46,8 +46,6 @@ const LoginPage = () => {
         password == "Ans@1234") ||
       (email.toLowerCase() === "osc@swm.com" && password === "98765432")
     ) {
-      // Set authentication token in cookies
-      // The 'expires' option sets the cookie to expire in 1 day
       const token = jwt.sign({ email: email.toLowerCase() }, "SUPERSECRET");
 
       Cookies.set("isAuthenticated", token, {
@@ -55,11 +53,7 @@ const LoginPage = () => {
         path: "/",
         secure: process.env.NODE_ENV === "production",
       });
-
-      // Success notification
       toast.success("Login Successful");
-
-      // Redirect after successful login
       if (email.toLowerCase() === "bhavnagar@gmail.com") {
         router.push("/jobsummary");
       } else if (email.toLowerCase() == "bmcswippr@gmail.com") {
@@ -68,7 +62,6 @@ const LoginPage = () => {
         router.push("/summary");
       }
     } else {
-      // Error notification for incorrect credentials
       toast.error("Invalid email or password");
     }
   }
