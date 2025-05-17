@@ -22769,7 +22769,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "01-09-2024",
     "First Ignition ON": "-",
@@ -22782,7 +22782,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "02-09-2024",
     "First Ignition ON": "-",
@@ -22795,7 +22795,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "03-09-2024",
     "First Ignition ON": "-",
@@ -22808,7 +22808,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "04-09-2024",
     "First Ignition ON": "-",
@@ -22821,7 +22821,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "05-09-2024",
     "First Ignition ON": "-",
@@ -22834,7 +22834,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "06-09-2024",
     "First Ignition ON": "-",
@@ -22847,7 +22847,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "07-09-2024",
     "First Ignition ON": "-",
@@ -22860,7 +22860,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "08-09-2024",
     "First Ignition ON": "-",
@@ -22873,7 +22873,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "09-09-2024",
     "First Ignition ON": "-",
@@ -22886,7 +22886,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "10-09-2024",
     "First Ignition ON": "-",
@@ -22899,7 +22899,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "11-09-2024",
     "First Ignition ON": "-",
@@ -22912,7 +22912,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "12-09-2024",
     "First Ignition ON": "12-09-2024 08:55:15 AM",
@@ -22925,7 +22925,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "13-09-2024",
     "First Ignition ON": "-",
@@ -22938,7 +22938,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "14-09-2024",
     "First Ignition ON": "-",
@@ -22951,7 +22951,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "15-09-2024",
     "First Ignition ON": "-",
@@ -22964,7 +22964,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "16-09-2024",
     "First Ignition ON": "-",
@@ -22977,7 +22977,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "17-09-2024",
     "First Ignition ON": "-",
@@ -22990,7 +22990,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "18-09-2024",
     "First Ignition ON": "18-09-2024 08:57:39 AM",
@@ -23003,7 +23003,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "19-09-2024",
     "First Ignition ON": "-",
@@ -23016,7 +23016,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "20-09-2024",
     "First Ignition ON": "-",
@@ -23029,7 +23029,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "21-09-2024",
     "First Ignition ON": "-",
@@ -23042,7 +23042,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "22-09-2024",
     "First Ignition ON": "-",
@@ -23055,7 +23055,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "23-09-2024",
     "First Ignition ON": "23-09-2024 08:55:28 AM",
@@ -23068,7 +23068,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "24-09-2024",
     "First Ignition ON": "-",
@@ -23081,7 +23081,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "25-09-2024",
     "First Ignition ON": "-",
@@ -23094,7 +23094,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "26-09-2024",
     "First Ignition ON": "-",
@@ -23107,7 +23107,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "27-09-2024",
     "First Ignition ON": "-",
@@ -23120,7 +23120,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "28-09-2024",
     "First Ignition ON": "-",
@@ -23133,7 +23133,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "29-09-2024",
     "First Ignition ON": "29-09-2024 08:49:02 AM",
@@ -23146,7 +23146,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2849 DAY",
+    "Veh. No": "GJ 06 GA 2849",
     Shift: "Day",
     Date: "30-09-2024",
     "First Ignition ON": "30-09-2024 08:55:18 AM",
@@ -23549,7 +23549,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "01-09-2024",
     "First Ignition ON": "-",
@@ -23562,7 +23562,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "02-09-2024",
     "First Ignition ON": "-",
@@ -23575,7 +23575,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "03-09-2024",
     "First Ignition ON": "-",
@@ -23588,7 +23588,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "04-09-2024",
     "First Ignition ON": "-",
@@ -23601,7 +23601,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "05-09-2024",
     "First Ignition ON": "-",
@@ -23614,7 +23614,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "06-09-2024",
     "First Ignition ON": "-",
@@ -23627,7 +23627,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "07-09-2024",
     "First Ignition ON": "-",
@@ -23640,7 +23640,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "08-09-2024",
     "First Ignition ON": "-",
@@ -23653,7 +23653,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "09-09-2024",
     "First Ignition ON": "-",
@@ -23666,7 +23666,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "10-09-2024",
     "First Ignition ON": "-",
@@ -23679,7 +23679,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "11-09-2024",
     "First Ignition ON": "-",
@@ -23692,7 +23692,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "12-09-2024",
     "First Ignition ON": "-",
@@ -23705,7 +23705,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "13-09-2024",
     "First Ignition ON": "-",
@@ -23718,7 +23718,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "14-09-2024",
     "First Ignition ON": "-",
@@ -23731,7 +23731,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "15-09-2024",
     "First Ignition ON": "-",
@@ -23744,7 +23744,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "16-09-2024",
     "First Ignition ON": "-",
@@ -23757,7 +23757,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "17-09-2024",
     "First Ignition ON": "-",
@@ -23770,7 +23770,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "18-09-2024",
     "First Ignition ON": "18-09-2024 08:45:15 AM",
@@ -23783,7 +23783,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "19-09-2024",
     "First Ignition ON": "19-09-2024 08:49:18 AM",
@@ -23796,7 +23796,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "20-09-2024",
     "First Ignition ON": "20-09-2024 08:55:00 AM",
@@ -23809,7 +23809,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "21-09-2024",
     "First Ignition ON": "21-09-2024 08:45:15 AM",
@@ -23822,7 +23822,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "22-09-2024",
     "First Ignition ON": "-",
@@ -23835,7 +23835,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "23-09-2024",
     "First Ignition ON": "23-09-2024 08:50:33 AM",
@@ -23848,7 +23848,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "24-09-2024",
     "First Ignition ON": "-",
@@ -23861,7 +23861,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "25-09-2024",
     "First Ignition ON": "-",
@@ -23874,7 +23874,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "26-09-2024",
     "First Ignition ON": "-",
@@ -23887,7 +23887,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "27-09-2024",
     "First Ignition ON": "-",
@@ -23900,7 +23900,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "28-09-2024",
     "First Ignition ON": "-",
@@ -23913,7 +23913,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "29-09-2024",
     "First Ignition ON": "-",
@@ -23926,7 +23926,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2895 DAY",
+    "Veh. No": "GJ 06 GA 2895",
     Shift: "Day",
     Date: "30-09-2024",
     "First Ignition ON": "-",
@@ -25941,7 +25941,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 09:20:36 AM",
@@ -25954,7 +25954,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -25967,7 +25967,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 09:15:38 AM",
@@ -25980,7 +25980,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "04-03-2025 09:18:33 AM",
@@ -25993,7 +25993,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 09:22:18 AM",
@@ -26006,7 +26006,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 09:27:24 AM",
@@ -26019,7 +26019,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 09:15:14 AM",
@@ -26032,7 +26032,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 09:18:33 AM",
@@ -26045,7 +26045,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -26058,7 +26058,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 09:20:12 AM",
@@ -26071,7 +26071,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 09:22:07 AM",
@@ -26084,7 +26084,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 09:25:10 AM",
@@ -26097,7 +26097,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -26110,7 +26110,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -26123,7 +26123,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -26136,7 +26136,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -26149,7 +26149,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -26162,7 +26162,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -26175,7 +26175,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "19-03-2025 09:15:19 AM",
@@ -26188,7 +26188,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 09:18:01 AM",
@@ -26201,7 +26201,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 09:22:08 AM",
@@ -26214,7 +26214,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 09:27:30 AM",
@@ -26227,7 +26227,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -26240,7 +26240,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "-",
@@ -26253,7 +26253,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 09:15:10 AM",
@@ -26266,7 +26266,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 09:17:12 AM",
@@ -26279,7 +26279,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "27-03-2025 09:20:33 AM",
@@ -26292,7 +26292,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 09:23:38 AM",
@@ -26305,7 +26305,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 09:25:27 AM",
@@ -26318,7 +26318,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -26331,7 +26331,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2671 DAY",
+    "Veh. No": "GJ 06 GA 2671",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 09:27:35 AM",
@@ -26747,7 +26747,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 08:42:03 AM",
@@ -26760,7 +26760,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -26773,7 +26773,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 08:45:33 AM",
@@ -26786,7 +26786,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "04-03-2025 08:47:07 AM",
@@ -26799,7 +26799,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 08:50:16 AM",
@@ -26812,7 +26812,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 08:53:20 AM",
@@ -26825,7 +26825,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 08:54:32 AM",
@@ -26838,7 +26838,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 08:57:09 AM",
@@ -26851,7 +26851,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -26864,7 +26864,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 08:45:15 AM",
@@ -26877,7 +26877,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "-",
@@ -26890,7 +26890,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "-",
@@ -26903,7 +26903,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "13-02-2025 08:45:07 AM",
@@ -26916,7 +26916,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -26929,7 +26929,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -26942,7 +26942,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -26955,7 +26955,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -26968,7 +26968,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "18-03-2024 08:47:20 AM",
@@ -26981,7 +26981,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "19-03-2024 08:50:33 AM",
@@ -26994,7 +26994,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 08:52:34 AM",
@@ -27007,7 +27007,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 08:55:17 AM",
@@ -27020,7 +27020,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 08:57:49 AM",
@@ -27033,7 +27033,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -27046,7 +27046,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "24-03-2025 08:45:10 AM",
@@ -27059,7 +27059,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 08:47:13 AM",
@@ -27072,7 +27072,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 08:49:33 AM",
@@ -27085,7 +27085,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "-",
@@ -27098,7 +27098,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 08:52:22 AM",
@@ -27111,7 +27111,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 08:55:42 AM",
@@ -27124,7 +27124,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -27137,7 +27137,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2892 DAY",
+    "Veh. No": "GJ 06 GA 2892",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 08:02:02 AM",
@@ -27553,7 +27553,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 09:15:18 AM",
@@ -27566,7 +27566,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -27579,7 +27579,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 09:17:32 AM",
@@ -27592,7 +27592,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "04-03-2025 09:15:24 AM",
@@ -27605,7 +27605,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 09:20:15 AM",
@@ -27618,7 +27618,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 09:24:14 AM",
@@ -27631,7 +27631,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 09:27:12 AM",
@@ -27644,7 +27644,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 09:15:28 AM",
@@ -27657,7 +27657,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -27670,7 +27670,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 09:17:30 AM",
@@ -27683,7 +27683,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 09:20:44 AM",
@@ -27696,7 +27696,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 09:25:28 AM",
@@ -27709,7 +27709,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -27722,7 +27722,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -27735,7 +27735,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -27748,7 +27748,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -27761,7 +27761,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -27774,7 +27774,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -27787,7 +27787,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "-",
@@ -27800,7 +27800,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "-",
@@ -27813,7 +27813,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 09:28:20 AM",
@@ -27826,7 +27826,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 09:15:10 AM",
@@ -27839,7 +27839,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -27852,7 +27852,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "24-03-2025 09:18:19 AM",
@@ -27865,7 +27865,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "-",
@@ -27878,7 +27878,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 09:24:22 AM",
@@ -27891,7 +27891,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "-",
@@ -27904,7 +27904,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 09:30:33 AM",
@@ -27917,7 +27917,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 09:15:03 AM",
@@ -27930,7 +27930,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -27943,7 +27943,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2939 DAY",
+    "Veh. No": "GJ 06 GA 2939",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 09:18:33 AM",
@@ -32623,7 +32623,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "01-04-2025",
     "First Ignition ON": "-",
@@ -32636,7 +32636,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "02-04-2025",
     "First Ignition ON": "02-04-2025 08:42:10 AM",
@@ -32649,7 +32649,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "03-04-2025",
     "First Ignition ON": "03-04-2025 08:45:05 AM",
@@ -32662,7 +32662,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "04-04-2025",
     "First Ignition ON": "04-04-2025 08:48:06 AM",
@@ -32675,7 +32675,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "05-04-2025",
     "First Ignition ON": "05-04-2025 08:50:02 AM",
@@ -32688,7 +32688,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "06-04-2025",
     "First Ignition ON": "-",
@@ -32701,7 +32701,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "07-04-2025",
     "First Ignition ON": "07-04-2025 08:53:22 AM",
@@ -32714,7 +32714,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "08-04-2025",
     "First Ignition ON": "08-04-2025 08:57:51 AM",
@@ -32727,7 +32727,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "09-04-2025",
     "First Ignition ON": "-",
@@ -32740,7 +32740,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "10-04-2025",
     "First Ignition ON": "10-04-2025 08:43:13 AM",
@@ -32753,7 +32753,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "11-04-2025",
     "First Ignition ON": "11-04-2025 08:47:22 AM",
@@ -32766,7 +32766,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "12-04-2025",
     "First Ignition ON": "12-04-2025 08:50:07 AM",
@@ -32779,7 +32779,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "13-04-2025",
     "First Ignition ON": "13-04-2025 08:52:17 AM",
@@ -32792,7 +32792,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "14-04-2025",
     "First Ignition ON": "14-04-2025 08:55:19 AM",
@@ -32805,7 +32805,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "15-04-2025",
     "First Ignition ON": "15-04-2025 08:58:20 AM",
@@ -32818,7 +32818,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "16-04-2025",
     "First Ignition ON": "16-04-2025 08:42:33 AM",
@@ -32831,7 +32831,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "17-04-2025",
     "First Ignition ON": "17-04-2025 08:50:13 AM",
@@ -32844,7 +32844,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "18-04-2025",
     "First Ignition ON": "18-04-2025 08:52:44 AM",
@@ -32857,7 +32857,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "19-04-2025",
     "First Ignition ON": "19-04-2025 08:42:47 AM",
@@ -32870,7 +32870,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "20-04-2025",
     "First Ignition ON": "-",
@@ -32883,7 +32883,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "21-04-2025",
     "First Ignition ON": "21-04-2025 08:45:18 AM",
@@ -32896,7 +32896,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "22-04-2025",
     "First Ignition ON": "22-04-2025 08:48:10 AM",
@@ -32909,7 +32909,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "23-04-2025",
     "First Ignition ON": "23-04-2025 08:50:15 AM",
@@ -32922,7 +32922,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "24-04-2025",
     "First Ignition ON": "24-04-2025 08:52:18 AM",
@@ -32935,7 +32935,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "25-04-2025",
     "First Ignition ON": "25-04-2025 08:55:13 AM",
@@ -32948,7 +32948,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "26-04-2025",
     "First Ignition ON": "26-04-2025 08:58:03 AM",
@@ -32961,7 +32961,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "27-04-2025",
     "First Ignition ON": "-",
@@ -32974,7 +32974,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "28-04-2025",
     "First Ignition ON": "28-04-2025 08:42:26 AM",
@@ -32987,7 +32987,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "29-04-2025",
     "First Ignition ON": "29-04-2025 08:45:30 AM",
@@ -33000,7 +33000,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "30-04-2025",
     "First Ignition ON": "30-04-2025 08:47:20 AM",
@@ -33403,7 +33403,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "01-04-2025",
     "First Ignition ON": "01-04-2025 08:55:04 AM",
@@ -33416,7 +33416,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "02-04-2025",
     "First Ignition ON": "02-04-2025 08:57:14 AM",
@@ -33429,7 +33429,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "03-04-2025",
     "First Ignition ON": "03-04-2025 08:42:33 AM",
@@ -33442,7 +33442,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "04-04-2025",
     "First Ignition ON": "04-04-2025 08:45:03 AM",
@@ -33455,7 +33455,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "05-04-2025",
     "First Ignition ON": "05-04-2025 08:48:36 AM",
@@ -33468,7 +33468,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "06-04-2025",
     "First Ignition ON": "-",
@@ -33481,7 +33481,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "07-04-2025",
     "First Ignition ON": "07-04-2025 08:50:52 AM",
@@ -33494,7 +33494,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "08-04-2025",
     "First Ignition ON": "08-04-2025 08:52:10 AM",
@@ -33507,7 +33507,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "09-04-2025",
     "First Ignition ON": "09-04-2025 08:56:12 AM",
@@ -33520,7 +33520,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "10-04-2025",
     "First Ignition ON": "10-04-2025 08:43:11 AM",
@@ -33533,7 +33533,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "11-04-2025",
     "First Ignition ON": "11-04-2025 08:47:33 AM",
@@ -33546,7 +33546,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "12-04-2025",
     "First Ignition ON": "12-04-2025 08:50:16 AM",
@@ -33559,7 +33559,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "13-04-2025",
     "First Ignition ON": "13-04-2025 08:52:30 AM",
@@ -33572,7 +33572,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "14-04-2025",
     "First Ignition ON": "14-04-2025 08:55:22 AM",
@@ -33585,7 +33585,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "15-04-2025",
     "First Ignition ON": "15-04-2025 08:57:34 AM",
@@ -33598,7 +33598,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "16-04-2025",
     "First Ignition ON": "16-04-2025 08:42:14 AM",
@@ -33611,7 +33611,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "17-04-2025",
     "First Ignition ON": "17-04-2025 08:45:10 AM",
@@ -33624,7 +33624,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "18-04-2025",
     "First Ignition ON": "18-04-2025 08:47:16 AM",
@@ -33637,7 +33637,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "19-04-2025",
     "First Ignition ON": "19-04-2025 08:50:33 AM",
@@ -33650,7 +33650,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "20-04-2025",
     "First Ignition ON": "-",
@@ -33663,7 +33663,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "21-04-2025",
     "First Ignition ON": "21-04-2025 08:52:51 AM",
@@ -33676,7 +33676,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "22-04-2025",
     "First Ignition ON": "22-04-2025 08:55:10 AM",
@@ -33689,7 +33689,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "23-04-2025",
     "First Ignition ON": "23-04-2025 08:57:47 AM",
@@ -33702,7 +33702,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "24-04-2025",
     "First Ignition ON": "-",
@@ -33715,7 +33715,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "25-04-2025",
     "First Ignition ON": "25-04-2025 08:47:20 AM",
@@ -33728,7 +33728,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "26-04-2025",
     "First Ignition ON": "26-04-2025 08:50:10 AM",
@@ -33741,7 +33741,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "27-04-2025",
     "First Ignition ON": "-",
@@ -33754,7 +33754,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "28-04-2025",
     "First Ignition ON": "28-04-2025 08:55:40 AM",
@@ -33767,7 +33767,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "29-04-2025",
     "First Ignition ON": "29-04-2025 08:57:36 AM",
@@ -33780,7 +33780,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "30-04-2025",
     "First Ignition ON": "-",
@@ -34183,7 +34183,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "01-04-2025",
     "First Ignition ON": "01-04-2025 08:47:51 AM",
@@ -34196,7 +34196,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "02-04-2025",
     "First Ignition ON": "02-04-2025 08:53:10 AM",
@@ -34209,7 +34209,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "03-04-2025",
     "First Ignition ON": "03-04-2025 08:57:03 AM",
@@ -34222,7 +34222,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "04-04-2025",
     "First Ignition ON": "04-04-2025 08:40:10 AM",
@@ -34235,7 +34235,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "05-04-2025",
     "First Ignition ON": "05-04-2025 08:45:05 AM",
@@ -34248,7 +34248,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "06-04-2025",
     "First Ignition ON": "-",
@@ -34261,7 +34261,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "07-04-2025",
     "First Ignition ON": "07-04-2025 08:48:03 AM",
@@ -34274,7 +34274,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "08-04-2025",
     "First Ignition ON": "08-04-2025 08:51:13 AM",
@@ -34287,7 +34287,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "09-04-2025",
     "First Ignition ON": "09-04-2025 08:54:36 AM",
@@ -34300,7 +34300,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "10-04-2025",
     "First Ignition ON": "10-04-2025 08:59:10 AM",
@@ -34313,7 +34313,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "11-04-2025",
     "First Ignition ON": "11-04-2025 08:42:03 AM",
@@ -34326,7 +34326,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "12-04-2025",
     "First Ignition ON": "12-04-2025 08:46:37 AM",
@@ -34339,7 +34339,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "13-04-2025",
     "First Ignition ON": "13-04-2025 08:50:08 AM",
@@ -34352,7 +34352,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "14-04-2025",
     "First Ignition ON": "14-04-2025 08:55:47 AM",
@@ -34365,7 +34365,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "15-04-2025",
     "First Ignition ON": "15-04-2025 08:58:55 AM",
@@ -34378,7 +34378,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "16-04-2025",
     "First Ignition ON": "16-04-2025 08:40:10 AM",
@@ -34391,7 +34391,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "17-04-2025",
     "First Ignition ON": "17-04-2025 08:45:14 AM",
@@ -34404,7 +34404,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "18-04-2025",
     "First Ignition ON": "18-04-2025 08:48:15 AM",
@@ -34417,7 +34417,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "19-04-2025",
     "First Ignition ON": "19-04-2025 08:51:35 AM",
@@ -34430,7 +34430,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "20-04-2025",
     "First Ignition ON": "-",
@@ -34443,7 +34443,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "21-04-2025",
     "First Ignition ON": "21-04-2025 08:55:19 AM",
@@ -34456,7 +34456,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "22-04-2025",
     "First Ignition ON": "22-04-2025 08:58:03 AM",
@@ -34469,7 +34469,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "23-04-2025",
     "First Ignition ON": "23-04-2025 08:40:28 AM",
@@ -34482,7 +34482,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "24-04-2025",
     "First Ignition ON": "24-04-2025 08:45:10 AM",
@@ -34495,7 +34495,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "25-04-2025",
     "First Ignition ON": "25-04-2025 08:48:37 AM",
@@ -34508,7 +34508,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "26-04-2025",
     "First Ignition ON": "26-04-2025 08:52:03 AM",
@@ -34521,7 +34521,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "27-04-2025",
     "First Ignition ON": "-",
@@ -34534,7 +34534,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "28-04-2025",
     "First Ignition ON": "28-04-2025 08:55:13 AM",
@@ -34547,7 +34547,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "29-04-2025",
     "First Ignition ON": "29-04-2025 08:58:47 AM",
@@ -34560,7 +34560,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "30-04-2025",
     "First Ignition ON": "30-04-2025 08:47:18 AM",
@@ -34963,7 +34963,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "01-04-2025",
     "First Ignition ON": "01-04-2025 08:57:22 AM",
@@ -34976,7 +34976,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "02-04-2025",
     "First Ignition ON": "02-04-2025 08:42:52 AM",
@@ -34989,7 +34989,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "03-04-2025",
     "First Ignition ON": "03-04-2025 08:48:36 AM",
@@ -35002,7 +35002,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "04-04-2025",
     "First Ignition ON": "04-04-2025 08:51:40 AM",
@@ -35015,7 +35015,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "05-04-2025",
     "First Ignition ON": "-",
@@ -35028,7 +35028,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "06-04-2025",
     "First Ignition ON": "-",
@@ -35041,7 +35041,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "07-04-2025",
     "First Ignition ON": "07-04-2025 08:45:32 AM",
@@ -35054,7 +35054,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "08-04-2025",
     "First Ignition ON": "08-04-2025 08:48:51 AM",
@@ -35067,7 +35067,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "09-04-2025",
     "First Ignition ON": "09-04-2025 08:55:20 AM",
@@ -35080,7 +35080,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "10-04-2025",
     "First Ignition ON": "-",
@@ -35093,7 +35093,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "11-04-2025",
     "First Ignition ON": "-",
@@ -35106,7 +35106,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "12-04-2025",
     "First Ignition ON": "-",
@@ -35119,7 +35119,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "13-04-2025",
     "First Ignition ON": "-",
@@ -35132,7 +35132,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "14-04-2025",
     "First Ignition ON": "-",
@@ -35145,7 +35145,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "15-04-2025",
     "First Ignition ON": "-",
@@ -35158,7 +35158,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "16-04-2025",
     "First Ignition ON": "-",
@@ -35171,7 +35171,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "17-04-2025",
     "First Ignition ON": "-",
@@ -35184,7 +35184,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "18-04-2025",
     "First Ignition ON": "-",
@@ -35197,7 +35197,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "19-04-2025",
     "First Ignition ON": "-",
@@ -35210,7 +35210,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "20-04-2025",
     "First Ignition ON": "-",
@@ -35223,7 +35223,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "21-04-2025",
     "First Ignition ON": "-",
@@ -35236,7 +35236,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "22-04-2025",
     "First Ignition ON": "-",
@@ -35249,7 +35249,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "23-04-2025",
     "First Ignition ON": "-",
@@ -35262,7 +35262,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "24-04-2025",
     "First Ignition ON": "-",
@@ -35275,7 +35275,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "25-04-2025",
     "First Ignition ON": "-",
@@ -35288,7 +35288,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "26-04-2025",
     "First Ignition ON": "-",
@@ -35301,7 +35301,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "27-04-2025",
     "First Ignition ON": "-",
@@ -35314,7 +35314,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "28-04-2025",
     "First Ignition ON": "-",
@@ -35327,7 +35327,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "29-04-2025",
     "First Ignition ON": "-",
@@ -35340,7 +35340,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "30-04-2025",
     "First Ignition ON": "-",
@@ -35743,7 +35743,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 08:45:09 AM",
@@ -35756,7 +35756,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -35769,7 +35769,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 08:49:12 AM",
@@ -35782,7 +35782,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "-",
@@ -35795,7 +35795,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 08:52:13 AM",
@@ -35808,7 +35808,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 08:55:18 AM",
@@ -35821,7 +35821,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 08:45:10 AM",
@@ -35834,7 +35834,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 08:48:09 AM",
@@ -35847,7 +35847,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -35860,7 +35860,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 08:55:02 AM",
@@ -35873,7 +35873,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 08:58:10 AM",
@@ -35886,7 +35886,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 08:42:17 AM",
@@ -35899,7 +35899,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -35912,7 +35912,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -35925,7 +35925,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -35938,7 +35938,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -35951,7 +35951,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -35964,7 +35964,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -35977,7 +35977,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "-",
@@ -35990,7 +35990,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 08:44:23 AM",
@@ -36003,7 +36003,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 08:47:08 AM",
@@ -36016,7 +36016,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 08:51:12 AM",
@@ -36029,7 +36029,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -36042,7 +36042,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "24-03-2025 08:55:28 AM",
@@ -36055,7 +36055,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 08:51:36 AM",
@@ -36068,7 +36068,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 08:57:30 AM",
@@ -36081,7 +36081,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "27-03-2025 08:52:03 AM",
@@ -36094,7 +36094,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 08:49:03 AM",
@@ -36107,7 +36107,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 08:56:13 AM",
@@ -36120,7 +36120,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -36133,7 +36133,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2648 DAY",
+    "Veh. No": "GJ 06 GA 2648",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 08:42:41 AM",
@@ -36549,7 +36549,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 08:51:14 AM",
@@ -36562,7 +36562,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -36575,7 +36575,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 08:42:03 AM",
@@ -36588,7 +36588,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "-",
@@ -36601,7 +36601,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 08:46:33 AM",
@@ -36614,7 +36614,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 08:49:11 AM",
@@ -36627,7 +36627,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 08:53:22 AM",
@@ -36640,7 +36640,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 08:51:21 AM",
@@ -36653,7 +36653,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -36666,7 +36666,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 08:57:31 AM",
@@ -36679,7 +36679,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 08:42:11 AM",
@@ -36692,7 +36692,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 08:47:36 AM",
@@ -36705,7 +36705,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -36718,7 +36718,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -36731,7 +36731,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -36744,7 +36744,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -36757,7 +36757,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -36770,7 +36770,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -36783,7 +36783,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "-",
@@ -36796,7 +36796,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 08:52:03 AM",
@@ -36809,7 +36809,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 08:44:15 AM",
@@ -36822,7 +36822,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "-",
@@ -36835,7 +36835,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -36848,7 +36848,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "-",
@@ -36861,7 +36861,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 08:43:19 AM",
@@ -36874,7 +36874,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 08:45:44 AM",
@@ -36887,7 +36887,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "27-03-2025 08:47:04 AM",
@@ -36900,7 +36900,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 08:51:12 AM",
@@ -36913,7 +36913,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 08:55:02 AM",
@@ -36926,7 +36926,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -36939,7 +36939,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2685 DAY",
+    "Veh. No": "GJ 06 GA 2685",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 08:58:12 AM",
@@ -37355,7 +37355,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 08:42:10 AM",
@@ -37368,7 +37368,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -37381,7 +37381,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "-",
@@ -37394,7 +37394,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "04-03-2025 08:43:17 AM",
@@ -37407,7 +37407,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "-",
@@ -37420,7 +37420,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 08:50:41 AM",
@@ -37433,7 +37433,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 08:42:18 AM",
@@ -37446,7 +37446,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 08:45:02 AM",
@@ -37459,7 +37459,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -37472,7 +37472,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 08:48:01 AM",
@@ -37485,7 +37485,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 08:50:15 AM",
@@ -37498,7 +37498,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 08:52:10 AM",
@@ -37511,7 +37511,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -37524,7 +37524,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -37537,7 +37537,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -37550,7 +37550,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -37563,7 +37563,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -37576,7 +37576,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -37589,7 +37589,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "-",
@@ -37602,7 +37602,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 08:57:13 AM",
@@ -37615,7 +37615,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 08:42:09 AM",
@@ -37628,7 +37628,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 08:45:11 AM",
@@ -37641,7 +37641,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -37654,7 +37654,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "24-03-2025 08:47:15 AM",
@@ -37667,7 +37667,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 08:50:13 AM",
@@ -37680,7 +37680,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "-",
@@ -37693,7 +37693,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "-",
@@ -37706,7 +37706,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "-",
@@ -37719,7 +37719,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "-",
@@ -37732,7 +37732,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -37745,7 +37745,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2910 DAY",
+    "Veh. No": "GJ 06 GA 2910",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 08:53:10 AM",
@@ -38161,7 +38161,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "01-03-2025",
     "First Ignition ON": "01-03-2025 08:50:18 AM",
@@ -38174,7 +38174,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "02-03-2025",
     "First Ignition ON": "-",
@@ -38187,7 +38187,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "03-03-2025",
     "First Ignition ON": "03-03-2025 08:55:09 AM",
@@ -38200,7 +38200,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "04-03-2025",
     "First Ignition ON": "04-03-2025 08:57:02 AM",
@@ -38213,7 +38213,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "05-03-2025",
     "First Ignition ON": "05-03-2025 08:42:12 AM",
@@ -38226,7 +38226,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "06-03-2025",
     "First Ignition ON": "06-03-2025 08:45:10 AM",
@@ -38239,7 +38239,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "07-03-2025",
     "First Ignition ON": "07-03-2025 08:47:05 AM",
@@ -38252,7 +38252,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "08-03-2025",
     "First Ignition ON": "08-03-2025 08:51:44 AM",
@@ -38265,7 +38265,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "09-03-2025",
     "First Ignition ON": "-",
@@ -38278,7 +38278,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "10-03-2025",
     "First Ignition ON": "10-03-2025 08:55:06 AM",
@@ -38291,7 +38291,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "11-03-2025",
     "First Ignition ON": "11-03-2025 08:52:15 AM",
@@ -38304,7 +38304,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "12-03-2025",
     "First Ignition ON": "12-03-2025 08:58:03 AM",
@@ -38317,7 +38317,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "13-03-2025",
     "First Ignition ON": "-",
@@ -38330,7 +38330,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "14-03-2025",
     "First Ignition ON": "-",
@@ -38343,7 +38343,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "15-03-2025",
     "First Ignition ON": "-",
@@ -38356,7 +38356,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "16-03-2025",
     "First Ignition ON": "-",
@@ -38369,7 +38369,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "17-03-2025",
     "First Ignition ON": "-",
@@ -38382,7 +38382,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "18-03-2025",
     "First Ignition ON": "-",
@@ -38395,7 +38395,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "19-03-2025",
     "First Ignition ON": "-",
@@ -38408,7 +38408,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "20-03-2025",
     "First Ignition ON": "20-03-2025 08:45:46 AM",
@@ -38421,7 +38421,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "21-03-2025",
     "First Ignition ON": "21-03-2025 08:48:35 AM",
@@ -38434,7 +38434,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "22-03-2025",
     "First Ignition ON": "22-03-2025 08:51:01 AM",
@@ -38447,7 +38447,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "23-03-2025",
     "First Ignition ON": "-",
@@ -38460,7 +38460,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "24-03-2025",
     "First Ignition ON": "24-03-2025 08:55:41 AM",
@@ -38473,7 +38473,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "25-03-2025",
     "First Ignition ON": "25-03-2025 08:59:37 AM",
@@ -38486,7 +38486,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "26-03-2025",
     "First Ignition ON": "26-03-2025 08:42:12 AM",
@@ -38499,7 +38499,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "27-03-2025",
     "First Ignition ON": "27-03-2025 08:46:06 AM",
@@ -38512,7 +38512,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "28-03-2025",
     "First Ignition ON": "28-03-2025 08:50:51 AM",
@@ -38525,7 +38525,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "29-03-2025",
     "First Ignition ON": "29-03-2025 08:55:57 AM",
@@ -38538,7 +38538,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "30-03-2025",
     "First Ignition ON": "-",
@@ -38551,7 +38551,7 @@ export const SomeOtherData = [
     "AVG Speed": "0",
   },
   {
-    "Veh. No": "GJ 06 GA 2994 DAY",
+    "Veh. No": "GJ 06 GA 2994",
     Shift: "Day",
     Date: "31-03-2025",
     "First Ignition ON": "31-03-2025 08:58:51 AM",
