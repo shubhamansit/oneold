@@ -221,13 +221,43 @@ function generateMonthlyDataWithPatterns(year, month, missedPatterns = {}) {
 function main() {
   console.log('🚀 Starting monthly data generation...');
   
-  // Generate data for January 2025
-  const year = 2025;
-  const month = 1;
+  // Get month from command line argument or default to January
+  const monthArg = process.argv[2];
+  let year = 2025;
+  let month = 1;
+  
+  if (monthArg) {
+    const monthMap = {
+      'jan': 1, 'january': 1, '1': 1,
+      'feb': 2, 'february': 2, '2': 2,
+      'mar': 3, 'march': 3, '3': 3,
+      'apr': 4, 'april': 4, '4': 4,
+      'may': 5, '5': 5,
+      'jun': 6, 'june': 6, '6': 6,
+      'jul': 7, 'july': 7, '7': 7,
+      'aug': 8, 'august': 8, '8': 8,
+      'sep': 9, 'september': 9, '9': 9,
+      'oct': 10, 'october': 10, '10': 10,
+      'nov': 11, 'november': 11, '11': 11,
+      'dec': 12, 'december': 12, '12': 12
+    };
+    
+    const monthLower = monthArg.toLowerCase();
+    if (monthMap[monthLower]) {
+      month = monthMap[monthLower];
+      console.log(`📅 Generating data for ${monthArg} (month ${month})`);
+    } else {
+      console.log(`⚠️  Invalid month: ${monthArg}. Using January as default.`);
+    }
+  } else {
+    console.log('📅 No month specified. Using January as default.');
+  }
   
   // Automatically detect and load missed checkpoint patterns
   let missedPatterns = {};
-  const patternsFile = 'missedCheckpointPatterns.json';
+  const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  const monthName = monthNames[month - 1];
+  const patternsFile = `missedCheckpointPatterns_${monthName}.json`;
   
   if (fs.existsSync(patternsFile)) {
     try {
@@ -238,7 +268,19 @@ function main() {
       console.log('📊 Error loading patterns file, using random patterns');
     }
   } else {
-    console.log('📊 No patterns file found, using random patterns for all vehicles');
+    // Fallback to generic patterns file
+    const genericPatternsFile = 'missedCheckpointPatterns.json';
+    if (fs.existsSync(genericPatternsFile)) {
+      try {
+        const patternsData = fs.readFileSync(genericPatternsFile, 'utf8');
+        missedPatterns = JSON.parse(patternsData);
+        console.log(`📊 Loaded generic patterns for ${Object.keys(missedPatterns).length} vehicles from ${genericPatternsFile}`);
+      } catch (error) {
+        console.log('📊 Error loading patterns file, using random patterns');
+      }
+    } else {
+      console.log('📊 No patterns file found, using random patterns for all vehicles');
+    }
   }
   
   // Generate monthly data
