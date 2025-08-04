@@ -150,9 +150,8 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
         // Calculate visited checkpoints
         const visitedCheckpoints = plannedCheckpoints - missedCheckpoints;
         
-        // Calculate on-time checkpoints (visited - some delays)
-        const maxDelays = Math.floor(visitedCheckpoints * 0.3);
-        const delays = Math.floor(Math.random() * (maxDelays + 1));
+        // Use actual delay values from template
+        const delays = template["Delay"] || 0;
         const onTimeCheckpoints = visitedCheckpoints - delays;
         
         // Calculate completion percentage
@@ -185,6 +184,7 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
           "Actual Start Time": actualStartTime,
           "Actual End Time": actualEndTime,
           "On-Time": onTimeCheckpoints,
+          "Early": template["Early"] || 0,
           "Delay": delays,
           "Total Visited Checkpoints": visitedCheckpoints,
           "Missed Checkpoints": missedCheckpoints,
