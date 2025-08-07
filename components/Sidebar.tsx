@@ -67,77 +67,102 @@ export function AppSidebar({
   children: React.ReactNode;
 }>) {
   const [data, setData] = React.useState<customeJwtPayload>();
+  const [isLoading, setIsLoading] = React.useState(true);
+  const router = useRouter();
+  
   React.useEffect(() => {
     const value = getCookie("isAuthenticated")?.toString();
     if (value) {
-      const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
-      setData(data);
+      try {
+        const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
+        setData(data);
+      } catch (error) {
+        console.error('JWT verification failed:', error);
+        if (typeof window !== 'undefined') {
+          router.push("/");
+        }
+      }
+    } else {
+      if (typeof window !== 'undefined') {
+        router.push("/");
+      }
     }
-  }, []);
-  const value = getCookie("isAuthenticated")?.toString();
-  var menuItems;
-  const router = useRouter();
+    setIsLoading(false);
+  }, [router]);
 
-  if (value) {
-    const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
-    menuItems = [
-      { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
-      { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
-      {
-        id: "menu_03",
-        title: "Reports",
-        icon: FileText,
-        href: "#",
-        subMenu:
-          data.email == "bhavnagar@gmail.com"
-            ? [
-                {
-                  title: "Job",
-                  items: [
-                    {
-                      name: "Job Summary",
-                      href: "/jobsummary",
-                    },
-                    {
-                      name: "Job Details Summary",
-                      href: "/jobdetailssummary",
-                    },
-                  ],
-                },
-              ]
-            : data.email == "bhavnagar@gmail.com"
-              ? [
+  // Show loading or redirect if not authenticated
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data) {
+    return <>{children}</>;
+  }
+
+  const menuItems = [
+    { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
+    { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
+    {
+      id: "menu_03",
+      title: "Reports",
+      icon: FileText,
+      href: "#",
+      subMenu:
+        data.email == "bhavnagar@gmail.com"
+          ? [
+              {
+                title: "Job",
+                items: [
                   {
-                    title: "Job",
-                    items: [
-                      {
-                        name: "Work Hour Summary",
-                        href: "/worksummary",
-                      },
-                      {
-                        name: "Swipper Summary",
-                        href: "/swippersummary",
-                      },
-                    ],
+                    name: "Work Hour Summary",
+                    href: "/worksummary",
                   },
-                ]
-              : [
                   {
-                    title: "Job",
-                    items: [
-                      {
-                        name: "Summary",
-                        href: "/summary",
-                      },
-                    ],
+                    name: "Swipper Summary",
+                    href: "/swippersummary",
                   },
                 ],
-      },
-      { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
-    ];
-  } else {
-    router.push("/");
-  }
+              },
+            ]
+          : data.email == "osc@swm.com"
+          ? [
+              {
+                title: "Job",
+                items: [
+                  {
+                    name: "Job Summary",
+                    href: "/jobsummary",
+                  },
+                  {
+                    name: "Job Details Summary",
+                    href: "/jobdetailssummary",
+                  },
+                ],
+              },
+              {
+                title: "Present",
+                items: [
+                  {
+                    name: "Present Summary",
+                    href: "/presentsummary",
+                  },
+                ],
+              },
+            ]
+          : [
+              {
+                title: "Job",
+                items: [
+                  {
+                    name: "Summary",
+                    href: "/summary",
+                  },
+                ],
+              },
+            ],
+    },
+    { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
+  ];
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
   const submenuRef = React.useRef<HTMLDivElement>(null);
@@ -222,17 +247,11 @@ export function AppSidebar({
                         key={index}
                         className="p-2 bg-[#DB4848] flex flex-col my-2"
                       >
-                        {/* <Button
-                          variant="ghost"
-                          className="w-full justify-between font-semibold text-sm"
-                        > */}
                         {group.title}
-                        {/* </Button> */}
-                        {group.items.map((subItem, subIndex) => (
+                        {group.items && group.items.map((subItem, subIndex) => (
                           <Link
                             key={subIndex}
                             href={subItem.href}
-                            // variant="ghost"
                             className=" hover:bg-zinc-900 text-white transition duration-150 ease-out hover:ease-in rounded p-2 text-sm pl-4"
                           >
                             {subItem.name}
