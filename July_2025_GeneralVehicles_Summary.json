@@ -1,0 +1,101 @@
+{
+  "totalVehicles": 2,
+  "vehicles": {
+    "GJ 06 BX 0386 W-1 - TRUCK": {
+      "recordCount": 31,
+      "daysWithMissedCheckpoints": 7,
+      "totalMissedCheckpoints": 8,
+      "averageCompletionPercentage": 99,
+      "sampleRecords": [
+        {
+          "Date": "2025-07-01 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-01 05:37:42",
+          "Actual End Time": "2025-07-01 11:17:38"
+        },
+        {
+          "Date": "2025-07-02 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-02 05:37:42",
+          "Actual End Time": "2025-07-02 11:17:38"
+        },
+        {
+          "Date": "2025-07-03 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-03 05:37:42",
+          "Actual End Time": "2025-07-03 11:17:38"
+        },
+        {
+          "Date": "2025-07-04 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-04 05:37:42",
+          "Actual End Time": "2025-07-04 11:17:38"
+        },
+        {
+          "Date": "2025-07-05 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-05 05:37:42",
+          "Actual End Time": "2025-07-05 11:17:38"
+        }
+      ]
+    },
+    "GJ 06 BX 0309  E-1 - truck": {
+      "recordCount": 31,
+      "daysWithMissedCheckpoints": 0,
+      "totalMissedCheckpoints": 0,
+      "averageCompletionPercentage": 100,
+      "sampleRecords": [
+        {
+          "Date": "2025-07-01 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-01 05:44:30",
+          "Actual End Time": "2025-07-01 11:20:28"
+        },
+        {
+          "Date": "2025-07-02 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-02 05:44:30",
+          "Actual End Time": "2025-07-02 11:20:28"
+        },
+        {
+          "Date": "2025-07-03 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-03 05:44:30",
+          "Actual End Time": "2025-07-03 11:20:28"
+        },
+        {
+          "Date": "2025-07-04 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-04 05:44:30",
+          "Actual End Time": "2025-07-04 11:20:28"
+        },
+        {
+          "Date": "2025-07-05 23:30:00",
+          "Missed Checkpoints": 0,
+          "Total Visited Checkpoints": 41,
+          "Checkpoints Complete Status(%)": 100,
+          "Actual Start Time": "2025-07-05 05:44:30",
+          "Actual End Time": "2025-07-05 11:20:28"
+        }
+      ]
+    }
+  }
+}
