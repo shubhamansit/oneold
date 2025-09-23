@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Filter, Search } from "lucide-react";
-import {getWastZone, getEastZone, getGeneral, BRIGRAJSINH} from "@/data/index";
+import {getWastZone, getEastZone, getGeneral, getBRIGRAJSINH} from "@/data/index";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const [allData, setAllData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
@@ -20,25 +21,28 @@ const Page = () => {
     const loadData = async () => {
       try {
         setIsLoading(true);
-        const [wastZoneData, eastZoneData, generalData] = await Promise.all([
+        const [wastZoneData, eastZoneData, generalData, brigrajsinhData] = await Promise.all([
           getWastZone(),
           getEastZone(),
-          getGeneral()
+          getGeneral(),
+          getBRIGRAJSINH()
         ]);
         
-        const allData = [...wastZoneData, ...eastZoneData, ...generalData];
-        setFilteredData(allData);
+        const combinedData = [...wastZoneData, ...eastZoneData, ...generalData, ...brigrajsinhData];
+        setAllData(combinedData);
+        setFilteredData(combinedData);
         
         // Debug: Log loaded data
         console.log('Data loaded successfully:', {
           wastZone: wastZoneData.length,
           eastZone: eastZoneData.length, 
           general: generalData.length,
-          total: allData.length
+          brigrajsinh: brigrajsinhData.length,
+          total: combinedData.length
         });
         
         // Debug: Check for GJ06BX0741 in loaded data
-        const gj0741Entries = allData.filter(job => 
+        const gj0741Entries = combinedData.filter(job => 
           job.more_details?.some(detail => 
             detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
           )
@@ -78,25 +82,22 @@ const Page = () => {
         zone: formData.zone.value 
       });
       
-      let result;
-    // Updated zone filtering logic to include general zone
-    if (formData.town.value == "BRIGRAJSINH") {
-      result = BRIGRAJSINH;
-    } else {
-      switch (formData.zone.value) {
-        case "WEST_ZONE":
-          result = [...wastZone];
-          break;
-        case "EAST_ZONE":
-          result = [...eastZone];
-          break;
-        case "GENERAL":
-          result = [...general];
-          break;
-        default:
-          result = [...wastZone, ...eastZone, ...general];
+      let result = [...allData];
+      
+      // Filter by zone if not "All"
+      if (formData.zone.value !== "All") {
+        result = result.filter((job) => job.Zone === formData.zone.value);
       }
-    }
+      
+      // Filter by town if not "All"
+      if (formData.town.value !== "All") {
+        result = result.filter((job) => job.Town === formData.town.value);
+      }
+      
+      // Filter by ward if not "All"
+      if (formData.ward.value !== "All") {
+        result = result.filter((job) => job.Ward === formData.ward.value);
+      }
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -185,14 +186,18 @@ const Page = () => {
 
   // Apply filters when dependencies change
   useEffect(() => {
-    applyFilters();
+    if (allData.length > 0) {
+      applyFilters();
+    }
   }, [
+    allData,
     checkedItems,
     formData.zone,
+    formData.town,
+    formData.ward,
     searchTerm,
     dateRange,
     vehicleSearchTerm,
-    formData.town,
   ]);
 
   // Reset dependent fields when zone changes

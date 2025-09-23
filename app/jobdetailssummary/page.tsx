@@ -10,6 +10,7 @@ import FiltersForm from "@/components/filtersForm";
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const [allData, setAllData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,8 +33,9 @@ const Page = () => {
           getEastZone()
         ]);
         
-        const allData = [...wastZoneData, ...eastZoneData];
-        setFilteredData(allData);
+        const combinedData = [...wastZoneData, ...eastZoneData];
+        setAllData(combinedData);
+        setFilteredData(combinedData);
       } catch (error) {
         console.error('Error loading data:', error);
         setFilteredData([]);
@@ -47,7 +49,7 @@ const Page = () => {
 
   // Comprehensive filtering function
   const applyFilters = () => {
-    let result = [...filteredData];
+    let result = [...allData];
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -85,8 +87,10 @@ const Page = () => {
 
   // Apply filters when dependencies change
   useEffect(() => {
-    applyFilters();
-  }, [checkedItems, formData.zone, searchTerm, dateRange]);
+    if (allData.length > 0) {
+      applyFilters();
+    }
+  }, [allData, checkedItems, formData.zone, searchTerm, dateRange]);
 
   // Reset dependent fields when zone changes
   useEffect(() => {
