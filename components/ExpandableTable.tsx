@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { wastZone } from "@/data/index2";
+import { wastZone } from "@/data/index";
 
 interface JobData {
   Branch: string;
@@ -27,6 +27,8 @@ interface JobData {
   Penalty: number;
   "Assigned Helpers": number;
   more_details: MoreDetails[];
+  Incidents?: number;
+  Company?: string;
 }
 
 interface MoreDetails {
@@ -62,7 +64,7 @@ interface MoreDetails {
   Incidents: number;
 }
 
-export default function ExpandableTable({ data }: { data: typeof wastZone }) {
+export default function ExpandableTable({ data }: { data: any[] }) {
   const [expandedRows, setExpandedRows] = useState<number[]>([]);
 
   const toggleRow = (index: number) => {
@@ -72,6 +74,10 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
   };
 
   function findMissedCheckPoints(moreDetails: MoreDetails[]) {
+    if (!moreDetails || moreDetails.length === 0) {
+      return 0;
+    }
+    
     let count = 0;
     for (let index = 0; index < moreDetails.length; index++) {
       if (moreDetails[index]["Checkpoints Complete Status(%)"] == 100) {
@@ -102,8 +108,8 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
         </TableHeader>
         <TableBody>
           {data.map((row, index) => (
-            <>
-              <TableRow key={index}>
+            <React.Fragment key={index}>
+              <TableRow>
                 <TableCell
                   className="h-8 w-8 p-0 underline cursor-pointer text-center"
                   onClick={() => toggleRow(index)}
@@ -115,12 +121,12 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
                 <TableCell>{row.Ward}</TableCell>
                 <TableCell>{row["Job Name"]}</TableCell>
                 <TableCell>{row["Job Type"]}</TableCell>
-                <TableCell>{row["more_details"].length}</TableCell>
+                <TableCell>{row["more_details"]?.length || 0}</TableCell>
                 <TableCell>
                   {findMissedCheckPoints(row["more_details"])}
                 </TableCell>
                 <TableCell>
-                  {row["more_details"].length -
+                  {(row["more_details"]?.length || 0) -
                     findMissedCheckPoints(row["more_details"])}
                 </TableCell>
                 <TableCell>{row.Failed}</TableCell>
@@ -128,39 +134,43 @@ export default function ExpandableTable({ data }: { data: typeof wastZone }) {
                 <TableCell>{row["Assigned Helpers"]}</TableCell>
               </TableRow>
               {expandedRows.includes(index) && (
-                <TableRow key={index}>
+                <TableRow key={`expanded-${index}`}>
                   <TableCell colSpan={13}>
                     <div className="p-4 bg-muted rounded-md">
                       <h3 className="text-lg font-semibold mb-2">
                         More Details
                       </h3>
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            {Object.keys(row.more_details[0]).map((key) => (
-                              <TableHead key={key}>{key}</TableHead>
-                            ))}
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {row.more_details.map((detail, detailIndex) => (
-                            <TableRow key={detailIndex}>
-                              {Object.values(detail).map(
-                                (value, valueIndex) => (
-                                  <TableCell key={valueIndex}>
-                                    {value || "--"}
-                                  </TableCell>
-                                ),
-                              )}
+                      {row.more_details && row.more_details.length > 0 ? (
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              {Object.keys(row.more_details[0]).map((key) => (
+                                <TableHead key={key}>{key}</TableHead>
+                              ))}
                             </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
+                          </TableHeader>
+                          <TableBody>
+                            {row.more_details.map((detail: any, detailIndex: number) => (
+                              <TableRow key={detailIndex}>
+                                {Object.values(detail).map(
+                                  (value, valueIndex) => (
+                                    <TableCell key={valueIndex}>
+                                      {String(value) || "--"}
+                                    </TableCell>
+                                  ),
+                                )}
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      ) : (
+                        <p className="text-muted-foreground">No details available</p>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
               )}
-            </>
+            </React.Fragment>
           ))}
         </TableBody>
       </Table>

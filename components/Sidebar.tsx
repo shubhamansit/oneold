@@ -69,6 +69,10 @@ export function AppSidebar({
   const [data, setData] = React.useState<customeJwtPayload>();
   const [isLoading, setIsLoading] = React.useState(true);
   const router = useRouter();
+  const pathname = usePathname();
+  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
+  const submenuRef = React.useRef<HTMLDivElement>(null);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   
   React.useEffect(() => {
     const value = getCookie("isAuthenticated")?.toString();
@@ -90,83 +94,7 @@ export function AppSidebar({
     setIsLoading(false);
   }, [router]);
 
-  // Show loading or redirect if not authenticated
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!data) {
-    return <>{children}</>;
-  }
-
-  const menuItems = [
-    { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
-    { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
-    {
-      id: "menu_03",
-      title: "Reports",
-      icon: FileText,
-      href: "#",
-      subMenu:
-        data.email == "bhavnagar@gmail.com"
-          ? [
-              {
-                title: "Job",
-                items: [
-                  {
-                    name: "Work Hour Summary",
-                    href: "/worksummary",
-                  },
-                  {
-                    name: "Swipper Summary",
-                    href: "/swippersummary",
-                  },
-                ],
-              },
-            ]
-          : data.email == "osc@swm.com"
-          ? [
-              {
-                title: "Job",
-                items: [
-                  {
-                    name: "Job Summary",
-                    href: "/jobsummary",
-                  },
-                  {
-                    name: "Job Details Summary",
-                    href: "/jobdetailssummary",
-                  },
-                ],
-              },
-              {
-                title: "Present",
-                items: [
-                  {
-                    name: "Present Summary",
-                    href: "/presentsummary",
-                  },
-                ],
-              },
-            ]
-          : [
-              {
-                title: "Job",
-                items: [
-                  {
-                    name: "Summary",
-                    href: "/summary",
-                  },
-                ],
-              },
-            ],
-    },
-    { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
-  ];
-  const pathname = usePathname();
-  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
-  const submenuRef = React.useRef<HTMLDivElement>(null);
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  // Handle loading and authentication states within JSX to avoid hooks order issues
 
   const handleMouseEnter = (id: string) => {
     if (timeoutRef.current) {
@@ -182,6 +110,11 @@ export function AppSidebar({
   };
 
   React.useEffect(() => {
+    // Check if we're in the browser environment
+    if (typeof document === "undefined") {
+      return;
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         submenuRef.current &&
@@ -197,14 +130,19 @@ export function AppSidebar({
     };
   }, []);
 
-  // If the current path is root, just return children without sidebar
-  if (pathname === "/") {
-    return <>{children}</>;
-  }
+  // Handle root path condition within JSX to avoid hooks order issues
 
   return (
-    <SidebarProvider>
-      <Sidebar className=" bg-[#f2f2f2] text-gray-700">
+    <>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : !data ? (
+        children
+      ) : pathname === "/" ? (
+        children
+      ) : (
+        <SidebarProvider>
+          <Sidebar className=" bg-[#f2f2f2] text-gray-700">
         <SidebarHeader className="p-2">
           <Avatar className="w-16 h-16 mx-auto">
             {data?.email == "osc@swm.com" ? (
@@ -217,7 +155,73 @@ export function AppSidebar({
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
-            {menuItems?.map((item, index) => (
+            {(() => {
+              const menuItems = [
+                { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
+                { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
+                {
+                  id: "menu_03",
+                  title: "Reports",
+                  icon: FileText,
+                  href: "#",
+                  subMenu:
+                    data!.email == "bhavnagar@gmail.com"
+                      ? [
+                          {
+                            title: "Job",
+                            items: [
+                              {
+                                name: "Work Hour Summary",
+                                href: "/worksummary",
+                              },
+                              {
+                                name: "Swipper Summary",
+                                href: "/swippersummary",
+                              },
+                            ],
+                          },
+                        ]
+                      : data!.email == "osc@swm.com"
+                      ? [
+                          {
+                            title: "Job",
+                            items: [
+                              {
+                                name: "Job Summary",
+                                href: "/jobsummary",
+                              },
+                              {
+                                name: "Job Details Summary",
+                                href: "/jobdetailssummary",
+                              },
+                            ],
+                          },
+                          {
+                            title: "Present",
+                            items: [
+                              {
+                                name: "Present Summary",
+                                href: "/presentsummary",
+                              },
+                            ],
+                          },
+                        ]
+                      : [
+                          {
+                            title: "Job",
+                            items: [
+                              {
+                                name: "Summary",
+                                href: "/summary",
+                              },
+                            ],
+                          },
+                        ],
+                },
+                { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
+              ];
+              
+              return menuItems.map((item, index) => (
               <div key={index}>
                 <SidebarMenuItem
                   key={index}
@@ -262,7 +266,8 @@ export function AppSidebar({
                   </div>
                 )}
               </div>
-            ))}
+            ));
+            })()}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter className="mt-auto">
@@ -294,6 +299,8 @@ export function AppSidebar({
         </SidebarFooter>
       </Sidebar>
       {children}
-    </SidebarProvider>
+        </SidebarProvider>
+      )}
+    </>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Filter, Search } from "lucide-react";
-import { wastZone, eastZone, general, BRIGRAJSINH } from "@/data/index"; // Add general import
+import {wastZone, eastZone, general, BRIGRAJSINH} from "@/data/index";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -12,7 +12,24 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
-  const [filteredData, setFilteredData] = useState(wastZone);
+  const [filteredData, setFilteredData] = useState([...wastZone, ...eastZone, ...general]);
+  
+  // Debug: Log initial data
+  console.log('Initial data loaded:', {
+    wastZone: wastZone.length,
+    eastZone: eastZone.length, 
+    general: general.length,
+    total: wastZone.length + eastZone.length + general.length
+  });
+  
+  // Debug: Check for GJ06BX0741 in initial data
+  const allData = [...wastZone, ...eastZone, ...general];
+  const gj0741Entries = allData.filter(job => 
+    job.more_details?.some(detail => 
+      detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
+    )
+  );
+  console.log('GJ06BX0741 entries in initial data:', gj0741Entries.length);
   const [searchTerm, setSearchTerm] = useState("");
   const [vehicleSearchTerm, setVehicleSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
@@ -27,7 +44,16 @@ const Page = () => {
 
   // Comprehensive filtering function
   const applyFilters = () => {
-    let result;
+    try {
+      console.log('applyFilters called with:', { 
+        checkedItems: checkedItems.length, 
+        searchTerm, 
+        vehicleSearchTerm, 
+        dateRange,
+        zone: formData.zone.value 
+      });
+      
+      let result;
     // Updated zone filtering logic to include general zone
     if (formData.town.value == "BRIGRAJSINH") {
       result = BRIGRAJSINH;
@@ -61,13 +87,27 @@ const Page = () => {
 
     // Filter by vehicle search term
     if (vehicleSearchTerm) {
-      result = result.filter((job) =>
-        job.more_details.some((detail) =>
-          detail.Vehicle.toLowerCase().includes(
-            vehicleSearchTerm.toLowerCase(),
-          ),
-        ),
-      );
+      console.log('Searching for vehicle:', vehicleSearchTerm);
+      const beforeCount = result.length;
+      
+      result = result.filter((job) => {
+        // Check if more_details exists and is an array
+        if (!job.more_details || !Array.isArray(job.more_details)) {
+          return false;
+        }
+        const hasMatch = job.more_details.some((detail) => {
+          const vehicleName = detail.Vehicle?.toLowerCase() || '';
+          const searchTerm = vehicleSearchTerm.toLowerCase();
+          const matches = vehicleName.includes(searchTerm);
+          if (matches) {
+            console.log('Found match:', detail.Vehicle, 'for search term:', vehicleSearchTerm);
+          }
+          return matches;
+        });
+        return hasMatch;
+      });
+      
+      console.log(`Vehicle search: ${beforeCount} -> ${result.length} results`);
     }
 
     // Date range filter
@@ -82,6 +122,11 @@ const Page = () => {
 
       result = result
         .map((job) => {
+          // Check if more_details exists and is an array
+          if (!job.more_details || !Array.isArray(job.more_details)) {
+            return null;
+          }
+          
           const filteredMoreDetails = job.more_details.filter((detail) => {
             const jobDate = new Date(detail.Date);
             // Set the time to noon to avoid timezone issues
@@ -94,11 +139,23 @@ const Page = () => {
             ? { ...job, more_details: filteredMoreDetails }
             : null;
         })
-        .filter(Boolean) as typeof result;
+        .filter(job => job !== null);
     }
 
-    // @ts-ignore
-    setFilteredData(result);
+    // Debug: Log the filtering results
+    console.log('Filtered data count:', result.length);
+    console.log('GJ06BX0741 entries found:', result.filter(job => 
+      job.more_details?.some(detail => 
+        detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
+      )
+    ).length);
+    
+      setFilteredData(result);
+    } catch (error) {
+      console.error('Error in applyFilters:', error);
+      // Set empty array as fallback
+      setFilteredData([]);
+    }
   };
 
   // Apply filters when dependencies change
@@ -135,9 +192,9 @@ const Page = () => {
     setFormData(newFormData);
   };
 
-  const handleCheckedItemsChange = (items: string[]) => {
+  const handleCheckedItemsChange = useCallback((items: string[]) => {
     setCheckedItems(items);
-  };
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Camera, ChevronDown, ChevronRight } from "lucide-react";
 import { eastZone, wastZone, general, BRIGRAJSINH } from "@/data/index";
@@ -18,6 +18,12 @@ const createNestedData = (
   const zoneMap = new Map<string, NestedItem>();
 
   data.forEach((item, index) => {
+    // Add null checks to prevent undefined errors
+    if (!item || !item.Zone || !item.Ward) {
+      console.warn('Invalid item data:', item);
+      return;
+    }
+    
     const zoneId = `zone_${item.Zone.toLowerCase().replace(/\s+/g, "_")}`;
     const wardId = `ward_${item.Ward.toLowerCase().replace(/\s+/g, "_")}`;
     const jobId = `job_${index}`;
@@ -152,16 +158,20 @@ export const NestedDropdownCheckbox = (props: {
     setCheckedItems([]);
   }, [props.validate]);
 
-  const handleItemCheck = (ids: string[], checked: boolean) => {
+  const handleItemCheck = useCallback((ids: string[], checked: boolean) => {
     setCheckedItems((prev) => {
       const newCheckedItems = checked
         ? Array.from(new Set([...prev, ...ids]))
         : prev.filter((item) => !ids.includes(item));
 
-      props.onCheckedItemsChange?.(newCheckedItems);
+      // Use setTimeout to defer the callback to avoid state update during render
+      setTimeout(() => {
+        props.onCheckedItemsChange?.(newCheckedItems);
+      }, 0);
+      
       return newCheckedItems;
     });
-  };
+  }, [props.onCheckedItemsChange]);
 
   const renderDropdown = (data: NestedItem[]) => {
     return data.map((item) => (
