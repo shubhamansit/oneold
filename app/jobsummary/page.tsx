@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Filter, Search } from "lucide-react";
-import {wastZone, eastZone, general, BRIGRAJSINH} from "@/data/index";
+import {getWastZone, getEastZone, getGeneral, BRIGRAJSINH} from "@/data/index";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -12,24 +12,49 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
-  const [filteredData, setFilteredData] = useState([...wastZone, ...eastZone, ...general]);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   
-  // Debug: Log initial data
-  console.log('Initial data loaded:', {
-    wastZone: wastZone.length,
-    eastZone: eastZone.length, 
-    general: general.length,
-    total: wastZone.length + eastZone.length + general.length
-  });
-  
-  // Debug: Check for GJ06BX0741 in initial data
-  const allData = [...wastZone, ...eastZone, ...general];
-  const gj0741Entries = allData.filter(job => 
-    job.more_details?.some(detail => 
-      detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
-    )
-  );
-  console.log('GJ06BX0741 entries in initial data:', gj0741Entries.length);
+  // Load data dynamically
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        const [wastZoneData, eastZoneData, generalData] = await Promise.all([
+          getWastZone(),
+          getEastZone(),
+          getGeneral()
+        ]);
+        
+        const allData = [...wastZoneData, ...eastZoneData, ...generalData];
+        setFilteredData(allData);
+        
+        // Debug: Log loaded data
+        console.log('Data loaded successfully:', {
+          wastZone: wastZoneData.length,
+          eastZone: eastZoneData.length, 
+          general: generalData.length,
+          total: allData.length
+        });
+        
+        // Debug: Check for GJ06BX0741 in loaded data
+        const gj0741Entries = allData.filter(job => 
+          job.more_details?.some(detail => 
+            detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
+          )
+        );
+        console.log('GJ06BX0741 entries in loaded data:', gj0741Entries.length);
+        
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setFilteredData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadData();
+  }, []);
   const [searchTerm, setSearchTerm] = useState("");
   const [vehicleSearchTerm, setVehicleSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
@@ -241,7 +266,16 @@ const Page = () => {
       </header>
       <main className="container mx-auto px-4 py-8">
         <div className="mt-4">
-          <ExpandableTable data={filteredData} />
+          {isLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading data...</p>
+              </div>
+            </div>
+          ) : (
+            <ExpandableTable data={filteredData} />
+          )}
         </div>
       </main>
 

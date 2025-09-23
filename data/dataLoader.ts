@@ -2,6 +2,7 @@
 let wastZoneCache: any[] | null = null;
 let eastZoneCache: any[] | null = null;
 let generalCache: any[] | null = null;
+let brigrajsinhCache: any[] | null = null;
 
 export async function getWastZone(): Promise<any[]> {
   if (wastZoneCache) return wastZoneCache;
@@ -42,7 +43,21 @@ export async function getGeneral(): Promise<any[]> {
   }
 }
 
+export async function getBRIGRAJSINH(): Promise<any[]> {
+  if (brigrajsinhCache) return brigrajsinhCache;
+  
+  try {
+    const brigrajsinhData = await import('./brigrajsinh.json');
+    brigrajsinhCache = brigrajsinhData.default || brigrajsinhData;
+    return brigrajsinhCache;
+  } catch (error) {
+    console.error('Error loading BRIGRAJSINH data:', error);
+    return [];
+  }
+}
+
 // For backward compatibility, export empty arrays initially
 export const wastZone: any[] = [];
 export const eastZone: any[] = [];
 export const general: any[] = [];
+export const BRIGRAJSINH: any[] = [];
