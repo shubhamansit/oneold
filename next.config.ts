@@ -25,13 +25,7 @@ const nextConfig: NextConfig = {
         },
       },
     };
-    
-    // Increase max asset size
-    config.performance = {
-      ...config.performance,
-      maxAssetSize: 10000000, // 10MB
-      maxEntrypointSize: 10000000, // 10MB
-    };
+
     
     return config;
   },
