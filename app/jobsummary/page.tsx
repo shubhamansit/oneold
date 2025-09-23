@@ -28,7 +28,21 @@ const Page = () => {
           getBRIGRAJSINH()
         ]);
         
-        const combinedData = [...wastZoneData, ...eastZoneData, ...generalData, ...brigrajsinhData];
+        // Debug: Check BRIGRAJSINH data structure
+        console.log('BRIGRAJSINH sample data:', brigrajsinhData.slice(0, 2));
+        console.log('BRIGRAJSINH data structure check:', {
+          hasZone: brigrajsinhData[0]?.Zone,
+          hasWard: brigrajsinhData[0]?.Ward,
+          hasJobName: brigrajsinhData[0]?.["Job Name"]
+        });
+        
+        // Filter BRIGRAJSINH data to only include job summary records
+        const filteredBRIGRAJSINHData = brigrajsinhData.filter((item: any) => {
+          return item && typeof item === 'object' && 'Zone' in item && 'Ward' in item && 'Job Name' in item;
+        });
+        console.log('BRIGRAJSINH filtered data:', filteredBRIGRAJSINHData.length, 'items');
+        
+        const combinedData = [...wastZoneData, ...eastZoneData, ...generalData, ...filteredBRIGRAJSINHData];
         setAllData(combinedData);
         setFilteredData(combinedData);
         
@@ -37,7 +51,7 @@ const Page = () => {
           wastZone: wastZoneData.length,
           eastZone: eastZoneData.length, 
           general: generalData.length,
-          brigrajsinh: brigrajsinhData.length,
+          brigrajsinh: filteredBRIGRAJSINHData.length,
           total: combinedData.length
         });
         
@@ -91,7 +105,16 @@ const Page = () => {
       
       // Filter by town if not "All"
       if (formData.town.value !== "All") {
-        result = result.filter((job) => job.Town === formData.town.value);
+        if (formData.town.value === "BRIGRAJSINH") {
+          // For BRIGRAJSINH, filter by Branch field instead of Town field
+          const beforeCount = result.length;
+          result = result.filter((job) => job.Branch === "BRIGRAJSINH");
+          console.log(`BRIGRAJSINH filtering: ${beforeCount} -> ${result.length} results`);
+        } else {
+          const beforeCount = result.length;
+          result = result.filter((job) => job.Town === formData.town.value);
+          console.log(`Town filtering (${formData.town.value}): ${beforeCount} -> ${result.length} results`);
+        }
       }
       
       // Filter by ward if not "All"
@@ -192,9 +215,9 @@ const Page = () => {
   }, [
     allData,
     checkedItems,
-    formData.zone,
-    formData.town,
-    formData.ward,
+    formData.zone.value,
+    formData.town.value,
+    formData.ward.value,
     searchTerm,
     dateRange,
     vehicleSearchTerm,

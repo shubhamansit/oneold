@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Camera, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { getEastZone, getWastZone, getGeneral, getBRIGRAJSINH } from "@/data/index";
 
 interface NestedItem {
@@ -12,49 +12,56 @@ interface NestedItem {
 }
 
 const createNestedData = (
-  data: any[],
+  data: unknown[],
 ): NestedItem[] => {
   const nestedData: NestedItem[] = [];
   const zoneMap = new Map<string, NestedItem>();
 
+  console.log('Creating nested data from:', data.length, 'items');
+  console.log('Sample data structure:', data.slice(0, 2));
+
   data.forEach((item, index) => {
-    // Add null checks to prevent undefined errors
-    if (!item || !item.Zone || !item.Ward) {
-      console.warn('Invalid item data:', item);
-      return;
-    }
-    
-    const zoneId = `zone_${item.Zone.toLowerCase().replace(/\s+/g, "_")}`;
-    const wardId = `ward_${item.Ward.toLowerCase().replace(/\s+/g, "_")}`;
-    const jobId = `job_${index}`;
+    // Check if this is a job object with Zone/Ward properties
+    if (item && typeof item === 'object' && 'Zone' in item && 'Ward' in item && 'Job Name' in item) {
+      const jobItem = item as { Zone: string; Ward: string; 'Job Name': string };
+      console.log('Processing job item:', { Zone: jobItem.Zone, Ward: jobItem.Ward, JobName: jobItem["Job Name"] });
+      
+      const zoneId = `zone_${jobItem.Zone.toLowerCase().replace(/\s+/g, "_")}`;
+      const wardId = `ward_${jobItem.Ward.toLowerCase().replace(/\s+/g, "_")}`;
+      const jobId = `job_${index}`;
 
-    if (!zoneMap.has(zoneId)) {
-      zoneMap.set(zoneId, {
-        id: zoneId,
-        label: item.Zone,
-        children: [],
+      if (!zoneMap.has(zoneId)) {
+        zoneMap.set(zoneId, {
+          id: zoneId,
+          label: jobItem.Zone,
+          children: [],
+        });
+        nestedData.push(zoneMap.get(zoneId)!);
+      }
+
+      const zone = zoneMap.get(zoneId)!;
+      let town = zone.children?.find((child) => child.id === wardId);
+
+      if (!town) {
+        town = {
+          id: wardId,
+          label: jobItem.Ward,
+          children: [],
+        };
+        zone.children?.push(town);
+      }
+
+      town.children?.push({
+        id: jobId,
+        label: jobItem["Job Name"],
       });
-      nestedData.push(zoneMap.get(zoneId)!);
+    } else {
+      // This might be detailed data, skip it for now
+      console.log('Skipping item without Zone/Ward/Job Name:', item);
     }
-
-    const zone = zoneMap.get(zoneId)!;
-    let town = zone.children?.find((child) => child.id === wardId);
-
-    if (!town) {
-      town = {
-        id: wardId,
-        label: item.Ward,
-        children: [],
-      };
-      zone.children?.push(town);
-    }
-
-    town.children?.push({
-      id: jobId,
-      label: item["Job Name"],
-    });
   });
 
+  console.log('Created nested data:', nestedData);
   return nestedData;
 };
 
@@ -150,36 +157,65 @@ export const NestedDropdownCheckbox = (props: {
   onCheckedItemsChange?: (items: string[]) => void;
   validate: boolean;
 }) => {
+  const { town, zone, ward, onCheckedItemsChange } = props;
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const [nestedData, setNestedData] = useState<NestedItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setCheckedItems([]);
-  }, [props.validate]);
+  }, [zone.value, ward.value]);
 
   // Load data dynamically based on zone and town
   useEffect(() => {
+    
     const loadData = async () => {
       setIsLoading(true);
       try {
-        let data: any[] = [];
+        let data: unknown[] = [];
         
-        if (props.town.value === "BRIGRAJSINH") {
-          if (props.zone.value === "WEST_ZONE") {
-            data = await getBRIGRAJSINH();
-          }
-        } else {
-          if (props.zone.value === "WEST_ZONE") {
+        console.log('Loading data for:', { town: town.value, zone: zone.value });
+        
+        if (town.value === "BRIGRAJSINH") {
+          // BRIGRAJSINH only has WEST_ZONE data
+          data = await getBRIGRAJSINH();
+          console.log('BRIGRAJSINH data loaded:', data.length, 'items');
+          console.log('BRIGRAJSINH sample data:', data.slice(0, 2));
+          
+          // Filter data to only include job summary records (not detailed records)
+          const jobSummaryData = data.filter((item: unknown) => {
+            if (item && typeof item === 'object' && 'Zone' in item && 'Ward' in item && 'Job Name' in item) {
+              return true;
+            }
+            return false;
+          });
+          console.log('BRIGRAJSINH job summary data after filtering:', jobSummaryData.length, 'items');
+          data = jobSummaryData;
+        } else if (town.value === "BHAVNAGAR_OSC") {
+          if (zone.value === "WEST_ZONE") {
             data = await getWastZone();
-          } else if (props.zone.value === "EAST_ZONE") {
+            console.log('WastZone data loaded:', data.length, 'items');
+          } else if (zone.value === "EAST_ZONE") {
             data = await getEastZone();
-          } else if (props.zone.value === "GENERAL") {
+            console.log('EastZone data loaded:', data.length, 'items');
+          } else if (zone.value === "GENERAL") {
             data = await getGeneral();
+            console.log('General data loaded:', data.length, 'items');
+          } else if (zone.value === "All") {
+            // Load all data when zone is "All"
+            const [wastZoneData, eastZoneData, generalData] = await Promise.all([
+              getWastZone(),
+              getEastZone(),
+              getGeneral()
+            ]);
+            data = [...wastZoneData, ...eastZoneData, ...generalData];
+            console.log('All data loaded:', data.length, 'items');
           }
         }
         
+        console.log('Final data before nesting:', data.slice(0, 3)); // Log first 3 items
         const nested = createNestedData(data);
+        console.log('Nested data created:', nested);
         setNestedData(nested);
       } catch (error) {
         console.error('Error loading data:', error);
@@ -190,22 +226,22 @@ export const NestedDropdownCheckbox = (props: {
     };
 
     loadData();
-  }, [props.zone.value, props.town.value]);
+  }, [zone.value, town.value]);
 
   const handleItemCheck = useCallback((ids: string[], checked: boolean) => {
     setCheckedItems((prev) => {
       const newCheckedItems = checked
         ? Array.from(new Set([...prev, ...ids]))
         : prev.filter((item) => !ids.includes(item));
-
-      // Use setTimeout to defer the callback to avoid state update during render
-      setTimeout(() => {
-        props.onCheckedItemsChange?.(newCheckedItems);
-      }, 0);
       
       return newCheckedItems;
     });
-  }, [props.onCheckedItemsChange]);
+  }, []);
+
+  // Use useEffect to call the callback after state update
+  useEffect(() => {
+    onCheckedItemsChange?.(checkedItems);
+  }, [checkedItems, onCheckedItemsChange]);
 
   const renderDropdown = (data: NestedItem[]) => {
     return data.map((item) => (
@@ -226,7 +262,7 @@ export const NestedDropdownCheckbox = (props: {
 
   let filteredData: NestedItem[] = nestedData;
 
-  if (props.ward.value === "All") {
+  if (ward.value === "All") {
     return renderDropdown(filteredData);
   }
 
@@ -235,7 +271,7 @@ export const NestedDropdownCheckbox = (props: {
     return {
       ...zone,
       children: zone.children?.filter(
-        (child) => child.label === props.ward.label,
+        (child) => child.label === ward.label,
       ),
     };
   });

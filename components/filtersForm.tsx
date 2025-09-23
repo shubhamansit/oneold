@@ -209,7 +209,7 @@ import SelectBox from "react-select";
 import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { NestedDropdownCheckbox } from "./NestedDropdownCheckbox";
-import { getBRIGRAJSINH, getEastZone, getWastZone } from "@/data/index";
+import { getBRIGRAJSINH, getEastZone, getWastZone, getGeneral } from "@/data/index";
 import { Calendar } from "./ui/calendar";
 import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
@@ -234,7 +234,7 @@ interface FiltersFormProps {
   onFormDataChange: (newFormData: FormData) => void;
   dateRange?: DateRange;
   onDateRangeChange: (date: DateRange | undefined) => void;
-  filteredData: any[] | undefined;
+  filteredData: unknown[] | undefined;
 }
 
 const FiltersForm: React.FC<FiltersFormProps> = ({
@@ -246,6 +246,11 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   onDateRangeChange,
   filteredData,
 }) => {
+  // Debug: Log filtered data
+  console.log('FiltersForm received filteredData:', {
+    length: filteredData?.length,
+    data: filteredData
+  });
   // Initialize options with proper typing
   const [companyOptions] = useState<Option[]>([{ value: "BMC", label: "BMC" }]);
 
@@ -257,6 +262,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   ]);
 
   const [zoneOptions, setZoneOptions] = useState<Option[]>([
+    { value: "All", label: "All" },
     { value: "EAST_ZONE", label: "EAST_ZONE" },
     { value: "WEST_ZONE", label: "WEST_ZONE" },
     { value: "GENERAL", label: "GENERAL" },
@@ -265,14 +271,18 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   const [wardOptions, setWardOptions] = useState<Option[]>([]);
   const [validate, setValidate] = useState(false);
   const [isXlS, setIsXLS] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  // Reset zone options when component mounts
+  // Reset zone options when town changes
   useEffect(() => {
+    console.log('Town changed to:', formData.town?.value);
     if (formData.town?.value === "BRIGRAJSINH") {
+      console.log('Setting zone options for BRIGRAJSINH');
       setZoneOptions([{ value: "WEST_ZONE", label: "WEST_ZONE" }]);
-    } else {
+    } else if (formData.town?.value === "BHAVNAGAR_OSC") {
+      console.log('Setting zone options for BHAVNAGAR_OSC');
       setZoneOptions([
+        { value: "All", label: "All" },
         { value: "EAST_ZONE", label: "EAST_ZONE" },
         { value: "WEST_ZONE", label: "WEST_ZONE" },
         { value: "GENERAL", label: "GENERAL" },
@@ -284,8 +294,10 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   useEffect(() => {
     if (!formData.zone?.value) return;
 
+    console.log('Loading ward data for:', { town: formData.town?.value, zone: formData.zone?.value });
+
     const loadWardData = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       try {
         let wardData: string[] = [];
 
@@ -294,16 +306,24 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
             const brigrajsinhData = await getBRIGRAJSINH();
             wardData = brigrajsinhData.map((zone) => zone.Ward);
           }
-        } else {
+        } else if (formData.town?.value === "BHAVNAGAR_OSC") {
           if (formData.zone.value === "WEST_ZONE") {
             const wastZoneData = await getWastZone();
             wardData = wastZoneData.map((zone) => zone.Ward);
           } else if (formData.zone.value === "EAST_ZONE") {
             const eastZoneData = await getEastZone();
             wardData = eastZoneData.map((zone) => zone.Ward);
-          } else {
-            const [wastZoneData, eastZoneData] = await Promise.all([getWastZone(), getEastZone()]);
-            wardData = [...wastZoneData, ...eastZoneData].map((zone) => zone.Ward);
+          } else if (formData.zone.value === "GENERAL") {
+            const generalData = await getGeneral();
+            wardData = generalData.map((zone) => zone.Ward);
+          } else if (formData.zone.value === "All") {
+            // Load all ward data when zone is "All"
+            const [wastZoneData, eastZoneData, generalData] = await Promise.all([
+              getWastZone(),
+              getEastZone(),
+              getGeneral()
+            ]);
+            wardData = [...wastZoneData, ...eastZoneData, ...generalData].map((zone) => zone.Ward);
           }
         }
 
@@ -318,7 +338,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
         console.error('Error loading ward data:', error);
         setWardOptions([{ value: "All", label: "All" }]);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     };
 
@@ -330,7 +350,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
     setValidate((prev) => !prev);
   }, [formData.ward]);
 
-  const handleChange = (selectedOptions: any, actionMeta: any) => {
+  const handleChange = (selectedOptions: unknown, actionMeta: { name: string }) => {
     switch (actionMeta.name) {
       case "town":
         if (selectedOptions?.value === "BRIGRAJSINH") {
@@ -338,6 +358,15 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
             ...formData,
             town: selectedOptions,
             zone: { value: "WEST_ZONE", label: "WEST_ZONE" },
+            ward: { value: "All", label: "All" },
+          };
+          onFormDataChange(newFormData);
+          onCheckedItemsChange([]);
+        } else if (selectedOptions?.value === "BHAVNAGAR_OSC") {
+          const newFormData = {
+            ...formData,
+            town: selectedOptions,
+            zone: { value: "All", label: "All" },
             ward: { value: "All", label: "All" },
           };
           onFormDataChange(newFormData);
@@ -351,15 +380,21 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
         break;
 
       case "zone":
-        if (formData.town?.value !== "BRIGRAJSINH") {
-          const newFormData = {
-            ...formData,
-            zone: selectedOptions,
-            ward: { value: "All", label: "All" },
-          };
-          onFormDataChange(newFormData);
-          onCheckedItemsChange([]);
-        }
+        const newFormData = {
+          ...formData,
+          zone: selectedOptions,
+          ward: { value: "All", label: "All" },
+        };
+        onFormDataChange(newFormData);
+        onCheckedItemsChange([]);
+        break;
+
+      case "ward":
+        onFormDataChange({
+          ...formData,
+          [actionMeta.name]: selectedOptions,
+        });
+        onCheckedItemsChange([]);
         break;
 
       default:
@@ -458,8 +493,8 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
                 className="xlsx bg-[#DB4848] text-white transition-all ease-in-out absolute -top-24 right-0 flex flex-col justify-start p-2 shadow-lg rounded-md overflow-hidden z-50"
                 onMouseLeave={() => setIsXLS(false)}
               >
-                <ExportExcel data={filteredData} exportMode="summary" />
-                <ExportExcel data={filteredData} exportMode="details" />
+                <ExportExcel data={filteredData || []} exportMode="summary" />
+                <ExportExcel data={filteredData || []} exportMode="details" />
               </div>
             )}
           </div>
