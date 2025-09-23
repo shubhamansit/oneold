@@ -74,6 +74,7 @@ const ExportExcel: FC<ExportExcelProps> = ({ data, exportMode }) => {
   const handleExportExcel = async () => {
     if (!data || data.length === 0) {
       toast.error("No data to export");
+      console.log("Export failed - no data:", { data, length: data?.length });
       return;
     }
 

@@ -49,6 +49,8 @@ export async function getBRIGRAJSINH(): Promise<any[]> {
   try {
     const brigrajsinhData = await import('./brigrajsinh.json');
     brigrajsinhCache = brigrajsinhData.default || brigrajsinhData;
+    console.log('BRIGRAJSINH data loaded from file:', brigrajsinhCache.length, 'items');
+    console.log('BRIGRAJSINH sample data from file:', brigrajsinhCache.slice(0, 2));
     return brigrajsinhCache;
   } catch (error) {
     console.error('Error loading BRIGRAJSINH data:', error);
