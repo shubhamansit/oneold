@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { wastZone } from "@/data/index";
+// Data is now passed as props, no need to import static data
 
 interface JobData {
   Branch: string;

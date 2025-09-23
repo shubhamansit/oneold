@@ -209,7 +209,7 @@ import SelectBox from "react-select";
 import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { NestedDropdownCheckbox } from "./NestedDropdownCheckbox";
-import { BRIGRAJSINH, eastZone, wastZone } from "@/data/index";
+import { getBRIGRAJSINH, getEastZone, getWastZone } from "@/data/index";
 import { Calendar } from "./ui/calendar";
 import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
@@ -265,6 +265,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   const [wardOptions, setWardOptions] = useState<Option[]>([]);
   const [validate, setValidate] = useState(false);
   const [isXlS, setIsXLS] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Reset zone options when component mounts
   useEffect(() => {
@@ -280,34 +281,49 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
   }, [formData.town]);
 
   // Update ward options based on selected zone
-
   useEffect(() => {
     if (!formData.zone?.value) return;
 
-    let wardData: string[] = [];
+    const loadWardData = async () => {
+      setIsLoading(true);
+      try {
+        let wardData: string[] = [];
 
-    if (formData.town?.value === "BRIGRAJSINH") {
-      if (formData.zone.value === "WEST_ZONE") {
-        wardData = BRIGRAJSINH.map((zone) => zone.Ward);
+        if (formData.town?.value === "BRIGRAJSINH") {
+          if (formData.zone.value === "WEST_ZONE") {
+            const brigrajsinhData = await getBRIGRAJSINH();
+            wardData = brigrajsinhData.map((zone) => zone.Ward);
+          }
+        } else {
+          if (formData.zone.value === "WEST_ZONE") {
+            const wastZoneData = await getWastZone();
+            wardData = wastZoneData.map((zone) => zone.Ward);
+          } else if (formData.zone.value === "EAST_ZONE") {
+            const eastZoneData = await getEastZone();
+            wardData = eastZoneData.map((zone) => zone.Ward);
+          } else {
+            const [wastZoneData, eastZoneData] = await Promise.all([getWastZone(), getEastZone()]);
+            wardData = [...wastZoneData, ...eastZoneData].map((zone) => zone.Ward);
+          }
+        }
+
+        const uniqueWardData = Array.from(new Set(wardData)).map((ward) => ({
+          value: ward,
+          label: ward,
+        }));
+
+        setWardOptions([{ value: "All", label: "All" }, ...uniqueWardData]);
+        setValidate((prev) => !prev);
+      } catch (error) {
+        console.error('Error loading ward data:', error);
+        setWardOptions([{ value: "All", label: "All" }]);
+      } finally {
+        setIsLoading(false);
       }
-    } else {
-      if (formData.zone.value === "WEST_ZONE") {
-        wardData = wastZone.map((zone) => zone.Ward);
-      } else if (formData.zone.value === "EAST_ZONE") {
-        wardData = eastZone.map((zone) => zone.Ward);
-      } else {
-        wardData = [...wastZone, ...eastZone].map((zone) => zone.Ward);
-      }
-    }
+    };
 
-    const uniqueWardData = Array.from(new Set(wardData)).map((ward) => ({
-      value: ward,
-      label: ward,
-    }));
-
-    setWardOptions([{ value: "All", label: "All" }, ...uniqueWardData]);
-    setValidate((prev) => !prev);
-  }, [formData.zone]);
+    loadWardData();
+  }, [formData.zone, formData.town]);
 
   // Update validation when ward changes
   useEffect(() => {

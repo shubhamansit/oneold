@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Camera, ChevronDown, ChevronRight } from "lucide-react";
-import { eastZone, wastZone, general, BRIGRAJSINH } from "@/data/index";
+import { getEastZone, getWastZone, getGeneral, getBRIGRAJSINH } from "@/data/index";
 
 interface NestedItem {
   id: string;
@@ -12,7 +12,7 @@ interface NestedItem {
 }
 
 const createNestedData = (
-  data: typeof wastZone | typeof eastZone | typeof BRIGRAJSINH,
+  data: any[],
 ): NestedItem[] => {
   const nestedData: NestedItem[] = [];
   const zoneMap = new Map<string, NestedItem>();
@@ -58,9 +58,7 @@ const createNestedData = (
   return nestedData;
 };
 
-const nestedData = createNestedData(wastZone);
-const nestedData2 = createNestedData(eastZone);
-const nestedData3 = createNestedData(general);
+// Data will be loaded dynamically inside the component
 
 const collectItemIds = (item: NestedItem): string[] => {
   const ids = [item.label];
@@ -153,10 +151,46 @@ export const NestedDropdownCheckbox = (props: {
   validate: boolean;
 }) => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const [nestedData, setNestedData] = useState<NestedItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setCheckedItems([]);
   }, [props.validate]);
+
+  // Load data dynamically based on zone and town
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        let data: any[] = [];
+        
+        if (props.town.value === "BRIGRAJSINH") {
+          if (props.zone.value === "WEST_ZONE") {
+            data = await getBRIGRAJSINH();
+          }
+        } else {
+          if (props.zone.value === "WEST_ZONE") {
+            data = await getWastZone();
+          } else if (props.zone.value === "EAST_ZONE") {
+            data = await getEastZone();
+          } else if (props.zone.value === "GENERAL") {
+            data = await getGeneral();
+          }
+        }
+        
+        const nested = createNestedData(data);
+        setNestedData(nested);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setNestedData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [props.zone.value, props.town.value]);
 
   const handleItemCheck = useCallback((ids: string[], checked: boolean) => {
     setCheckedItems((prev) => {
@@ -186,28 +220,14 @@ export const NestedDropdownCheckbox = (props: {
     ));
   };
 
-  let filteredData: NestedItem[] = [];
-  if (props.town.value == "BRIGRAJSINH") {
-    if (props.zone.value === "WEST_ZONE") {
-      filteredData = createNestedData(BRIGRAJSINH);
-    }
-    if (props.ward.value === "All") {
-      return renderDropdown(filteredData);
-    }
-  } else {
-    if (props.zone.value === "WEST_ZONE") {
-      filteredData = nestedData;
-    } else if (props.zone.value === "EAST_ZONE") {
-      filteredData = nestedData2;
-    } else if (props.zone.value === "GENERAL") {
-      filteredData = nestedData3;
-    } else if (props.zone.value === "All") {
-      filteredData = [...nestedData, ...nestedData2, ...nestedData3];
-    }
+  if (isLoading) {
+    return <div className="p-4 text-center">Loading filters...</div>;
+  }
 
-    if (props.ward.value === "All") {
-      return renderDropdown(filteredData);
-    }
+  let filteredData: NestedItem[] = nestedData;
+
+  if (props.ward.value === "All") {
+    return renderDropdown(filteredData);
   }
 
   // If ward.value is not "All", filter based on the specific ward label
