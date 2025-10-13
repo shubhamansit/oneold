@@ -1,0 +1,61 @@
+/* Hide day headers */
+.calendar-container .rdp-head_row,
+.calendar-container .rdp-head_cell,
+.calendar-container .rdp-head_row *,
+.calendar-container .rdp-head_cell *,
+.calendar-container [class*="head_row"],
+.calendar-container [class*="head_cell"],
+.calendar-container thead,
+.calendar-container thead tr,
+.calendar-container thead th {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+}
+
+/* Calendar Range Selection Styling */
+.calendar-container .rdp-day_selected,
+.calendar-container .rdp-day--selected {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.calendar-container .rdp-day_range_start,
+.calendar-container .rdp-day--range_start {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.calendar-container .rdp-day_range_end,
+.calendar-container .rdp-day--range_end {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.calendar-container .rdp-day_range_middle,
+.calendar-container .rdp-day--range_middle {
+  background-color: hsl(var(--primary) / 0.2) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+/* Ensure proper alignment */
+.calendar-container .rdp-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.calendar-container .rdp-cell {
+  position: relative;
+  padding: 0;
+  text-align: center;
+  font-size: 0.875rem;
+}

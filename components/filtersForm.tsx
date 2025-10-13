@@ -213,6 +213,8 @@ import { getBRIGRAJSINH, getEastZone, getWastZone, getGeneral } from "@/data/ind
 import { Calendar } from "./ui/calendar";
 import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
+import "react-day-picker/dist/style.css";
+import "../styles/calendar.css";
 
 interface Option {
   value: string;
@@ -459,12 +461,25 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
         </div>
         <div className="flex-grow flex flex-col p-4 gap-4">
           <Label>Date Range</Label>
-          <Calendar
-            mode="range"
-            selected={dateRange}
-            onSelect={onDateRangeChange}
-            className="rounded-md border"
-          />
+          {dateRange && (
+            <div className="text-xs text-gray-500 mb-2">
+              Selected: {dateRange.from?.toLocaleDateString()} - {dateRange.to?.toLocaleDateString()}
+            </div>
+          )}
+          <div className="border rounded-md p-2 calendar-container">
+            <Calendar
+              mode="range"
+              selected={dateRange}
+              onSelect={(range) => {
+                console.log('Date range selected:', range);
+                onDateRangeChange(range);
+              }}
+              numberOfMonths={1}
+              showOutsideDays={true}
+              showWeekNumber={false}
+              hideHead={true}
+            />
+          </div>
           <NestedDropdownCheckbox
             town={formData.town}
             zone={formData.zone}
