@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 // Maintenance mode flag - set to true to show maintenance message
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 export default function RootLayout({
   children,
