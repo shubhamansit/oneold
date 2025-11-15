@@ -31,12 +31,87 @@ export default function RootLayout({
   if (MAINTENANCE_MODE) {
     return (
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-50">
-            <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md mx-auto">
-              <h1 className="text-3xl font-bold text-gray-800 mb-4">Site Unavailable</h1>
-              <p className="text-lg text-gray-600 mb-2">Please contact administrator</p>
+        <body className={`${geistSans.variable} ${geistMono.variable} bg-background`}>
+          <div className="w-full h-screen flex flex-col justify-center items-center bg-gradient-to-br from-background via-secondary to-background relative overflow-hidden">
+            {/* Animated background elements - subtle and light */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+              <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[hsl(217.2,91.2%,59.8%)]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/5 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
             </div>
+            
+            {/* Main content */}
+            <div className="relative z-10 text-center px-4">
+              {/* Icon/Logo area */}
+              <div className="mb-8 flex justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-[hsl(217.2,91.2%,59.8%)] rounded-full blur-2xl opacity-20 animate-pulse"></div>
+                  <div className="relative bg-primary rounded-full p-6 shadow-lg">
+                    <svg 
+                      className="w-16 h-16 text-primary-foreground" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" 
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main message card */}
+              <div className="bg-card border border-border rounded-2xl shadow-xl p-8 md:p-12 max-w-lg mx-auto transform transition-all duration-300 hover:shadow-2xl">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+                  Site Unavailable
+                </h1>
+                <div className="w-24 h-1 bg-gradient-to-r from-primary to-[hsl(217.2,91.2%,59.8%)] mx-auto mb-6 rounded-full"></div>
+                <p className="text-xl md:text-2xl text-foreground mb-2 font-medium">
+                  Please contact administrator
+                </p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  We apologize for the inconvenience
+                </p>
+              </div>
+
+              {/* Decorative elements */}
+              <div className="mt-12 flex justify-center space-x-2">
+                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-[hsl(217.2,91.2%,59.8%)] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
+
+            {/* Custom animations */}
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes blob {
+                0% {
+                  transform: translate(0px, 0px) scale(1);
+                }
+                33% {
+                  transform: translate(30px, -50px) scale(1.1);
+                }
+                66% {
+                  transform: translate(-20px, 20px) scale(0.9);
+                }
+                100% {
+                  transform: translate(0px, 0px) scale(1);
+                }
+              }
+              .animate-blob {
+                animation: blob 7s infinite;
+              }
+              .animation-delay-2000 {
+                animation-delay: 2s;
+              }
+              .animation-delay-4000 {
+                animation-delay: 4s;
+              }
+            `}} />
           </div>
         </body>
       </html>
