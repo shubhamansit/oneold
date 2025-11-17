@@ -54,6 +54,20 @@ const Page = () => {
           brigrajsinh: filteredBRIGRAJSINHData.length,
           total: combinedData.length
         });
+
+        // Debug: Check date ranges in loaded data
+        const allDates = combinedData.flatMap(job => 
+          job.more_details?.map(detail => detail.Date) || []
+        ).filter(Boolean);
+        
+        if (allDates.length > 0) {
+          const uniqueDates = [...new Set(allDates)].sort();
+          console.log('Date range in loaded data:', {
+            earliest: uniqueDates[0],
+            latest: uniqueDates[uniqueDates.length - 1],
+            totalDates: uniqueDates.length
+          });
+        }
         
         // Debug: Check for GJ06BX0741 in loaded data
         const gj0741Entries = combinedData.filter(job => 
@@ -76,6 +90,13 @@ const Page = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [vehicleSearchTerm, setVehicleSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
+
+  // Debug: Log date range changes
+  useEffect(() => {
+    console.log('Date range state changed:', dateRange);
+    console.log('Date range from:', dateRange?.from);
+    console.log('Date range to:', dateRange?.to);
+  }, [dateRange]);
   const [formData, setFormData] = useState({
     company: [{ value: "BMC", label: "BMC" }],
     branch: [{ value: "BMC", label: "BMC" }],
@@ -168,6 +189,12 @@ const Page = () => {
       fromDate.setHours(0, 0, 0, 0);
       toDate.setHours(23, 59, 59, 999);
 
+      console.log('Date range filter applied:', {
+        fromDate: fromDate.toISOString(),
+        toDate: toDate.toISOString(),
+        dateRange
+      });
+
 
       result = result
         .map((job) => {
@@ -178,9 +205,7 @@ const Page = () => {
           
           const filteredMoreDetails = job.more_details.filter((detail) => {
             const jobDate = new Date(detail.Date);
-            // Set the time to noon to avoid timezone issues
-            jobDate.setHours(12, 0, 0, 0);
-
+            // Keep the original time from the data
             return jobDate >= fromDate && jobDate <= toDate;
           });
 
