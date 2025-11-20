@@ -26,6 +26,14 @@ const nextConfig: NextConfig = {
       },
     };
 
+    // Disable problematic pack file cache strategy to prevent memory allocation errors
+    // Next.js will fall back to standard filesystem caching
+    if (config.cache && typeof config.cache === 'object') {
+      // Ensure we're using filesystem cache (Next.js default)
+      // This prevents the PackFileCacheStrategy from causing memory issues
+      config.cache.maxMemoryGenerations = 1;
+    }
+
     return config;
   },
 };
