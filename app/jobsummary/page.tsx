@@ -6,8 +6,8 @@ import {getWastZone, getEastZone, getGeneral, getBRIGRAJSINH} from "@/data/index
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -57,7 +57,7 @@ const Page = () => {
 
         // Debug: Check date ranges in loaded data
         const allDates = combinedData.flatMap(job => 
-          job.more_details?.map(detail => detail.Date) || []
+          job.more_details?.map((detail: any) => detail.Date) || []
         ).filter(Boolean);
         
         if (allDates.length > 0) {
@@ -71,7 +71,7 @@ const Page = () => {
         
         // Debug: Check for GJ06BX0741 in loaded data
         const gj0741Entries = combinedData.filter(job => 
-          job.more_details?.some(detail => 
+          job.more_details?.some((detail: any) => 
             detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
           )
         );
@@ -160,12 +160,12 @@ const Page = () => {
       console.log('Searching for vehicle:', vehicleSearchTerm);
       const beforeCount = result.length;
       
-      result = result.filter((job) => {
+      result = result.filter((job: any) => {
         // Check if more_details exists and is an array
         if (!job.more_details || !Array.isArray(job.more_details)) {
           return false;
         }
-        const hasMatch = job.more_details.some((detail) => {
+        const hasMatch = job.more_details.some((detail: any) => {
           const vehicleName = detail.Vehicle?.toLowerCase() || '';
           const searchTerm = vehicleSearchTerm.toLowerCase();
           const matches = vehicleName.includes(searchTerm);
@@ -203,7 +203,7 @@ const Page = () => {
             return null;
           }
           
-          const filteredMoreDetails = job.more_details.filter((detail) => {
+          const filteredMoreDetails = job.more_details.filter((detail: any) => {
             const jobDate = new Date(detail.Date);
             // Keep the original time from the data
             return jobDate >= fromDate && jobDate <= toDate;
@@ -219,7 +219,7 @@ const Page = () => {
     // Debug: Log the filtering results
     console.log('Filtered data count:', result.length);
     console.log('GJ06BX0741 entries found:', result.filter(job => 
-      job.more_details?.some(detail => 
+      job.more_details?.some((detail: any) => 
         detail.Vehicle?.includes('GJ06BX0741') || detail.Vehicle?.includes('GJ 06 BX 0741')
       )
     ).length);
