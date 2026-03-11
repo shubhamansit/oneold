@@ -1126,7 +1126,7 @@ const GJ_04_GB_0086 = {
 
 const GJ_04_GB_0078_RUT_01_07_0078___ENTRA = {
   "Date": "2025-01-01 23:30:00",
-  "Vehicle": "GJ 04 GB 0078 RUT 01-07-0078 - ENTRA",
+  "Vehicle": "GJ 06 BX 0741 RUT 01-07-0078 - ENTRA",
   "Start Time": "2025-01-01 00:00:00",
   "End Time": "2025-01-01 18:00:00",
   "Actual Start Time": "2025-01-01 00:01:29",

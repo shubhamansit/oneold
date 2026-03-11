@@ -1,6 +1,63 @@
 const fs = require('fs');
 const XLSX = require('xlsx');
 
+// Function to create a template for a missing vehicle
+function createVehicleTemplateAuto(excelVehicleId, tpoi, similarTemplate) {
+  // Try to extract route code from vehicle ID or use a default pattern
+  // For now, we'll need to infer route from context or use a placeholder
+  // This will be improved when we have route information
+  
+  // Extract vehicle parts from Excel ID (e.g., GJ04GB0482 -> GJ 04 GB 0482)
+  const vehicleMatch = excelVehicleId.match(/GJ(\d{2})([A-Z]+)(\d{4})/);
+  if (!vehicleMatch) {
+    return null;
+  }
+  
+  const [, district, type, number] = vehicleMatch;
+  // Create vehicle name - route will need to be determined from context
+  // For now, use a placeholder format
+  const vehicleName = `GJ ${district} ${type} ${number}`;
+  
+  // Use similar template as base, or create defaults
+  const template = similarTemplate ? { ...similarTemplate } : {
+    "Date": "2025-01-01 23:30:00",
+    "Start Time": "2025-01-01 00:00:00",
+    "End Time": "2025-01-01 18:00:00",
+    "Actual Start Time": "2025-01-01 05:30:00",
+    "Actual End Time": "2025-01-01 11:30:00",
+    "On-Time": 0,
+    "Early": 0,
+    "Delay": 0,
+    "Total Visited Checkpoints": 0,
+    "Missed Checkpoints": 0,
+    "Checkpoints Complete Status(%)": 0,
+    "Estimated Distance": 20,
+    "Distance": 0,
+    "Distance Completed %": 0,
+    "On Route": 0,
+    "On Route %": 100,
+    "Off Route": 0,
+    "Off Route %": 0,
+    "Early Arrival Condition(Minute)": "0:00",
+    "Delay Arrival Condition(Minute)": "0:00",
+    "Group Name": "--",
+    "Penalty": 0,
+    "Reason": "--",
+    "Remark": "--",
+    "Assigned": `${excelVehicleId} ${excelVehicleId}`,
+    "Present": `${excelVehicleId} ${excelVehicleId}`,
+    "Waste Weight": 0,
+    "Incidents": 0,
+    "avg_halt_time": "3:30"
+  };
+  
+  // Update vehicle-specific fields
+  template.Vehicle = vehicleName;
+  template["Planned Checkpoints"] = tpoi || 50;
+  
+  return template;
+}
+
 // Function to read Excel file and extract missed checkpoint data
 function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
   try {
@@ -16,9 +73,10 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
     
     console.log(`📅 Found ${jsonData.length} rows in Excel file`);
     
-    // Read vehicle templates for mapping
+    // Read vehicle templates for mapping (create a mutable copy for auto-creation)
     const vehicleTemplatesData = fs.readFileSync('vehicleTemplates.json', 'utf8');
-    const vehicleTemplates = JSON.parse(vehicleTemplatesData);
+    const templates = JSON.parse(vehicleTemplatesData);
+    const vehicleTemplates = [...templates]; // Create mutable copy for auto-creation
     
     // Create a map of vehicle names for easy lookup
     const vehicleMap = new Map();
@@ -26,56 +84,233 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
       vehicleMap.set(template.Vehicle, template);
     });
     
-    // Extract missed checkpoint data
+    // Extract missed checkpoint data and T-POI values
     const missedCheckpointData = {};
+    const tpoiData = {}; // Store T-POI values by Excel vehicle ID
+    const tpoiDataByTemplate = {}; // Store T-POI values by template vehicle name
+    const excelVehicleToTemplate = {}; // Map Excel vehicle ID to template vehicle name
     const daysInMonth = new Date(year, month, 0).getDate();
     
+    const skippedRows = [];
     // Skip header row and process data rows
     for (let i = 1; i < jsonData.length; i++) {
       const row = jsonData[i];
+      if (!row || !Array.isArray(row)) {
+        skippedRows.push({ row: i + 1, reason: 'empty or invalid row' });
+        continue;
+      }
       
-      // Vehicle identifier is in column 3 (index 2)
-      const vehicleIdentifier = row[2];
+      // Extract route code from column 1 (index 1) - " RUTE"
+      const routeCode = row[1] != null ? String(row[1]).trim() : null;
       
-      if (!vehicleIdentifier || typeof vehicleIdentifier !== 'string') {
+      // Vehicle identifier is in column 3 (index 2) - handle both string and number
+      const rawVehicle = row[2];
+      const vehicleIdentifier = rawVehicle != null && String(rawVehicle).trim() !== ''
+        ? String(rawVehicle).trim()
+        : null;
+      
+      if (!vehicleIdentifier) {
+        skippedRows.push({ row: i + 1, reason: 'no vehicle ID', raw: rawVehicle });
         continue;
       }
       
       // Skip header-like entries
-      if (vehicleIdentifier.toUpperCase() === 'VEHICLE' || 
-          vehicleIdentifier.toUpperCase() === 'VEHICLE ID') {
+      const vehicleUpper = vehicleIdentifier.toUpperCase().trim();
+      if (vehicleUpper === 'VEHICLE' || 
+          vehicleUpper === 'VEHICLE ID' ||
+          vehicleUpper.includes('TOTEL') ||
+          vehicleUpper === '') {
+        skippedRows.push({ row: i + 1, reason: 'header row', value: vehicleIdentifier });
         continue;
       }
       
-      // Find matching vehicle template
+      // Extract T-POI from column 4 (index 3)
+      const tpoiValue = row[3];
+      let tpoi = null;
+      // Check if T-POI exists (including 0 as a valid value)
+      if (tpoiValue !== null && tpoiValue !== undefined && tpoiValue !== '') {
+        const parsedTpoi = parseInt(tpoiValue);
+        if (!isNaN(parsedTpoi)) {
+          tpoi = parsedTpoi;
+        }
+      }
+      
+      // Store T-POI for this Excel vehicle ID (even if no template match, and even if 0)
+      if (tpoi !== null) {
+        tpoiData[vehicleIdentifier.trim()] = tpoi;
+      }
+      
+      // Find matching vehicle template - prioritize route code matching
       let matchedVehicle = null;
-      const normalizedShortId = vehicleIdentifier.replace(/\s/g, '').toUpperCase();
+      // Extract base ID (GJ DD XX NNNN) - handles suffixes like E1, W-1
+      const baseIdMatch = vehicleIdentifier.replace(/\s/g, '').toUpperCase().match(/GJ(\d{2})([A-Z]+)(\d{4})/);
+      const normalizedShortId = baseIdMatch ? `GJ${baseIdMatch[1]}${baseIdMatch[2]}${baseIdMatch[3]}` : vehicleIdentifier.replace(/\s/g, '').toUpperCase().trim();
+      const excelVehicleNum = vehicleIdentifier.match(/\d{4}/)?.[0];
       
       for (const [templateVehicle, template] of vehicleMap.entries()) {
-        const matchStrategies = [
-          templateVehicle === vehicleIdentifier,
-          templateVehicle.replace(/\s/g, '') === vehicleIdentifier.replace(/\s/g, ''),
-          templateVehicle.includes(vehicleIdentifier),
-          templateVehicle.match(/GJ\s*\d+\s*[A-Z]+\s*\d+/)?.[0]?.replace(/\s/g, '') === normalizedShortId,
-          template.Assigned && template.Assigned.includes(vehicleIdentifier)
-        ];
+        const templateNormalized = templateVehicle.replace(/\s/g, '').toUpperCase();
+        const templateVehicleNum = templateVehicle.match(/\d{4}/)?.[0];
         
-        if (matchStrategies.some(strategy => strategy)) {
-          matchedVehicle = templateVehicle;
-          break;
+        // Extract route code from template (format: XX-XX-XXXX)
+        const templateRouteMatch = templateVehicle.match(/(\d{2}-\d{2}-\d{4})/);
+        const templateRouteCode = templateRouteMatch ? templateRouteMatch[1] : null;
+        const routeVehicleNum = templateRouteCode ? templateRouteCode.split('-')[2] : null;
+        
+        // Priority 1: Match by route code (most specific)
+        if (routeCode && templateRouteCode && routeCode === templateRouteCode) {
+          // Also verify vehicle ID matches
+          const vehicleMatches = [
+            templateVehicle.includes(vehicleIdentifier.trim()),
+            templateNormalized.includes(normalizedShortId),
+            templateVehicleNum === excelVehicleNum
+          ];
+          if (vehicleMatches.some(m => m)) {
+            matchedVehicle = templateVehicle;
+            break;
+          }
+        }
+      }
+      
+      // Priority 2: If no route code match, try other strategies
+      if (!matchedVehicle) {
+        for (const [templateVehicle, template] of vehicleMap.entries()) {
+          const templateNormalized = templateVehicle.replace(/\s/g, '').toUpperCase();
+          const templateVehicleNum = templateVehicle.match(/\d{4}/)?.[0];
+          
+          // Extract route code from template (format: XX-XX-XXXX)
+          const routeMatch = templateVehicle.match(/(\d{2}-\d{2}-\d{4})/);
+          const routeVehicleNum = routeMatch ? routeMatch[1].split('-')[2] : null;
+          
+          const matchStrategies = [
+            templateVehicle === vehicleIdentifier.trim(),
+            templateNormalized === normalizedShortId,
+            templateVehicle.includes(vehicleIdentifier.trim()) || vehicleIdentifier.trim().includes(templateVehicle),
+            templateVehicle.match(/GJ\s*\d+\s*[A-Z]+\s*\d+/)?.[0]?.replace(/\s/g, '').toUpperCase() === normalizedShortId,
+            template.Assigned && template.Assigned.includes(vehicleIdentifier.trim()),
+            // Match by vehicle number in template vehicle name
+            templateVehicleNum && excelVehicleNum && templateVehicleNum === excelVehicleNum,
+            // Match by vehicle number in route code (e.g., GJ06BX0435 matches route ending in 0435)
+            routeVehicleNum && excelVehicleNum && routeVehicleNum === excelVehicleNum,
+            // Match by partial vehicle number (last 3 digits)
+            templateVehicleNum && excelVehicleNum && 
+              templateVehicleNum.slice(-3) === excelVehicleNum.slice(-3) &&
+              templateVehicleNum.length === excelVehicleNum.length
+          ];
+          
+          if (matchStrategies.some(strategy => strategy)) {
+            matchedVehicle = templateVehicle;
+            break;
+          }
         }
       }
       
       if (!matchedVehicle) {
-        console.log(`⚠️  No template found for vehicle: ${vehicleIdentifier}`);
-        continue;
+        // Try to auto-create a template for this vehicle
+        console.log(`⚠️  No template found for vehicle: ${vehicleIdentifier} (Route: ${routeCode || 'N/A'}, T-POI: ${tpoi || 'N/A'}) - Attempting to create template...`);
+        
+        // Find a similar template based on vehicle type
+        let similarTemplate = null;
+        const normalizedId = vehicleIdentifier.replace(/\s/g, '').toUpperCase();
+        if (normalizedId.includes('GJ04GB') || normalizedId.includes('GJ-04-GB') || normalizedId.includes('GJ 04 GB')) {
+          similarTemplate = vehicleTemplates.find(t => t.Vehicle && (t.Vehicle.includes('GJ 04 GB') || t.Vehicle.includes('GJ-04-GB')) && (t.Vehicle.includes('RUT') || t.Vehicle.includes('ROUTE')));
+        } else if (normalizedId.includes('GJ04GA') || normalizedId.includes('GJ-04-GA') || normalizedId.includes('GJ 04 GA')) {
+          similarTemplate = vehicleTemplates.find(t => t.Vehicle && (t.Vehicle.includes('GJ 04 GA') || t.Vehicle.includes('GJ-04-GA')) && (t.Vehicle.includes('RUT') || t.Vehicle.includes('ROUTE')));
+        } else if (normalizedId.includes('GJ06BX') || normalizedId.includes('GJ-06-BX') || normalizedId.includes('GJ 06 BX')) {
+          similarTemplate = vehicleTemplates.find(t => t.Vehicle && (t.Vehicle.includes('GJ 06 BX') || t.Vehicle.includes('GJ-06-BX')) && (t.Vehicle.includes('RUT') || t.Vehicle.includes('ROUTE')));
+        } else if (normalizedId.includes('GJ04BX')) {
+          similarTemplate = vehicleTemplates.find(t => t.Vehicle && t.Vehicle.includes('GJ 04 GA') && (t.Vehicle.includes('RUT') || t.Vehicle.includes('ROUTE')));
+        }
+        
+        // Use route code from Excel if available, otherwise try to infer
+        let finalRouteCode = routeCode;
+        if (!finalRouteCode) {
+          const vehicleNumMatch = vehicleIdentifier.match(/\d{4}/);
+          if (vehicleNumMatch) {
+            const num = vehicleNumMatch[0];
+            // Try to find route pattern in similar templates
+            if (similarTemplate) {
+              const routeMatch = similarTemplate.Vehicle.match(/(\d{2}-\d{2}-\d{4})/);
+              if (routeMatch) {
+                // Use similar route pattern but with this vehicle's number
+                const routeParts = routeMatch[1].split('-');
+                finalRouteCode = `${routeParts[0]}-${routeParts[1]}-${num}`;
+              }
+            }
+            // If still no route, try to infer from vehicle number
+            if (!finalRouteCode && num.length === 4) {
+              // Use a default pattern: first 2 digits - last 2 digits - full number
+              finalRouteCode = `${num.slice(0, 2)}-${num.slice(2)}-${num}`;
+            }
+          }
+        }
+        
+        // Create new template - use baseIdMatch to support "GJ 06 BX 0309 E1" style IDs
+        const vehicleMatch = vehicleIdentifier.replace(/\s/g, '').match(/GJ(\d{2})([A-Z]+)(\d{4})/i) || vehicleIdentifier.match(/GJ\s*(\d{2})\s*([A-Z]+)\s*(\d{4})/i);
+        if (vehicleMatch && finalRouteCode) {
+          const [, district, type, number] = vehicleMatch;
+          const newVehicleName = `GJ ${district} ${type} ${number} RUT ${finalRouteCode}`;
+          
+          // Create template
+          const newTemplate = similarTemplate ? { ...similarTemplate } : {
+            "Date": "2025-01-01 23:30:00",
+            "Start Time": "2025-01-01 00:00:00",
+            "End Time": "2025-01-01 18:00:00",
+            "Actual Start Time": "2025-01-01 05:30:00",
+            "Actual End Time": "2025-01-01 11:30:00",
+            "On-Time": 0,
+            "Early": 0,
+            "Delay": 0,
+            "Total Visited Checkpoints": 0,
+            "Missed Checkpoints": 0,
+            "Checkpoints Complete Status(%)": 0,
+            "Estimated Distance": 20,
+            "Distance": 0,
+            "Distance Completed %": 0,
+            "On Route": 0,
+            "On Route %": 100,
+            "Off Route": 0,
+            "Off Route %": 0,
+            "Early Arrival Condition(Minute)": "0:00",
+            "Delay Arrival Condition(Minute)": "0:00",
+            "Group Name": "--",
+            "Penalty": 0,
+            "Reason": "--",
+            "Remark": "--",
+            "Assigned": `${vehicleIdentifier.trim()} ${vehicleIdentifier.trim()}`,
+            "Present": `${vehicleIdentifier.trim()} ${vehicleIdentifier.trim()}`,
+            "Waste Weight": 0,
+            "Incidents": 0,
+            "avg_halt_time": "3:30"
+          };
+          
+          newTemplate.Vehicle = newVehicleName;
+          newTemplate["Planned Checkpoints"] = tpoi || 50;
+          
+          // Add to templates and vehicle map
+          vehicleTemplates.push(newTemplate);
+          vehicleMap.set(newVehicleName, newTemplate);
+          matchedVehicle = newVehicleName;
+          
+          console.log(`✅ Auto-created template: ${newVehicleName} (T-POI: ${tpoi || 'N/A'})`);
+        } else {
+          console.log(`❌ Could not auto-create template for: ${vehicleIdentifier} - skipping`);
+          skippedRows.push({ row: i + 1, reason: 'auto-create failed', vehicle: vehicleIdentifier, route: routeCode });
+          continue;
+        }
       }
       
-      // Extract missed checkpoint data for each day (columns 4 onwards)
+      // Store T-POI value for the matched template vehicle (always store if matched and T-POI exists)
+      // If multiple Excel vehicles match the same template, use the last one (or we could merge)
+      if (tpoi !== null) {
+        tpoiDataByTemplate[matchedVehicle] = tpoi;
+      }
+      excelVehicleToTemplate[vehicleIdentifier.trim()] = matchedVehicle;
+      
+      // Extract missed checkpoint data for each day (columns 5 onwards, since column 4 is T-POI)
       const dailyMissedCheckpoints = [];
       
       for (let day = 1; day <= daysInMonth; day++) {
-        const columnIndex = 2 + day; // Column 3 is vehicle ID, so day 1 starts at column 4 (index 3)
+        const columnIndex = 3 + day; // Column 4 is T-POI, so day 1 starts at column 5 (index 4)
         
         if (columnIndex < row.length) {
           const missedValue = row[columnIndex];
@@ -92,21 +327,41 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
         }
       }
       
+      // Store missed checkpoint data (even if all zeros)
       missedCheckpointData[matchedVehicle] = dailyMissedCheckpoints;
-      console.log(`✅ Mapped vehicle: ${vehicleIdentifier} → ${matchedVehicle} (${dailyMissedCheckpoints.filter(x => x > 0).length} days with missed checkpoints)`);
+      console.log(`✅ Mapped vehicle: ${vehicleIdentifier} → ${matchedVehicle} (T-POI: ${tpoi || 'N/A'}, ${dailyMissedCheckpoints.filter(x => x > 0).length} days with missed checkpoints)`);
     }
     
-    console.log(`📊 Successfully extracted missed checkpoint data for ${Object.keys(missedCheckpointData).length} vehicles`);
-    return missedCheckpointData;
+    // Save updated templates if any were auto-created
+    if (vehicleTemplates.length > templates.length) {
+      const newTemplates = vehicleTemplates.slice(templates.length);
+      console.log(`💾 Saving ${newTemplates.length} auto-created templates to vehicleTemplates.json...`);
+      fs.writeFileSync('vehicleTemplates.json', JSON.stringify(vehicleTemplates, null, 2), 'utf8');
+      console.log(`✅ Templates saved!`);
+    }
+    
+    // Report skipped rows
+    if (skippedRows.length > 0) {
+      console.log(`\n⚠️  Skipped ${skippedRows.length} row(s):`);
+      skippedRows.forEach(s => console.log(`   Row ${s.row}: ${s.reason}${s.vehicle ? ` (${s.vehicle})` : ''}${s.raw !== undefined ? ` raw=${s.raw}` : ''}`));
+    } else {
+      console.log(`\n✅ No rows skipped - all data processed`);
+    }
+    
+    // Return both missed checkpoint data and T-POI data
+    console.log(`\n📊 Successfully extracted missed checkpoint data for ${Object.keys(missedCheckpointData).length} vehicles`);
+    console.log(`📊 Extracted T-POI for ${Object.keys(tpoiData).length} Excel vehicles`);
+    console.log(`📊 Mapped T-POI to ${Object.keys(tpoiDataByTemplate).length} template vehicles`);
+    return { missedCheckpointData, tpoiData: tpoiDataByTemplate, excelTpoiData: tpoiData, skippedRows };
     
   } catch (error) {
     console.error('❌ Error reading Excel file:', error);
-    return {};
+    return { missedCheckpointData: {}, tpoiData: {} };
   }
 }
 
-// Function to generate monthly data using actual missed checkpoint data
-function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData) {
+// Function to generate monthly data using actual missed checkpoint data and T-POI values
+function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData = {}) {
   try {
     console.log(`🔧 Generating monthly data for ${year}-${month.toString().padStart(2, '0')}...`);
     
@@ -143,8 +398,8 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
         const actualStartTime = `${dateStr} ${actualStartTimeParts}`;
         const actualEndTime = `${dateStr} ${actualEndTimeParts}`;
         
-        // Use actual missed checkpoints from Excel data
-        const plannedCheckpoints = template["Planned Checkpoints"];
+        // Use T-POI from Excel if available, otherwise use template's Planned Checkpoints
+        const plannedCheckpoints = tpoiData[vehicleName] || template["Planned Checkpoints"];
         const missedCheckpoints = missedPattern[day - 1] || 0;
         
         // Calculate visited checkpoints
@@ -183,6 +438,7 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
           "End Time": endTimeStr,
           "Actual Start Time": actualStartTime,
           "Actual End Time": actualEndTime,
+          "Planned Checkpoints": plannedCheckpoints, // Use T-POI from Excel
           "On-Time": onTimeCheckpoints,
           "Early": template["Early"] || 0,
           "Delay": delays,
@@ -210,7 +466,7 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
 // Function to save monthly data to file
 function saveMonthlyData(data, year, month) {
   try {
-    const filename = `monthlyData_2025_${month.toString().padStart(2, '0')}.json`;
+    const filename = `monthlyData_${year}_${month.toString().padStart(2, '0')}.json`;
     const jsonContent = JSON.stringify(data, null, 2);
     fs.writeFileSync(filename, jsonContent, 'utf8');
     
@@ -231,16 +487,19 @@ function processExcelToMonthlyData(excelFilePath, year, month) {
     console.log(`🚀 Processing Excel file: ${excelFilePath}`);
     console.log(`📅 Generating data for ${year}-${month.toString().padStart(2, '0')}`);
     
-    // Step 1: Read missed checkpoint data from Excel
-    const missedCheckpointData = readMissedCheckpointsFromExcel(excelFilePath, year, month);
+    // Step 1: Read missed checkpoint data and T-POI from Excel
+    const { missedCheckpointData, tpoiData, excelTpoiData } = readMissedCheckpointsFromExcel(excelFilePath, year, month);
     
     if (Object.keys(missedCheckpointData).length === 0) {
       console.error('❌ No missed checkpoint data found in Excel file');
       return false;
     }
     
-    // Step 2: Generate monthly data using actual missed checkpoint data
-    const monthlyData = generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData);
+    console.log(`📊 Extracted T-POI values for ${Object.keys(tpoiData).length} template vehicles`);
+    console.log(`📊 Total Excel vehicles with T-POI: ${Object.keys(excelTpoiData || {}).length}`);
+    
+    // Step 2: Generate monthly data using actual missed checkpoint data and T-POI values
+    const monthlyData = generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData);
     
     if (monthlyData.length === 0) {
       console.error('❌ Failed to generate monthly data');

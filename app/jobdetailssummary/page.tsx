@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar, Filter, Search } from "lucide-react";
-import { wastZone, eastZone } from "@/data/index";
+import { getWastZone, getEastZone } from "@/data/index";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
@@ -10,7 +10,9 @@ import FiltersForm from "@/components/filtersForm";
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
-  const [filteredData, setFilteredData] = useState(wastZone);
+  const [allData, setAllData] = useState<any[]>([]);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>();
   const [formData, setFormData] = useState({
@@ -21,14 +23,33 @@ const Page = () => {
     ward: { value: "All", label: "All" },
   });
 
+  // Load data dynamically
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setIsLoading(true);
+        const [wastZoneData, eastZoneData] = await Promise.all([
+          getWastZone(),
+          getEastZone()
+        ]);
+        
+        const combinedData = [...wastZoneData, ...eastZoneData];
+        setAllData(combinedData);
+        setFilteredData(combinedData);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setFilteredData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadData();
+  }, []);
+
   // Comprehensive filtering function
   const applyFilters = () => {
-    let result =
-      formData.zone.value === "WEST_ZONE"
-        ? [...wastZone]
-        : formData.zone.value === "EAST_ZONE"
-          ? [...eastZone]
-          : [...wastZone, ...eastZone];
+    let result = [...allData];
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -66,8 +87,10 @@ const Page = () => {
 
   // Apply filters when dependencies change
   useEffect(() => {
-    applyFilters();
-  }, [checkedItems, formData.zone, searchTerm, dateRange]);
+    if (allData.length > 0) {
+      applyFilters();
+    }
+  }, [allData, checkedItems, formData.zone, searchTerm, dateRange]);
 
   // Reset dependent fields when zone changes
   useEffect(() => {
