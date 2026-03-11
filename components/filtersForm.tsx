@@ -420,6 +420,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
         <div className="flex flex-col w-72 gap-4">
           <Label htmlFor="company">Company</Label>
           <SelectBox
+            instanceId="filter-company"
             isMulti
             name="company"
             options={companyOptions}
@@ -428,6 +429,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
           />
           <Label htmlFor="branch">Branch</Label>
           <SelectBox
+            instanceId="filter-branch"
             isMulti
             name="branch"
             options={branchOptions}
@@ -436,6 +438,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
           />
           <Label htmlFor="town">Town</Label>
           <SelectBox
+            instanceId="filter-town"
             name="town"
             options={townOptions}
             onChange={handleChange}
@@ -444,6 +447,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
           />
           <Label htmlFor="zone">Zone</Label>
           <SelectBox
+            instanceId="filter-zone"
             name="zone"
             options={zoneOptions}
             onChange={handleChange}
@@ -452,6 +456,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
           />
           <Label htmlFor="ward">Ward</Label>
           <SelectBox
+            instanceId="filter-ward"
             name="ward"
             options={wardOptions}
             onChange={handleChange}

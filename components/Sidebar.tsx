@@ -61,11 +61,58 @@ const menuItems = [
   { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
 ];
 
-export function AppSidebar({
+// Error boundary component to handle React errors
+class SidebarErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    console.warn("Sidebar error:", error);
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.warn("Sidebar error details:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback: render children without sidebar
+      return <>{this.props.children}</>;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Wrapper component to handle navigation context errors
+function SafeAppSidebar({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  return (
+    <SidebarErrorBoundary>
+      <AppSidebarContent>{children}</AppSidebarContent>
+    </SidebarErrorBoundary>
+  );
+}
+
+function AppSidebarContent({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  // Safety check: ensure we're in a browser environment
+  if (typeof window === 'undefined') {
+    return <>{children}</>;
+  }
+
   const [data, setData] = React.useState<customeJwtPayload>();
   const [isLoading, setIsLoading] = React.useState(true);
   const router = useRouter();
@@ -304,3 +351,6 @@ export function AppSidebar({
     </>
   );
 }
+
+// Export the safe wrapper as the main component
+export { SafeAppSidebar as AppSidebar };
