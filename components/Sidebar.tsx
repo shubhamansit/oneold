@@ -26,7 +26,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "cookies-next/client";
 
@@ -61,11 +61,58 @@ const menuItems = [
   { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
 ];
 
-export function AppSidebar({
+// Error boundary component to handle React errors
+class SidebarErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    console.warn("Sidebar error:", error);
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.warn("Sidebar error details:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback: render children without sidebar
+      return <>{this.props.children}</>;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Wrapper component to handle navigation context errors
+function SafeAppSidebar({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  return (
+    <SidebarErrorBoundary>
+      <AppSidebarContent>{children}</AppSidebarContent>
+    </SidebarErrorBoundary>
+  );
+}
+
+function AppSidebarContent({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  // Safety check: ensure we're in a browser environment
+  if (typeof window === 'undefined') {
+    return <>{children}</>;
+  }
+
   const [data, setData] = React.useState<customeJwtPayload>();
   const [isLoading, setIsLoading] = React.useState(true);
   const router = useRouter();
@@ -163,7 +210,45 @@ export function AppSidebar({
     },
     { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
   ];
-  const pathname = usePathname();
+  
+  // Get pathname using window.location as fallback
+  const [pathname, setPathname] = React.useState("/");
+  
+  React.useEffect(() => {
+    // Use window.location.pathname as the primary method
+    if (typeof window !== 'undefined') {
+      setPathname(window.location.pathname);
+      
+      // Listen for route changes
+      const handleRouteChange = () => {
+        setPathname(window.location.pathname);
+      };
+      
+      // Listen for popstate events (back/forward navigation)
+      window.addEventListener('popstate', handleRouteChange);
+      
+      // Listen for pushstate/replacestate (programmatic navigation)
+      const originalPushState = window.history.pushState;
+      const originalReplaceState = window.history.replaceState;
+      
+      window.history.pushState = function(...args) {
+        originalPushState.apply(window.history, args);
+        handleRouteChange();
+      };
+      
+      window.history.replaceState = function(...args) {
+        originalReplaceState.apply(window.history, args);
+        handleRouteChange();
+      };
+      
+      return () => {
+        window.removeEventListener('popstate', handleRouteChange);
+        window.history.pushState = originalPushState;
+        window.history.replaceState = originalReplaceState;
+      };
+    }
+  }, []);
+  
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
   const submenuRef = React.useRef<HTMLDivElement>(null);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
@@ -297,3 +382,6 @@ export function AppSidebar({
     </SidebarProvider>
   );
 }
+
+// Export the safe wrapper as the main component
+export { SafeAppSidebar as AppSidebar };
