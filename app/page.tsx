@@ -21,7 +21,7 @@ import Image from "next/image";
 import jwt from "jsonwebtoken";
 
 // Set to true to disable login and show "contact administrator" message
-const LOGIN_DISABLED = true;
+const LOGIN_DISABLED = false;
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -44,7 +44,7 @@ const LoginPage = () => {
     // Specific hard-coded credentials for login
     if (
       (email.toLowerCase() === "bhavnagar@gmail.com" &&
-        password === "Bhadresh@1234") ||
+        password === "Improvement@007") ||
       (email.toLowerCase() === "bmcswippr@gmail.com" &&
         password == "Ans@1234") ||
       (email.toLowerCase() === "osc@swm.com" && password === "98765432")
