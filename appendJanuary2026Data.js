@@ -75,7 +75,15 @@ function appendJanuary2026Data() {
             return updatedRecord;
           }
           
-          if (updatedRecord.more_details && Array.isArray(updatedRecord.more_details)) {
+          if (!Array.isArray(updatedRecord.more_details)) {
+            updatedRecord.more_details = [];
+          }
+
+            const jobName = updatedRecord["Job Name"];
+            if (!jobName || typeof jobName !== "string") {
+              return updatedRecord;
+            }
+
             // Create a map of existing dates to avoid duplicates
             const existingDates = new Map();
             updatedRecord.more_details.forEach(detail => {
@@ -86,7 +94,6 @@ function appendJanuary2026Data() {
             });
             
             // Try multiple matching strategies for this vehicle
-            const jobName = updatedRecord["Job Name"];
             let foundMatch = false;
             
             // Strategy 1: Extract route code and find matching January vehicle
@@ -241,7 +248,6 @@ function appendJanuary2026Data() {
             
             // Update more_details with all records (existing + January 2026)
             updatedRecord.more_details = Array.from(existingDates.values());
-          }
           
           return updatedRecord;
         });
