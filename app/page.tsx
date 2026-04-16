@@ -44,7 +44,7 @@ const LoginPage = () => {
     // Specific hard-coded credentials for login
     if (
       (email.toLowerCase() === "bhavnagar@gmail.com" &&
-        password === "Improvement@007") ||
+        password === "Bhadresh@1234") ||
       (email.toLowerCase() === "bmcswippr@gmail.com" &&
         password == "Ans@1234") ||
       (email.toLowerCase() === "osc@swm.com" && password === "98765432")

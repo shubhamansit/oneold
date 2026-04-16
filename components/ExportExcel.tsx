@@ -4,7 +4,7 @@ import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import { toast } from "sonner";
 
-interface JobData {
+export interface JobData {
   Branch: string;
   Town: string;
   Zone: string;
@@ -21,7 +21,7 @@ interface JobData {
   more_details: MoreDetails[];
 }
 
-interface MoreDetails {
+export interface MoreDetails {
   Status: string;
   Date: string;
   Vehicle: string;

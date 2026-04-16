@@ -8,6 +8,7 @@ import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { hideMarch2026FromJobs } from "@/lib/hideMarch2026";
 
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -43,8 +44,9 @@ const Page = () => {
         console.log('BRIGRAJSINH filtered data:', filteredBRIGRAJSINHData.length, 'items');
         
         const combinedData = [...wastZoneData, ...eastZoneData, ...generalData, ...filteredBRIGRAJSINHData];
-        setAllData(combinedData);
-        setFilteredData(combinedData);
+        const visibleData = hideMarch2026FromJobs(combinedData);
+        setAllData(visibleData);
+        setFilteredData(visibleData);
         
         // Debug: Log loaded data
         console.log('Data loaded successfully:', {
@@ -117,7 +119,7 @@ const Page = () => {
         zone: formData.zone.value 
       });
       
-      let result = [...allData];
+      let result = hideMarch2026FromJobs([...allData]);
       
       // Filter by zone if not "All"
       if (formData.zone.value !== "All") {
@@ -215,6 +217,9 @@ const Page = () => {
         })
         .filter(job => job !== null);
     }
+
+    // Always hide March 2026 (even if a date range includes it)
+    result = hideMarch2026FromJobs(result);
 
     // Debug: Log the filtering results
     console.log('Filtered data count:', result.length);
