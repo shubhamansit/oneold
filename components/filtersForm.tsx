@@ -215,6 +215,9 @@ import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
 import "react-day-picker/dist/style.css";
 import "../styles/calendar.css";
+import { isHiddenMarch2026Date } from "@/lib/hideMarch2026";
+import type { ActionMeta, MultiValue, SingleValue } from "react-select";
+import type { JobData } from "./ExportExcel";
 
 interface Option {
   value: string;
@@ -236,7 +239,7 @@ interface FiltersFormProps {
   onFormDataChange: (newFormData: FormData) => void;
   dateRange?: DateRange;
   onDateRangeChange: (date: DateRange | undefined) => void;
-  filteredData: unknown[] | undefined;
+  filteredData: JobData[] | undefined;
 }
 
 const FiltersForm: React.FC<FiltersFormProps> = ({
@@ -352,22 +355,38 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
     setValidate((prev) => !prev);
   }, [formData.ward]);
 
-  const handleChange = (selectedOptions: unknown, actionMeta: { name: string }) => {
-    switch (actionMeta.name) {
+  const handleChange = (
+    selectedOptions: MultiValue<Option> | SingleValue<Option>,
+    actionMeta: ActionMeta<Option>,
+  ) => {
+    const name = actionMeta.name;
+    if (!name) return;
+
+    switch (name) {
+      case "company":
+      case "branch":
+        onFormDataChange({
+          ...formData,
+          [name]: (selectedOptions as MultiValue<Option>) as unknown as Option[],
+        });
+        return;
+
       case "town":
-        if (selectedOptions?.value === "BRIGRAJSINH") {
+        if ((selectedOptions as SingleValue<Option>)?.value === "BRIGRAJSINH") {
           const newFormData = {
             ...formData,
-            town: selectedOptions,
+            town: selectedOptions as Option,
             zone: { value: "WEST_ZONE", label: "WEST_ZONE" },
             ward: { value: "All", label: "All" },
           };
           onFormDataChange(newFormData);
           onCheckedItemsChange([]);
-        } else if (selectedOptions?.value === "BHAVNAGAR_OSC") {
+        } else if (
+          (selectedOptions as SingleValue<Option>)?.value === "BHAVNAGAR_OSC"
+        ) {
           const newFormData = {
             ...formData,
-            town: selectedOptions,
+            town: selectedOptions as Option,
             zone: { value: "All", label: "All" },
             ward: { value: "All", label: "All" },
           };
@@ -376,7 +395,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
         } else {
           onFormDataChange({
             ...formData,
-            [actionMeta.name]: selectedOptions,
+            [name]: selectedOptions as Option,
           });
         }
         break;
@@ -384,7 +403,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
       case "zone":
         const newFormData = {
           ...formData,
-          zone: selectedOptions,
+          zone: selectedOptions as Option,
           ward: { value: "All", label: "All" },
         };
         onFormDataChange(newFormData);
@@ -394,7 +413,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
       case "ward":
         onFormDataChange({
           ...formData,
-          [actionMeta.name]: selectedOptions,
+          [name]: selectedOptions as Option,
         });
         onCheckedItemsChange([]);
         break;
@@ -402,7 +421,7 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
       default:
         onFormDataChange({
           ...formData,
-          [actionMeta.name]: selectedOptions,
+          [name]: selectedOptions as Option,
         });
     }
   };
@@ -479,10 +498,18 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
                 console.log('Date range selected:', range);
                 onDateRangeChange(range);
               }}
+              disabled={[
+                {
+                  from: new Date(2026, 2, 1),
+                  to: new Date(2026, 2, 31, 23, 59, 59, 999),
+                },
+              ]}
+              modifiers={{
+                hiddenMarch2026: (date) => isHiddenMarch2026Date(date),
+              }}
               numberOfMonths={1}
               showOutsideDays={true}
               showWeekNumber={false}
-              hideHead={true}
             />
           </div>
           <NestedDropdownCheckbox

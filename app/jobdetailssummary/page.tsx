@@ -6,6 +6,7 @@ import { getWastZone, getEastZone } from "@/data/index";
 import ExpandableTable from "@/components/ExpandableTable";
 import { DateRange } from "react-day-picker";
 import FiltersForm from "@/components/filtersForm";
+import { hideMarch2026FromJobs } from "@/lib/hideMarch2026";
 
 const Page = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -34,8 +35,9 @@ const Page = () => {
         ]);
         
         const combinedData = [...wastZoneData, ...eastZoneData];
-        setAllData(combinedData);
-        setFilteredData(combinedData);
+        const visibleData = hideMarch2026FromJobs(combinedData);
+        setAllData(visibleData);
+        setFilteredData(visibleData);
       } catch (error) {
         console.error('Error loading data:', error);
         setFilteredData([]);
@@ -49,7 +51,7 @@ const Page = () => {
 
   // Comprehensive filtering function
   const applyFilters = () => {
-    let result = [...allData];
+    let result = hideMarch2026FromJobs([...allData]);
 
     // Filter by checked items
     if (checkedItems.length > 0) {
@@ -81,6 +83,9 @@ const Page = () => {
         })
         .filter(Boolean) as typeof result; // Remove null entries
     }
+
+    // Always hide March 2026 (even if a date range includes it)
+    result = hideMarch2026FromJobs(result);
     // @ts-ignore
     setFilteredData(result);
   };
