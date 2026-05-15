@@ -1,3 +1,6 @@
+/** Set to `true` to hide March 2026 in the app without deleting JSON data. */
+export const HIDE_MARCH_2026 = false;
+
 export const HIDDEN_MONTH_PREFIX = "2026-03";
 
 type AnyRecord = Record<string, any>;
@@ -17,11 +20,13 @@ function toDateKey(value: unknown): string | null {
 }
 
 export function isHiddenMarch2026Date(value: unknown): boolean {
+  if (!HIDE_MARCH_2026) return false;
   const key = toDateKey(value);
   return typeof key === "string" && key.startsWith(HIDDEN_MONTH_PREFIX);
 }
 
 export function hideMarch2026FromJobs<T extends AnyRecord>(jobs: T[]): T[] {
+  if (!HIDE_MARCH_2026) return jobs;
   return jobs
     .map((job) => {
       const details = (job as any).more_details;
@@ -35,4 +40,3 @@ export function hideMarch2026FromJobs<T extends AnyRecord>(jobs: T[]): T[] {
     })
     .filter(Boolean) as T[];
 }
-

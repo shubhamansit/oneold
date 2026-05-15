@@ -215,7 +215,7 @@ import { DateRange } from "react-day-picker";
 import ExportExcel from "./ExportExcel";
 import "react-day-picker/dist/style.css";
 import "../styles/calendar.css";
-import { isHiddenMarch2026Date } from "@/lib/hideMarch2026";
+import { HIDE_MARCH_2026, isHiddenMarch2026Date } from "@/lib/hideMarch2026";
 import type { ActionMeta, MultiValue, SingleValue } from "react-select";
 import type { JobData } from "./ExportExcel";
 
@@ -498,15 +498,21 @@ const FiltersForm: React.FC<FiltersFormProps> = ({
                 console.log('Date range selected:', range);
                 onDateRangeChange(range);
               }}
-              disabled={[
-                {
-                  from: new Date(2026, 2, 1),
-                  to: new Date(2026, 2, 31, 23, 59, 59, 999),
-                },
-              ]}
-              modifiers={{
-                hiddenMarch2026: (date) => isHiddenMarch2026Date(date),
-              }}
+              disabled={
+                HIDE_MARCH_2026
+                  ? [
+                      {
+                        from: new Date(2026, 2, 1),
+                        to: new Date(2026, 2, 31, 23, 59, 59, 999),
+                      },
+                    ]
+                  : undefined
+              }
+              modifiers={
+                HIDE_MARCH_2026
+                  ? { hiddenMarch2026: (date) => isHiddenMarch2026Date(date) }
+                  : undefined
+              }
               numberOfMonths={1}
               showOutsideDays={true}
               showWeekNumber={false}
