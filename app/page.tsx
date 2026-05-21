@@ -50,8 +50,8 @@ const LoginPage = () => {
       (normalizedEmail === "bmcswippr@gmail.com" &&
         password == "Ans@1234") ||
       (normalizedEmail === "osc@swm.com" && password === "98765432") ||
-      (normalizedEmail === "nashikwaste123@gmail.com" &&
-        password === "Nashik@1212") ||
+      (normalizedEmail === "nasikwaste123@gmail.com" &&
+        password === "Nasik@1212") ||
       (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@");
 
     if (isValidLogin) {
