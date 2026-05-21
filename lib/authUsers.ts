@@ -5,7 +5,7 @@ export const EXISTING_USER_ROUTES: Record<string, string> = {
 };
 
 export const DAYWISE_DISTANCE_USERS = [
-  "nashikwaste123@gmail.com",
+  "nasikwaste123@gmail.com",
   "nmc123@gmail.com",
 ] as const;
 
