@@ -29,9 +29,25 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "cookies-next/client";
+import { isDaywiseDistanceUser } from "@/lib/authUsers";
 
 interface customeJwtPayload extends JwtPayload {
   email: string;
+}
+
+function decodeAuthCookie(value?: string): customeJwtPayload | undefined {
+  if (!value) return undefined;
+
+  try {
+    const decoded = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
+    return {
+      ...decoded,
+      email: decoded.email?.toLowerCase(),
+    };
+  } catch (error) {
+    console.error("JWT verification failed:", error);
+    return undefined;
+  }
 }
 
 const menuItems = [
@@ -121,25 +137,24 @@ function AppSidebarContent({
   const submenuRef = React.useRef<HTMLDivElement>(null);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   
+  const currentCookieValue = getCookie("isAuthenticated")?.toString();
+  const currentCookieData = React.useMemo(() => {
+    return decodeAuthCookie(currentCookieValue);
+  }, [currentCookieValue]);
+
+  const activeData = currentCookieValue ? currentCookieData : undefined;
+  
   React.useEffect(() => {
-    const value = getCookie("isAuthenticated")?.toString();
-    if (value) {
-      try {
-        const data = jwt.verify(value, "SUPERSECRET") as customeJwtPayload;
-        setData(data);
-      } catch (error) {
-        console.error('JWT verification failed:', error);
-        if (typeof window !== 'undefined') {
-          router.push("/");
-        }
-      }
-    } else {
-      if (typeof window !== 'undefined') {
-        router.push("/");
-      }
-    }
+    const decodedData = decodeAuthCookie(getCookie("isAuthenticated")?.toString());
+
+    setOpenSubmenu(null);
+    setData(decodedData);
     setIsLoading(false);
-  }, [router]);
+
+    if (!decodedData && pathname !== "/") {
+      router.replace("/");
+    }
+  }, [pathname, router]);
 
   // Handle loading and authentication states within JSX to avoid hooks order issues
 
@@ -154,6 +169,16 @@ function AppSidebarContent({
     timeoutRef.current = setTimeout(() => {
       setOpenSubmenu(null);
     }, 300); // Delay before closing submenu
+  };
+
+  const handleLogout = () => {
+    setData(undefined);
+    setOpenSubmenu(null);
+    setIsLoading(false);
+    document.cookie =
+      "isAuthenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    router.replace("/");
+    router.refresh();
   };
 
   React.useEffect(() => {
@@ -177,13 +202,17 @@ function AppSidebarContent({
     };
   }, []);
 
+  React.useEffect(() => {
+    setOpenSubmenu(null);
+  }, [activeData?.email, pathname]);
+
   // Handle root path condition within JSX to avoid hooks order issues
 
   return (
     <>
       {isLoading ? (
         <div>Loading...</div>
-      ) : !data ? (
+      ) : !activeData ? (
         children
       ) : pathname === "/" ? (
         children
@@ -192,7 +221,7 @@ function AppSidebarContent({
           <Sidebar className=" bg-[#f2f2f2] text-gray-700">
         <SidebarHeader className="p-2">
           <Avatar className="w-16 h-16 mx-auto">
-            {data?.email == "osc@swm.com" ? (
+            {activeData?.email == "osc@swm.com" ? (
               <AvatarImage src="/image2.png" alt="Logo" />
             ) : (
               <AvatarImage src="/image.png" alt="Logo" />
@@ -203,70 +232,98 @@ function AppSidebarContent({
         <SidebarContent>
           <SidebarMenu>
             {(() => {
-              const menuItems = [
-                { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
-                { id: "menu_02", title: "Tracking", icon: LocateIcon, href: "#" },
-                {
-                  id: "menu_03",
-                  title: "Reports",
-                  icon: FileText,
-                  href: "#",
-                  subMenu:
-                    data!.email == "bhavnagar@gmail.com"
-                      ? [
-                          {
-                            title: "Job",
-                            items: [
-                              {
-                                name: "Work Hour Summary",
-                                href: "/worksummary",
-                              },
-                              {
-                                name: "Swipper Summary",
-                                href: "/swippersummary",
-                              },
-                            ],
-                          },
-                        ]
-                      : data!.email == "osc@swm.com"
-                      ? [
-                          {
-                            title: "Job",
-                            items: [
-                              {
-                                name: "Job Summary",
-                                href: "/jobsummary",
-                              },
-                              {
-                                name: "Job Details Summary",
-                                href: "/jobdetailssummary",
-                              },
-                            ],
-                          },
-                          {
-                            title: "Present",
-                            items: [
-                              {
-                                name: "Present Summary",
-                                href: "/presentsummary",
-                              },
-                            ],
-                          },
-                        ]
-                      : [
-                          {
-                            title: "Job",
-                            items: [
-                              {
-                                name: "Summary",
-                                href: "/summary",
-                              },
-                            ],
-                          },
-                        ],
-                },
-                { id: "menu_04", title: "Settings", icon: Settings, href: "#" },
-              ];
+              const email = activeData!.email.toLowerCase();
+              const reportSubMenu = isDaywiseDistanceUser(email)
+                ? [
+                    {
+                      title: "Nashik Waste",
+                      items: [
+                        {
+                          name: "Daywise Distance",
+                          href: "/daywisedistance",
+                        },
+                      ],
+                    },
+                  ]
+                : email === "bhavnagar@gmail.com"
+                ? [
+                    {
+                      title: "Job",
+                      items: [
+                        {
+                          name: "Work Hour Summary",
+                          href: "/worksummary",
+                        },
+                        {
+                          name: "Swipper Summary",
+                          href: "/swippersummary",
+                        },
+                      ],
+                    },
+                  ]
+                : email === "osc@swm.com"
+                ? [
+                    {
+                      title: "Job",
+                      items: [
+                        {
+                          name: "Job Summary",
+                          href: "/jobsummary",
+                        },
+                        {
+                          name: "Job Details Summary",
+                          href: "/jobdetailssummary",
+                        },
+                      ],
+                    },
+                    {
+                      title: "Present",
+                      items: [
+                        {
+                          name: "Present Summary",
+                          href: "/presentsummary",
+                        },
+                      ],
+                    },
+                  ]
+                : email === "bmcswippr@gmail.com"
+                ? [
+                    {
+                      title: "Job",
+                      items: [
+                        {
+                          name: "Summary",
+                          href: "/summary",
+                        },
+                      ],
+                    },
+                  ]
+                : [];
+
+              const menuItems = isDaywiseDistanceUser(email)
+                ? []
+                : [
+                    { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
+                    {
+                      id: "menu_02",
+                      title: "Tracking",
+                      icon: LocateIcon,
+                      href: "#",
+                    },
+                    {
+                      id: "menu_03",
+                      title: "Reports",
+                      icon: FileText,
+                      href: "#",
+                      subMenu: reportSubMenu,
+                    },
+                    {
+                      id: "menu_04",
+                      title: "Settings",
+                      icon: Settings,
+                      href: "#",
+                    },
+                  ];
               
               return menuItems.map((item, index) => (
               <div key={index}>
@@ -318,31 +375,46 @@ function AppSidebarContent({
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter className="mt-auto">
-          <div className="flex flex-col items-center gap-2 p-2">
-            {[
-              { icon: HelpCircle, title: "Help" },
-              { icon: LogOut, title: "Sign out" },
-              { icon: Download, title: "Cloud Download" },
-              { icon: MessageCircle, title: "Support" },
-            ].map((item, index) => (
+          {isDaywiseDistanceUser(activeData.email) ? (
+            <div className="flex flex-col items-center gap-2 p-2">
               <Button
-                key={index}
                 variant="ghost"
                 size="icon"
-                title={item.title}
+                title="Logout"
+                onClick={handleLogout}
               >
-                <item.icon className="h-6 w-6" />
+                <LogOut className="h-6 w-6" />
               </Button>
-            ))}
-            <div className="flex gap-2">
-              <Button variant="ghost" size="icon" title="Share Android App">
-                <PlayCircle className="h-6 w-6" />
-              </Button>
-              <Button variant="ghost" size="icon" title="Share iOS App">
-                <Apple className="h-6 w-6" />
-              </Button>
+              <span className="text-xs">Logout</span>
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col items-center gap-2 p-2">
+              {[
+                { icon: HelpCircle, title: "Help" },
+                { icon: LogOut, title: "Sign out" },
+                { icon: Download, title: "Cloud Download" },
+                { icon: MessageCircle, title: "Support" },
+              ].map((item, index) => (
+                <Button
+                  key={index}
+                  variant="ghost"
+                  size="icon"
+                  title={item.title}
+                  onClick={item.title === "Sign out" ? handleLogout : undefined}
+                >
+                  <item.icon className="h-6 w-6" />
+                </Button>
+              ))}
+              <div className="flex gap-2">
+                <Button variant="ghost" size="icon" title="Share Android App">
+                  <PlayCircle className="h-6 w-6" />
+                </Button>
+                <Button variant="ghost" size="icon" title="Share iOS App">
+                  <Apple className="h-6 w-6" />
+                </Button>
+              </div>
+            </div>
+          )}
         </SidebarFooter>
       </Sidebar>
       {children}

@@ -1,0 +1,890 @@
+{
+  "sheetName": "Daywise Distance",
+  "rows": [
+    [
+      {
+        "value": "Vehicle",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "Vehicle Brand",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "Vehicle Model",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "Total Distance",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "01",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "02",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "03",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "04",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "05",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "06",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "07",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "08",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "09",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "10",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "11",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "12",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "13",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "14",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "15",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "16",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "17",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "18",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "19",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "20",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "21",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "22",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "23",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "24",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "25",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "26",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "27",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "28",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "29",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "30",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "31",
+        "isBlue": false,
+        "isRedMarked": false
+      }
+    ],
+    [
+      {
+        "value": "JC 400 MH 15 JM 1385 - SWEEPER MASHINE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "AMW",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "1618 TP",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 1779,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 42,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 40,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 33,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 49,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 50,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 42,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 50,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 39,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 47,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 47,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 43,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 44,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 41,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 42,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 47,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 41,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 44,
+        "isBlue": false,
+        "isRedMarked": true
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 44,
+        "isBlue": false,
+        "isRedMarked": true
+      },
+      {
+        "value": 41,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 42,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 36,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 40,
+        "isBlue": false,
+        "isRedMarked": false
+      }
+    ],
+    [
+      {
+        "value": "JC 400 MH 15 JM 1383 - SWEEPER MACHINE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "ELGIN",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "EAGLE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 1234,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 53,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 49,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 55,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 50,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 48,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 39,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 59,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 35,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 53,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 55,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 58,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 51,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 57,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 44,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": false
+      }
+    ],
+    [
+      {
+        "value": "JC 400 MH 15 JM 1384 - SWEEPER MACHINE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "ELGIN",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "EAGLE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 1201,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 58,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 43,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 69,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 34,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 51,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 55,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 42,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 60,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 59,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 51,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 34,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 47,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 27,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 83,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 49,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 59,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 40,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 77,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 37,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 35,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 33,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 61,
+        "isBlue": false,
+        "isRedMarked": false
+      }
+    ],
+    [
+      {
+        "value": "JC 400 MH 15 JM 1382 - SWEEPER MACHINE",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "General",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "General",
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 1088,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 50,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 56,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 61,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 56,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 46,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 39,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 37,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 69,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 52,
+        "isBlue": false,
+        "isRedMarked": true
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 33,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 62,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 35,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 49,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 51,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 50,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 66,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 32,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 28,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": "",
+        "isBlue": true,
+        "isRedMarked": false
+      },
+      {
+        "value": 45,
+        "isBlue": false,
+        "isRedMarked": false
+      },
+      {
+        "value": 62,
+        "isBlue": false,
+        "isRedMarked": false
+      }
+    ]
+  ]
+}

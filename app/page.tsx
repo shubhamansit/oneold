@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import jwt from "jsonwebtoken";
+import { getLoginRedirectForEmail } from "@/lib/authUsers";
 
 // Set to true to disable login and show "contact administrator" message
 const LOGIN_DISABLED = false;
@@ -42,14 +43,19 @@ const LoginPage = () => {
     const { email, password } = values;
 
     // Specific hard-coded credentials for login
-    if (
-      (email.toLowerCase() === "bhavnagar@gmail.com" &&
+    const normalizedEmail = email.toLowerCase();
+    const isValidLogin =
+      (normalizedEmail === "bhavnagar@gmail.com" &&
         password === "Bhadresh@1234") ||
-      (email.toLowerCase() === "bmcswippr@gmail.com" &&
+      (normalizedEmail === "bmcswippr@gmail.com" &&
         password == "Ans@1234") ||
-      (email.toLowerCase() === "osc@swm.com" && password === "98765432")
-    ) {
-      const token = jwt.sign({ email: email.toLowerCase() }, "SUPERSECRET");
+      (normalizedEmail === "osc@swm.com" && password === "98765432") ||
+      (normalizedEmail === "nashikwaste123@gmail.com" &&
+        password === "Nashik@1212") ||
+      (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@");
+
+    if (isValidLogin) {
+      const token = jwt.sign({ email: normalizedEmail }, "SUPERSECRET");
 
       Cookies.set("isAuthenticated", token, {
         expires: 1,
@@ -57,13 +63,7 @@ const LoginPage = () => {
         secure: process.env.NODE_ENV === "production",
       });
       toast.success("Login Successful");
-      if (email.toLowerCase() === "bhavnagar@gmail.com") {
-        router.push("/jobsummary");
-      } else if (email.toLowerCase() == "bmcswippr@gmail.com") {
-        router.push("/worksummary");
-      } else {
-        router.push("/summary");
-      }
+      router.push(getLoginRedirectForEmail(normalizedEmail));
     } else {
       toast.error("Invalid email or password");
     }
