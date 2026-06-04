@@ -16,43 +16,43 @@ const headers = [
 
 const rows = [
   {
-    vehicle: "JC 400 MH 15 JM 1384 - SWEEPER MACHINE",
-    brand: "ELGIN",
-    model: "EAGLE",
-    total: 745,
+    vehicle: "JC 400 MH 15 JM 1385 - SWEEPER MASHINE",
+    brand: "General",
+    model: "General",
+    total: 1044,
     days: [
-      35, 61, BLUE, 54, 79, 52, 58, 68, 75, BLUE, 88, 51, 67, 57, BLUE, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      33, 33, 0, 35, 47, 0, 37, 43, 40, 0, 36, 43, 49, 40, 37, 36, 0,
+      40, 54, 55, 49, 45, 53, 0, 46, 44, 59, 0, 43, 47, 0,
+    ],
+  },
+  {
+    vehicle: "JC 400 MH 15 JM 1384 - SWEEPER MACHINE",
+    brand: "General",
+    model: "General",
+    total: 1142,
+    days: [
+      41, 48, 0, 47, 40, 46, 49, 34, 37, 0, 44, 46, 34, 49, 48, 44, 0,
+      51, 73, 57, 42, 45, 42, 0, 63, 44, 37, 0, 37, 44, 0,
     ],
   },
   {
     vehicle: "JC 400 MH 15 JM 1382 - SWEEPER MACHINE",
     brand: "General",
     model: "General",
-    total: 600,
+    total: 1007,
     days: [
-      67, 56, BLUE, 66, 43, 36, 53, 36, 53, BLUE, 65, 42, 41, 42, BLUE, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      33, 38, 0, 33, 42, 44, 40, 39, 41, 0, 33, 42, 38, 42, 35, 35, 0,
+      0, 66, 60, 42, 43, 35, 0, 45, 48, 43, 0, 42, 48, 0,
     ],
   },
   {
     vehicle: "JC 400 MH 15 JM 1383 - SWEEPER MACHINE",
-    brand: "ELGIN",
-    model: "EAGLE",
-    total: 506,
+    brand: "General",
+    model: "General",
+    total: 1304,
     days: [
-      41, 54, 0, 44, 43, 63, 36, 51, 45, 0, 43, 42, 40, 45, BLUE, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    ],
-  },
-  {
-    vehicle: "JC 400 MH 15 JM 1385 - SWEEPER MACHINE",
-    brand: "AMW",
-    model: "1618 TP",
-    total: 474,
-    days: [
-      42, 41, BLUE, 44, 34, BLUE, 47, 29, 50, BLUE, 46, 41, 62, 38, BLUE, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      52, 50, 0, 54, 48, 51, 47, 45, 50, 0, 53, 49, 48, 51, 53, 49, 0,
+      55, 57, 47, 60, 52, 55, 0, 56, 58, 60, 0, 53, 51, 0,
     ],
   },
 ];
