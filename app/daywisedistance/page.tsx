@@ -47,22 +47,32 @@ const timeFilterOptions = [
   "1 PM TO 9 PM",
 ] as const;
 
-function recalculateTotalDistance(row: DaywiseCell[]) {
-  const total = row
-    .slice(4, 35)
-    .reduce((sum, cell) => sum + (Number(cell.value) || 0), 0);
+type TimeFilterOption = (typeof timeFilterOptions)[number];
 
-  if (row[3]) {
-    row[3] = { ...row[3], value: total };
-  }
-}
-
-function applyMayTimeFilter(rows: DaywiseCell[][], selectedTimeFilter: string) {
+function applyMayTimeFilter(
+  rows: DaywiseCell[][],
+  selectedTimeFilter: TimeFilterOption
+) {
   if (selectedTimeFilter === timeFilterOptions[0]) {
     return rows;
   }
 
   const updatedRows = rows.map((row) => row.map((cell) => ({ ...cell })));
+
+  updatedRows.slice(1).forEach((row) => {
+    if (row[3]) {
+      row[3] = { ...row[3], value: 0 };
+    }
+
+    row.slice(4, 35).forEach((_, index) => {
+      const cellIndex = index + 4;
+      row[cellIndex] = {
+        ...row[cellIndex],
+        value: 0,
+        isBlue: false,
+      };
+    });
+  });
 
   if (selectedTimeFilter === "11AM TO 7 PM") {
     const row = updatedRows.find((item) =>
@@ -73,7 +83,7 @@ function applyMayTimeFilter(rows: DaywiseCell[][], selectedTimeFilter: string) {
 
     if (row?.[9]) {
       row[9] = { ...row[9], value: 46, isBlue: false };
-      recalculateTotalDistance(row);
+      row[3] = { ...row[3], value: 46 };
     }
   }
 
@@ -86,7 +96,7 @@ function applyMayTimeFilter(rows: DaywiseCell[][], selectedTimeFilter: string) {
 
     if (row?.[21]) {
       row[21] = { ...row[21], value: 55, isBlue: false };
-      recalculateTotalDistance(row);
+      row[3] = { ...row[3], value: 55 };
     }
   }
 
@@ -98,7 +108,7 @@ export default function DaywiseDistancePage() {
   const [isAllowed, setIsAllowed] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [selectedMonth, setSelectedMonth] = useState(monthOptions[0].key);
-  const [selectedTimeFilter, setSelectedTimeFilter] = useState(
+  const [selectedTimeFilter, setSelectedTimeFilter] = useState<TimeFilterOption>(
     timeFilterOptions[0]
   );
 
@@ -162,7 +172,9 @@ export default function DaywiseDistancePage() {
           {selectedMonth === "may" && (
             <select
               value={selectedTimeFilter}
-              onChange={(event) => setSelectedTimeFilter(event.target.value)}
+              onChange={(event) =>
+                setSelectedTimeFilter(event.target.value as TimeFilterOption)
+              }
               className="h-10 rounded-md border border-gray-300 bg-white px-3 text-sm font-medium text-gray-700 outline-none focus:border-[#DB4848]"
             >
               {timeFilterOptions.map((option) => (
