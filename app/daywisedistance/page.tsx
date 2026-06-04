@@ -59,21 +59,6 @@ function applyMayTimeFilter(
 
   const updatedRows = rows.map((row) => row.map((cell) => ({ ...cell })));
 
-  updatedRows.slice(1).forEach((row) => {
-    if (row[3]) {
-      row[3] = { ...row[3], value: 0 };
-    }
-
-    row.slice(4, 35).forEach((_, index) => {
-      const cellIndex = index + 4;
-      row[cellIndex] = {
-        ...row[cellIndex],
-        value: 0,
-        isBlue: false,
-      };
-    });
-  });
-
   if (selectedTimeFilter === "11AM TO 7 PM") {
     const row = updatedRows.find((item) =>
       String(item[0]?.value || "").includes(
@@ -81,9 +66,18 @@ function applyMayTimeFilter(
       )
     );
 
-    if (row?.[9]) {
-      row[9] = { ...row[9], value: 46, isBlue: false };
+    if (row) {
       row[3] = { ...row[3], value: 46 };
+      row.slice(4, 35).forEach((_, index) => {
+        const cellIndex = index + 4;
+        row[cellIndex] = {
+          ...row[cellIndex],
+          value: cellIndex === 9 ? 46 : 0,
+          isBlue: false,
+        };
+      });
+
+      return [updatedRows[0], row];
     }
   }
 
@@ -94,9 +88,18 @@ function applyMayTimeFilter(
       )
     );
 
-    if (row?.[21]) {
-      row[21] = { ...row[21], value: 55, isBlue: false };
+    if (row) {
       row[3] = { ...row[3], value: 55 };
+      row.slice(4, 35).forEach((_, index) => {
+        const cellIndex = index + 4;
+        row[cellIndex] = {
+          ...row[cellIndex],
+          value: cellIndex === 21 ? 55 : 0,
+          isBlue: false,
+        };
+      });
+
+      return [updatedRows[0], row];
     }
   }
 
