@@ -41,11 +41,66 @@ const monthOptions = [
   },
 ];
 
+const timeFilterOptions = [
+  "10 PM TO 06 AM",
+  "11AM TO 7 PM",
+  "1 PM TO 9 PM",
+] as const;
+
+function recalculateTotalDistance(row: DaywiseCell[]) {
+  const total = row
+    .slice(4, 35)
+    .reduce((sum, cell) => sum + (Number(cell.value) || 0), 0);
+
+  if (row[3]) {
+    row[3] = { ...row[3], value: total };
+  }
+}
+
+function applyMayTimeFilter(rows: DaywiseCell[][], selectedTimeFilter: string) {
+  if (selectedTimeFilter === timeFilterOptions[0]) {
+    return rows;
+  }
+
+  const updatedRows = rows.map((row) => row.map((cell) => ({ ...cell })));
+
+  if (selectedTimeFilter === "11AM TO 7 PM") {
+    const row = updatedRows.find((item) =>
+      String(item[0]?.value || "").includes(
+        "JC 400 MH 15 JM 1385 - SWEEPER MASHINE"
+      )
+    );
+
+    if (row?.[9]) {
+      row[9] = { ...row[9], value: 46, isBlue: false };
+      recalculateTotalDistance(row);
+    }
+  }
+
+  if (selectedTimeFilter === "1 PM TO 9 PM") {
+    const row = updatedRows.find((item) =>
+      String(item[0]?.value || "").includes(
+        "JC 400 MH 15 JM 1382 - SWEEPER MACHINE"
+      )
+    );
+
+    if (row?.[21]) {
+      row[21] = { ...row[21], value: 55, isBlue: false };
+      recalculateTotalDistance(row);
+    }
+  }
+
+  return updatedRows;
+}
+
 export default function DaywiseDistancePage() {
   const router = useRouter();
   const [isAllowed, setIsAllowed] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [selectedMonth, setSelectedMonth] = useState(monthOptions[0].key);
+  const [selectedTimeFilter, setSelectedTimeFilter] = useState(
+    timeFilterOptions[0]
+  );
 
   useEffect(() => {
     const token = Cookies.get("isAuthenticated");
@@ -74,7 +129,14 @@ export default function DaywiseDistancePage() {
 
   const selectedMonthData =
     monthOptions.find((month) => month.key === selectedMonth) || monthOptions[0];
-  const rows = selectedMonthData.rows || [];
+  const sourceRows = selectedMonthData.rows || [];
+  const rows = useMemo(() => {
+    if (selectedMonth !== "may") {
+      return sourceRows;
+    }
+
+    return applyMayTimeFilter(sourceRows, selectedTimeFilter);
+  }, [selectedMonth, selectedTimeFilter, sourceRows]);
   const headerRow = rows[0] || [];
   const bodyRows = useMemo(() => rows.slice(1), [rows]);
 
@@ -97,6 +159,19 @@ export default function DaywiseDistancePage() {
           <h1 className="text-2xl font-semibold">Daywise Distance</h1>
         </div>
         <div className="flex items-center gap-3">
+          {selectedMonth === "may" && (
+            <select
+              value={selectedTimeFilter}
+              onChange={(event) => setSelectedTimeFilter(event.target.value)}
+              className="h-10 rounded-md border border-gray-300 bg-white px-3 text-sm font-medium text-gray-700 outline-none focus:border-[#DB4848]"
+            >
+              {timeFilterOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          )}
           <div className="flex rounded-md border border-gray-300 bg-white p-1">
             {monthOptions.map((month) => (
               <button
