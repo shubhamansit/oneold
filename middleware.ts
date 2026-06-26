@@ -52,5 +52,6 @@ export const config = {
     "/swippersummary/:path*",
     "/summary/:path*",
     "/daywisedistance/:path*",
+    "/jobdetails/:path*",
   ],
 };
