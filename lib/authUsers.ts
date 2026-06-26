@@ -11,8 +11,16 @@ export const DAYWISE_DISTANCE_USERS = [
 
 export const DAYWISE_DISTANCE_ROUTE = "/daywisedistance";
 
+export const HMC_USERS = ["hmc@gmail.com"] as const;
+
+export const HMC_ROUTE = "/jobdetails";
+
 export function isDaywiseDistanceUser(email?: string | null) {
   return !!email && DAYWISE_DISTANCE_USERS.some((user) => user === email.toLowerCase());
+}
+
+export function isHmcUser(email?: string | null) {
+  return !!email && HMC_USERS.some((user) => user === email.toLowerCase());
 }
 
 export function getLoginRedirectForEmail(email: string) {
@@ -20,6 +28,10 @@ export function getLoginRedirectForEmail(email: string) {
 
   if (isDaywiseDistanceUser(normalizedEmail)) {
     return DAYWISE_DISTANCE_ROUTE;
+  }
+
+  if (isHmcUser(normalizedEmail)) {
+    return HMC_ROUTE;
   }
 
   return EXISTING_USER_ROUTES[normalizedEmail] || "/";
@@ -30,10 +42,19 @@ export function canAccessRoute(email: string | null | undefined, pathname: strin
 
   const normalizedEmail = email.toLowerCase();
   const isDaywiseRoute = pathname.startsWith(DAYWISE_DISTANCE_ROUTE);
+  const isHmcRoute = pathname.startsWith(HMC_ROUTE);
 
   if (isDaywiseDistanceUser(normalizedEmail)) {
     return isDaywiseRoute;
   }
 
-  return !isDaywiseRoute && normalizedEmail in EXISTING_USER_ROUTES;
+  if (isHmcUser(normalizedEmail)) {
+    return isHmcRoute;
+  }
+
+  return (
+    !isDaywiseRoute &&
+    !isHmcRoute &&
+    normalizedEmail in EXISTING_USER_ROUTES
+  );
 }

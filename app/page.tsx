@@ -52,7 +52,9 @@ const LoginPage = () => {
       (normalizedEmail === "osc@swm.com" && password === "98765432") ||
       (normalizedEmail === "nasikwaste123@gmail.com" &&
         password === "Nasik@1212") ||
-      (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@");
+      (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@") ||
+      (normalizedEmail === "hmc@gmail.com" &&
+        password === "Corporation@hisar2025");
 
     if (isValidLogin) {
       const token = jwt.sign({ email: normalizedEmail }, "SUPERSECRET");

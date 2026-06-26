@@ -29,7 +29,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "cookies-next/client";
-import { isDaywiseDistanceUser } from "@/lib/authUsers";
+import { isDaywiseDistanceUser, isHmcUser } from "@/lib/authUsers";
 
 interface customeJwtPayload extends JwtPayload {
   email: string;
@@ -300,7 +300,8 @@ function AppSidebarContent({
                   ]
                 : [];
 
-              const menuItems = isDaywiseDistanceUser(email)
+              const menuItems =
+                isDaywiseDistanceUser(email) || isHmcUser(email)
                 ? []
                 : [
                     { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
@@ -375,7 +376,8 @@ function AppSidebarContent({
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter className="mt-auto">
-          {isDaywiseDistanceUser(activeData.email) ? (
+          {isDaywiseDistanceUser(activeData.email) ||
+          isHmcUser(activeData.email) ? (
             <div className="flex flex-col items-center gap-2 p-2">
               <Button
                 variant="ghost"
@@ -417,7 +419,7 @@ function AppSidebarContent({
           )}
         </SidebarFooter>
       </Sidebar>
-      {children}
+      <main className="min-w-0 flex-1 overflow-hidden">{children}</main>
         </SidebarProvider>
       )}
     </>
