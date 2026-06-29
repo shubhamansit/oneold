@@ -10,7 +10,9 @@ import HmcGroupedTable from "@/components/hmc/HmcGroupedTable";
 import { useHmcColumnSettings } from "@/lib/useHmcColumnSettings";
 import { useHmcColumnWidths } from "@/lib/useHmcColumnWidths";
 import {
+  buildHmcSummaryPageHref,
   fetchHmcJobDetail,
+  parseHmcSummaryFiltersFromSearchParams,
   type HmcDetailData,
   type HmcMonthKey,
 } from "@/lib/hmcJobData";
@@ -27,6 +29,14 @@ export default function JobDetailPage() {
   const jobId = decodeURIComponent(String(params.jobId || ""));
   const month = (searchParams.get("month") || "march") as HmcMonthKey;
   const date = searchParams.get("date") || "";
+
+  const backHref = useMemo(() => {
+    const filters = parseHmcSummaryFiltersFromSearchParams(searchParams);
+    return buildHmcSummaryPageHref({
+      dateRange: filters.dateRange,
+      jobIds: filters.jobIds,
+    });
+  }, [searchParams]);
 
   const {
     columns: visibleColumns,
@@ -66,8 +76,6 @@ export default function JobDetailPage() {
     return null;
   }
 
-  const backHref = `/jobdetails?month=${month}&date=${date}`;
-
   return (
     <div className="flex h-screen min-w-0 flex-col overflow-hidden px-3 py-4 md:px-6">
       <div className="shrink-0 space-y-3 pb-4">
@@ -96,7 +104,7 @@ export default function JobDetailPage() {
         </div>
       </div>
 
-      <div className="min-h-0 min-w-0 flex-1 overflow-auto rounded-md border bg-white">
+      <div className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-md border bg-white">
         {isLoading ? (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
             Loading checkpoint details...

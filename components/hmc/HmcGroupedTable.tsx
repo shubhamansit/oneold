@@ -1,9 +1,11 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import {
   formatCellValue,
+  formatHmcSummaryTotalValue,
   getRowCellValue,
+  HMC_SUMMARY_TOTAL_METRICS,
   normalizeHmcTableStructure,
 } from "@/lib/hmcJobData";
 import type { HmcColumnDef, HmcHeaderGroup } from "@/lib/hmcJobData";
@@ -17,9 +19,15 @@ import {
 import { cn } from "@/lib/utils";
 
 const headerClassName =
-  "sticky z-[1] border border-gray-300 bg-gray-100 px-2 py-2 text-center text-xs font-semibold";
+  "border border-gray-300 bg-gray-100 px-2 py-2 text-center text-xs font-semibold";
 const cellClassName =
-  "overflow-hidden text-ellipsis whitespace-nowrap border border-gray-200 px-2 py-2 text-xs";
+  "overflow-hidden text-ellipsis whitespace-nowrap border border-gray-200 bg-white px-2 py-2 text-xs";
+const totalsClassName =
+  "overflow-hidden text-ellipsis whitespace-nowrap border border-gray-300 bg-gray-50 px-2 py-2 text-center text-xs font-bold";
+
+const totalColumnStyles = Object.fromEntries(
+  HMC_SUMMARY_TOTAL_METRICS.map((metric) => [metric.key, metric.className])
+) as Record<string, string>;
 
 type HmcGroupedTableProps = {
   headerGroups?: HmcHeaderGroup[];
@@ -32,6 +40,7 @@ type HmcGroupedTableProps = {
   onColumnWidthChange?: (columnKey: string, width: number) => void;
   onColumnWidthsChange?: (updates: Record<string, number>) => void;
   defaultColumnWidth?: number;
+  summaryTotals?: Record<string, number>;
 };
 
 type ResizableHeaderCellProps = {
@@ -87,14 +96,18 @@ export default function HmcGroupedTable({
   headerGroups: headerGroupsProp,
   columns: columnsProp,
   rows: rowsProp,
-  showSrNo = true,
+  showSrNo = false,
   onRowClick,
   getSrNo,
   getColumnWidth,
   onColumnWidthChange,
   onColumnWidthsChange,
   defaultColumnWidth = HMC_DEFAULT_COLUMN_WIDTH,
+  summaryTotals,
 }: HmcGroupedTableProps) {
+  const headerScrollRef = useRef<HTMLDivElement>(null);
+  const bodyScrollRef = useRef<HTMLDivElement>(null);
+
   const { headerGroups, columns } = normalizeHmcTableStructure({
     headerGroups: headerGroupsProp,
     columns: columnsProp,
@@ -108,6 +121,12 @@ export default function HmcGroupedTable({
       getColumnWidth?.(columnKey) ?? defaultColumnWidth,
     [defaultColumnWidth, getColumnWidth]
   );
+
+  const syncHeaderScroll = useCallback(() => {
+    if (headerScrollRef.current && bodyScrollRef.current) {
+      headerScrollRef.current.scrollLeft = bodyScrollRef.current.scrollLeft;
+    }
+  }, []);
 
   const startResize = useCallback(
     (event: React.MouseEvent, columnKey: string) => {
@@ -194,151 +213,202 @@ export default function HmcGroupedTable({
       )
     : undefined;
 
-  return (
-    <table
-      className={cn(
-        "border-collapse text-xs",
-        isResizable ? "table-fixed" : "min-w-max w-full"
-      )}
-      style={tableWidth ? { width: tableWidth, minWidth: tableWidth } : undefined}
-    >
-      {isResizable ? (
-        <colgroup>
-          {showSrNo ? (
-            <col style={{ width: HMC_SR_NO_COLUMN_WIDTH }} />
-          ) : null}
-          {columns.map((column) => {
-            const width = resolveWidth(column.key);
-            return (
-              <col
-                key={column.key}
-                style={{ width, minWidth: width, maxWidth: width }}
-              />
-            );
-          })}
-        </colgroup>
-      ) : null}
-      <thead>
-        <tr>
-          {showSrNo ? (
-            <th
-              rowSpan={hasGroupedHeaders ? 2 : 1}
-              style={
-                isResizable
-                  ? {
-                      width: HMC_SR_NO_COLUMN_WIDTH,
-                      minWidth: HMC_SR_NO_COLUMN_WIDTH,
-                      maxWidth: HMC_SR_NO_COLUMN_WIDTH,
-                    }
-                  : undefined
-              }
-              className={cn(
-                headerClassName,
-                "top-0 whitespace-nowrap align-middle"
-              )}
-            >
-              Sr. No.
-            </th>
-          ) : null}
-          {headerGroups.map((group) => {
-            if (group.colspan === 1) {
-              const child = group.children[0];
+  const tableClassName = cn(
+    "border-separate border-spacing-0 text-xs",
+    isResizable ? "table-fixed" : "min-w-max w-full"
+  );
 
-              return (
-                <ResizableHeaderCell
-                  key={`${group.label}-${child.key}`}
-                  rowSpan={group.rowSpan}
-                  width={isResizable ? resolveWidth(child.key) : undefined}
-                  className="top-0"
-                  onResizeStart={
-                    isResizable
-                      ? (event) => startResize(event, child.key)
-                      : undefined
+  const tableStyle = tableWidth
+    ? { width: tableWidth, minWidth: tableWidth }
+    : undefined;
+
+  const renderColGroup = () =>
+    isResizable ? (
+      <colgroup>
+        {showSrNo ? <col style={{ width: HMC_SR_NO_COLUMN_WIDTH }} /> : null}
+        {columns.map((column) => {
+          const width = resolveWidth(column.key);
+          return (
+            <col
+              key={column.key}
+              style={{ width, minWidth: width, maxWidth: width }}
+            />
+          );
+        })}
+      </colgroup>
+    ) : null;
+
+  const renderHeader = () => (
+    <thead>
+      <tr>
+        {showSrNo ? (
+          <th
+            rowSpan={hasGroupedHeaders ? 2 : 1}
+            style={
+              isResizable
+                ? {
+                    width: HMC_SR_NO_COLUMN_WIDTH,
+                    minWidth: HMC_SR_NO_COLUMN_WIDTH,
+                    maxWidth: HMC_SR_NO_COLUMN_WIDTH,
                   }
-                >
-                  {group.label}
-                </ResizableHeaderCell>
-              );
+                : undefined
             }
-
-            const groupWidth = isResizable
-              ? group.children.reduce(
-                  (total, child) => total + resolveWidth(child.key),
-                  0
-                )
-              : undefined;
+            className={cn(headerClassName, "whitespace-nowrap align-middle")}
+          >
+            Sr. No.
+          </th>
+        ) : null}
+        {headerGroups.map((group) => {
+          if (group.colspan === 1) {
+            const child = group.children[0];
 
             return (
               <ResizableHeaderCell
-                key={`${group.label}-${group.children[0]?.key}`}
-                colSpan={group.colspan}
+                key={`${group.label}-${child.key}`}
                 rowSpan={group.rowSpan}
-                width={groupWidth}
-                className="top-0"
+                width={isResizable ? resolveWidth(child.key) : undefined}
                 onResizeStart={
-                  isResizable && onColumnWidthsChange
-                    ? (event) => startGroupResize(event, group)
+                  isResizable
+                    ? (event) => startResize(event, child.key)
                     : undefined
                 }
               >
                 {group.label}
               </ResizableHeaderCell>
             );
+          }
+
+          const groupWidth = isResizable
+            ? group.children.reduce(
+                (total, child) => total + resolveWidth(child.key),
+                0
+              )
+            : undefined;
+
+          return (
+            <ResizableHeaderCell
+              key={`${group.label}-${group.children[0]?.key}`}
+              colSpan={group.colspan}
+              rowSpan={group.rowSpan}
+              width={groupWidth}
+              onResizeStart={
+                isResizable && onColumnWidthsChange
+                  ? (event) => startGroupResize(event, group)
+                  : undefined
+              }
+            >
+              {group.label}
+            </ResizableHeaderCell>
+          );
+        })}
+      </tr>
+      {hasGroupedHeaders ? (
+        <tr>
+          {headerGroups
+            .filter((group) => group.colspan > 1)
+            .flatMap((group) =>
+              group.children.map((child) => (
+                <th
+                  key={child.key}
+                  style={
+                    isResizable
+                      ? {
+                          width: resolveWidth(child.key),
+                          minWidth: resolveWidth(child.key),
+                          maxWidth: resolveWidth(child.key),
+                        }
+                      : undefined
+                  }
+                  className={cn(
+                    headerClassName,
+                    "overflow-hidden text-ellipsis whitespace-nowrap"
+                  )}
+                >
+                  {child.label}
+                </th>
+              ))
+            )}
+        </tr>
+      ) : null}
+    </thead>
+  );
+
+  const renderTotalsRow = () => {
+    if (!summaryTotals) return null;
+
+    return (
+      <tbody>
+        <tr>
+          {showSrNo ? <td className={totalsClassName} /> : null}
+          {columns.map((column) => {
+            const totalValue = summaryTotals[column.key];
+
+            return (
+              <td
+                key={`total-${column.key}`}
+                className={cn(
+                  totalsClassName,
+                  totalValue !== undefined ? totalColumnStyles[column.key] : ""
+                )}
+              >
+                {totalValue !== undefined
+                  ? formatHmcSummaryTotalValue(column.key, totalValue)
+                  : ""}
+              </td>
+            );
           })}
         </tr>
-        {hasGroupedHeaders ? (
-          <tr>
-            {headerGroups
-              .filter((group) => group.colspan > 1)
-              .flatMap((group) =>
-                group.children.map((child) => (
-                  <th
-                    key={child.key}
-                    style={
-                      isResizable
-                        ? {
-                            width: resolveWidth(child.key),
-                            minWidth: resolveWidth(child.key),
-                            maxWidth: resolveWidth(child.key),
-                          }
-                        : undefined
-                    }
-                    className={cn(
-                      headerClassName,
-                      "top-9 overflow-hidden text-ellipsis whitespace-nowrap"
+      </tbody>
+    );
+  };
+
+  return (
+    <div className="flex h-full min-h-0 flex-col overflow-hidden">
+      <div ref={headerScrollRef} className="shrink-0 overflow-hidden bg-gray-100">
+        <table className={tableClassName} style={tableStyle}>
+          {renderColGroup()}
+          {renderHeader()}
+          {renderTotalsRow()}
+        </table>
+      </div>
+
+      <div
+        ref={bodyScrollRef}
+        className="min-h-0 flex-1 overflow-auto bg-white"
+        onScroll={syncHeaderScroll}
+      >
+        <table className={tableClassName} style={tableStyle}>
+          {renderColGroup()}
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className={
+                  onRowClick ? "cursor-pointer hover:bg-gray-50" : undefined
+                }
+                onClick={onRowClick ? () => onRowClick(rowIndex) : undefined}
+              >
+                {showSrNo ? (
+                  <td className={cn(cellClassName, "font-medium")}>
+                    {getSrNo ? getSrNo(rowIndex) : rowIndex + 1}
+                  </td>
+                ) : null}
+                {columns.map((column) => (
+                  <td
+                    key={`${rowIndex}-${column.key}`}
+                    className={cellClassName}
+                    title={String(
+                      formatCellValue(getRowCellValue(row, column))
                     )}
                   >
-                    {child.label}
-                  </th>
-                ))
-              )}
-          </tr>
-        ) : null}
-      </thead>
-      <tbody>
-        {rows.map((row, rowIndex) => (
-          <tr
-            key={rowIndex}
-            className={onRowClick ? "cursor-pointer hover:bg-gray-50" : undefined}
-            onClick={onRowClick ? () => onRowClick(rowIndex) : undefined}
-          >
-            {showSrNo ? (
-              <td className={cn(cellClassName, "font-medium")}>
-                {getSrNo ? getSrNo(rowIndex) : rowIndex + 1}
-              </td>
-            ) : null}
-            {columns.map((column) => (
-              <td
-                key={`${rowIndex}-${column.key}`}
-                className={cellClassName}
-                title={String(formatCellValue(getRowCellValue(row, column)))}
-              >
-                {formatCellValue(getRowCellValue(row, column))}
-              </td>
+                    {formatCellValue(getRowCellValue(row, column))}
+                  </td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

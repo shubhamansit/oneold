@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import {
   Home,
   FileText,
@@ -134,7 +135,12 @@ function AppSidebarContent({
   const router = useRouter();
   const pathname = usePathname();
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
+  const [submenuPosition, setSubmenuPosition] = React.useState({
+    top: 0,
+    left: 0,
+  });
   const submenuRef = React.useRef<HTMLDivElement>(null);
+  const menuItemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   
   const currentCookieValue = getCookie("isAuthenticated")?.toString();
@@ -162,6 +168,16 @@ function AppSidebarContent({
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+
+    const anchor = menuItemRefs.current[id];
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect();
+      setSubmenuPosition({
+        top: rect.top,
+        left: rect.right + 8,
+      });
+    }
+
     setOpenSubmenu(id);
   };
 
@@ -229,11 +245,23 @@ function AppSidebarContent({
             <AvatarFallback>Logo</AvatarFallback>
           </Avatar>
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="overflow-visible">
           <SidebarMenu>
             {(() => {
               const email = activeData!.email.toLowerCase();
-              const reportSubMenu = isDaywiseDistanceUser(email)
+              const reportSubMenu = isHmcUser(email)
+                ? [
+                    {
+                      title: "Reports",
+                      items: [
+                        {
+                          name: "Route Detail Summary",
+                          href: "/jobdetails",
+                        },
+                      ],
+                    },
+                  ]
+                : isDaywiseDistanceUser(email)
                 ? [
                     {
                       title: "Nashik Waste",
@@ -300,9 +328,18 @@ function AppSidebarContent({
                   ]
                 : [];
 
-              const menuItems =
-                isDaywiseDistanceUser(email) || isHmcUser(email)
+              const menuItems = isDaywiseDistanceUser(email)
                 ? []
+                : isHmcUser(email)
+                ? [
+                    {
+                      id: "menu_03",
+                      title: "Reports",
+                      icon: FileText,
+                      href: "#",
+                      subMenu: reportSubMenu,
+                    },
+                  ]
                 : [
                     { id: "menu_01", title: "Dashboard", icon: Home, href: "#" },
                     {
@@ -327,49 +364,62 @@ function AppSidebarContent({
                   ];
               
               return menuItems.map((item, index) => (
-              <div key={index}>
+              <div
+                key={index}
+                className="relative"
+                ref={(node) => {
+                  menuItemRefs.current[item.id] = node;
+                }}
+              >
                 <SidebarMenuItem
-                  key={index}
                   onMouseEnter={() => handleMouseEnter(item.id)}
                   onMouseLeave={handleMouseLeave}
-                  className="relative"
                 >
                   <SidebarMenuButton
                     asChild
-                    className="flex flex-col items-center justify-center h-20"
+                    className="flex h-20 flex-col items-center justify-center"
                   >
-                    <Button variant="ghost" className=" h-full">
-                      <item.icon className="h-6 w-6 mb-1" />
+                    <Button variant="ghost" className="h-full w-full">
+                      <item.icon className="mb-1 h-6 w-6" />
                       <span className="text-xs">{item.title}</span>
                     </Button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                {item.subMenu && openSubmenu === item.id && (
-                  <div
-                    ref={submenuRef}
-                    className="absolute left-full top-52 ml-2 w-64 bg-white shadow-lg rounded-md overflow-hidden z-999"
-                    onMouseEnter={() => handleMouseEnter(item.id)}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    {item.subMenu.map((group, index) => (
-                      <div
-                        key={index}
-                        className="p-2 bg-[#DB4848] flex flex-col my-2"
-                      >
-                        {group.title}
-                        {group.items && group.items.map((subItem, subIndex) => (
-                          <Link
-                            key={subIndex}
-                            href={subItem.href}
-                            className=" hover:bg-zinc-900 text-white transition duration-150 ease-out hover:ease-in rounded p-2 text-sm pl-4"
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                {item.subMenu &&
+                  openSubmenu === item.id &&
+                  typeof document !== "undefined" &&
+                  createPortal(
+                    <div
+                      ref={submenuRef}
+                      style={{
+                        position: "fixed",
+                        top: submenuPosition.top,
+                        left: submenuPosition.left,
+                        zIndex: 9999,
+                      }}
+                      className="w-64 overflow-hidden rounded-md border border-[#c93c3c] bg-[#DB4848] shadow-lg"
+                      onMouseEnter={() => handleMouseEnter(item.id)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {item.subMenu.map((group, groupIndex) => (
+                        <div key={groupIndex}>
+                          <div className="border-b border-white/20 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white">
+                            {group.title}
+                          </div>
+                          {group.items?.map((subItem, subIndex) => (
+                            <Link
+                              key={subIndex}
+                              href={subItem.href}
+                              className="block px-3 py-2.5 text-sm text-white transition-colors hover:bg-black/20"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>,
+                    document.body
+                  )}
               </div>
             ));
             })()}
