@@ -51,6 +51,16 @@ function getWardSelectionState(
   return "some";
 }
 
+function getAllSelectionState(allJobIds: string[], selected: Set<string>) {
+  if (!allJobIds.length) return "none";
+
+  const selectedCount = allJobIds.filter((id) => selected.has(id)).length;
+
+  if (!selectedCount) return "none";
+  if (selectedCount === allJobIds.length) return "all";
+  return "some";
+}
+
 export default function HmcWardFilterDrawer({
   monthIndex,
   availableDates,
@@ -160,6 +170,7 @@ export default function HmcWardFilterDrawer({
   }, [monthIndex, open, wardFilterIsoDates]);
 
   const draftSet = new Set(draftJobIds);
+  const allSelectionState = getAllSelectionState(allJobIds, draftSet);
 
   const toggleJob = (jobKey: string, checked: boolean) => {
     setDraftJobIds((current) => {
@@ -185,6 +196,10 @@ export default function HmcWardFilterDrawer({
 
       return [...next];
     });
+  };
+
+  const toggleAllJobs = (checked: boolean) => {
+    setDraftJobIds(checked ? [...allJobIds] : []);
   };
 
   const toggleWardExpanded = (wardKey: string) => {
@@ -279,6 +294,21 @@ export default function HmcWardFilterDrawer({
               </p>
             ) : (
               <div className="flex flex-col gap-2">
+                <label className="flex cursor-pointer items-center gap-3 rounded-md border bg-muted/20 px-3 py-2.5">
+                  <Checkbox
+                    checked={
+                      allSelectionState === "all"
+                        ? true
+                        : allSelectionState === "some"
+                          ? "indeterminate"
+                          : false
+                    }
+                    onCheckedChange={(checked) => toggleAllJobs(checked === true)}
+                    aria-label="Select all wards and jobs"
+                  />
+                  <span className="text-sm font-medium">Select all</span>
+                </label>
+
                 {draftWardGroups.map((ward) => {
                   const wardState = getWardSelectionState(ward, draftSet);
                   const isExpanded = expandedWards[ward.key] ?? true;
