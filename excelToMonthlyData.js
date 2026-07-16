@@ -146,32 +146,35 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
       const baseIdMatch = vehicleIdentifier.replace(/\s/g, '').toUpperCase().match(/GJ(\d{2})([A-Z]+)(\d{4})/);
       const normalizedShortId = baseIdMatch ? `GJ${baseIdMatch[1]}${baseIdMatch[2]}${baseIdMatch[3]}` : vehicleIdentifier.replace(/\s/g, '').toUpperCase().trim();
       const excelVehicleNum = vehicleIdentifier.match(/\d{4}/)?.[0];
+      const normalizedRouteCode = routeCode ? routeCode.replace(/\s+/g, '') : null;
+      const isStandardRoute = normalizedRouteCode && /^\d{2}-\d{2}-\d{4}$/.test(normalizedRouteCode);
+      const excelHasSpecialSuffix = /E[\s-]*1|W[\s-]*1/i.test(vehicleIdentifier);
       
-      for (const [templateVehicle, template] of vehicleMap.entries()) {
-        const templateNormalized = templateVehicle.replace(/\s/g, '').toUpperCase();
-        const templateVehicleNum = templateVehicle.match(/\d{4}/)?.[0];
-        
-        // Extract route code from template (format: XX-XX-XXXX)
-        const templateRouteMatch = templateVehicle.match(/(\d{2}-\d{2}-\d{4})/);
-        const templateRouteCode = templateRouteMatch ? templateRouteMatch[1] : null;
-        const routeVehicleNum = templateRouteCode ? templateRouteCode.split('-')[2] : null;
-        
-        // Priority 1: Match by route code (most specific)
-        if (routeCode && templateRouteCode && routeCode === templateRouteCode) {
-          // Also verify vehicle ID matches
-          const vehicleMatches = [
-            templateVehicle.includes(vehicleIdentifier.trim()),
-            templateNormalized.includes(normalizedShortId),
-            templateVehicleNum === excelVehicleNum
-          ];
-          if (vehicleMatches.some(m => m)) {
+      // Priority 1: Exact standard route code match (route is unique — do not require plate match)
+      if (isStandardRoute) {
+        for (const [templateVehicle] of vehicleMap.entries()) {
+          const templateRouteMatch = templateVehicle.match(/(\d{2}-\d{2}-\d{4})/);
+          const templateRouteCode = templateRouteMatch ? templateRouteMatch[1] : null;
+          if (templateRouteCode && templateRouteCode === normalizedRouteCode) {
             matchedVehicle = templateVehicle;
             break;
           }
         }
       }
       
-      // Priority 2: If no route code match, try other strategies
+      // Priority 1b: Special E-1 / W-1 suffix vehicles — match dedicated templates first
+      if (!matchedVehicle && excelHasSpecialSuffix && excelVehicleNum) {
+        for (const [templateVehicle] of vehicleMap.entries()) {
+          const templateNormalized = templateVehicle.replace(/\s/g, '').toUpperCase();
+          const templateHasSpecial = /E[\s-]*1|W[\s-]*1/i.test(templateVehicle);
+          if (templateHasSpecial && templateNormalized.includes(normalizedShortId)) {
+            matchedVehicle = templateVehicle;
+            break;
+          }
+        }
+      }
+      
+      // Priority 2: Fallback strategies — never cross-map onto a different standard route
       if (!matchedVehicle) {
         for (const [templateVehicle, template] of vehicleMap.entries()) {
           const templateNormalized = templateVehicle.replace(/\s/g, '').toUpperCase();
@@ -179,7 +182,17 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
           
           // Extract route code from template (format: XX-XX-XXXX)
           const routeMatch = templateVehicle.match(/(\d{2}-\d{2}-\d{4})/);
-          const routeVehicleNum = routeMatch ? routeMatch[1].split('-')[2] : null;
+          const templateRouteCode = routeMatch ? routeMatch[1] : null;
+          const routeVehicleNum = templateRouteCode ? templateRouteCode.split('-')[2] : null;
+          
+          // If Excel has a standard route, only allow fallbacks that don't collide with another route
+          if (isStandardRoute && templateRouteCode && templateRouteCode !== normalizedRouteCode) {
+            continue;
+          }
+          // Don't map a special-suffix Excel row onto a non-special template by plate alone
+          if (excelHasSpecialSuffix && templateRouteCode && !/E[\s-]*1|W[\s-]*1/i.test(templateVehicle)) {
+            continue;
+          }
           
           const matchStrategies = [
             templateVehicle === vehicleIdentifier.trim(),
