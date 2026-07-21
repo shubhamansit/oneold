@@ -1,7 +1,9 @@
-// Dynamic data loader — prefer API fetch in the browser so newly added jobs
-// appear in filters without a rebuild / stale webpack JSON import.
-// IMPORTANT: never use import(`./${name}.json`) — webpack would pull in ALL
-// data/*.json including corrupt backup files and break the build.
+// Zone data loader.
+// Uses explicit JSON imports only (never import(`./${name}.json`) — that makes
+ // webpack pull in corrupt backup files under data/ and break the build).
+//
+ // Do NOT fetch /api/data/* for these files in production: wastZone/eastZone are
+ // 45–70MB and exceed serverless response limits, which leaves Job Summary empty.
 
 let wastZoneCache: any[] | null = null;
 let eastZoneCache: any[] | null = null;
@@ -18,20 +20,9 @@ function ensureArray(data: any): any[] {
   return [];
 }
 
-async function fetchZoneFromApi(
-  zone: "wastZone" | "eastZone" | "general" | "brigrajsinh"
-): Promise<any[]> {
-  const res = await fetch(`/api/data/${zone}`, { cache: "no-store" });
-  if (!res.ok) {
-    throw new Error(`Failed to load ${zone}: ${res.status}`);
-  }
-  return ensureArray(await res.json());
-}
-
 async function importZoneJson(
   zone: "wastZone" | "eastZone" | "general" | "brigrajsinh"
 ): Promise<any[]> {
-  // Explicit imports only — do not glob data/*.json
   switch (zone) {
     case "wastZone": {
       const mod = await import("./wastZone.json");
@@ -61,10 +52,7 @@ async function loadZone(
   if (existing) return existing;
 
   try {
-    const data =
-      typeof window !== "undefined"
-        ? await fetchZoneFromApi(zone)
-        : await importZoneJson(zone);
+    const data = await importZoneJson(zone);
     setCache(data);
     return data;
   } catch (error) {
