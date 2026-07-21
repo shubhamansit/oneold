@@ -1,4 +1,8 @@
-// Dynamic data loader to avoid memory issues during build
+// Dynamic data loader — prefer API fetch in the browser so newly added jobs
+// appear in filters without a rebuild / stale webpack JSON import.
+// IMPORTANT: never use import(`./${name}.json`) — webpack would pull in ALL
+// data/*.json including corrupt backup files and break the build.
+
 let wastZoneCache: any[] | null = null;
 let eastZoneCache: any[] | null = null;
 let generalCache: any[] | null = null;
@@ -8,68 +12,113 @@ function ensureArray(data: any): any[] {
   if (Array.isArray(data)) {
     return data;
   }
-  if (data && typeof data === 'object' && 'default' in data) {
+  if (data && typeof data === "object" && "default" in data) {
     return Array.isArray(data.default) ? data.default : [];
   }
   return [];
 }
 
-export async function getWastZone(): Promise<any[]> {
-  if (wastZoneCache) return wastZoneCache;
-  
+async function fetchZoneFromApi(
+  zone: "wastZone" | "eastZone" | "general" | "brigrajsinh"
+): Promise<any[]> {
+  const res = await fetch(`/api/data/${zone}`, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(`Failed to load ${zone}: ${res.status}`);
+  }
+  return ensureArray(await res.json());
+}
+
+async function importZoneJson(
+  zone: "wastZone" | "eastZone" | "general" | "brigrajsinh"
+): Promise<any[]> {
+  // Explicit imports only — do not glob data/*.json
+  switch (zone) {
+    case "wastZone": {
+      const mod = await import("./wastZone.json");
+      return ensureArray(mod.default || mod);
+    }
+    case "eastZone": {
+      const mod = await import("./eastZone.json");
+      return ensureArray(mod.default || mod);
+    }
+    case "general": {
+      const mod = await import("./general.json");
+      return ensureArray(mod.default || mod);
+    }
+    case "brigrajsinh": {
+      const mod = await import("./brigrajsinh.json");
+      return ensureArray(mod.default || mod);
+    }
+  }
+}
+
+async function loadZone(
+  zone: "wastZone" | "eastZone" | "general" | "brigrajsinh",
+  getCache: () => any[] | null,
+  setCache: (data: any[]) => void
+): Promise<any[]> {
+  const existing = getCache();
+  if (existing) return existing;
+
   try {
-    const wastZoneData = await import('./wastZone.json');
-    const data = wastZoneData.default || wastZoneData;
-    wastZoneCache = ensureArray(data);
-    return wastZoneCache;
+    const data =
+      typeof window !== "undefined"
+        ? await fetchZoneFromApi(zone)
+        : await importZoneJson(zone);
+    setCache(data);
+    return data;
   } catch (error) {
-    console.error('Error loading wastZone data:', error);
+    console.error(`Error loading ${zone} data:`, error);
     return [];
   }
+}
+
+export async function getWastZone(): Promise<any[]> {
+  return loadZone(
+    "wastZone",
+    () => wastZoneCache,
+    (d) => {
+      wastZoneCache = d;
+    }
+  );
 }
 
 export async function getEastZone(): Promise<any[]> {
-  if (eastZoneCache) return eastZoneCache;
-  
-  try {
-    const eastZoneData = await import('./eastZone.json');
-    const data = eastZoneData.default || eastZoneData;
-    eastZoneCache = ensureArray(data);
-    return eastZoneCache;
-  } catch (error) {
-    console.error('Error loading eastZone data:', error);
-    return [];
-  }
+  return loadZone(
+    "eastZone",
+    () => eastZoneCache,
+    (d) => {
+      eastZoneCache = d;
+    }
+  );
 }
 
 export async function getGeneral(): Promise<any[]> {
-  if (generalCache) return generalCache;
-  
-  try {
-    const generalData = await import('./general.json');
-    const data = generalData.default || generalData;
-    generalCache = ensureArray(data);
-    return generalCache;
-  } catch (error) {
-    console.error('Error loading general data:', error);
-    return [];
-  }
+  return loadZone(
+    "general",
+    () => generalCache,
+    (d) => {
+      generalCache = d;
+    }
+  );
 }
 
 export async function getBRIGRAJSINH(): Promise<any[]> {
-  if (brigrajsinhCache) return brigrajsinhCache;
-  
-  try {
-    const brigrajsinhData = await import('./brigrajsinh.json');
-    const data = brigrajsinhData.default || brigrajsinhData;
-    brigrajsinhCache = ensureArray(data);
-    console.log('BRIGRAJSINH data loaded from file:', brigrajsinhCache.length, 'items');
-    console.log('BRIGRAJSINH sample data from file:', brigrajsinhCache.slice(0, 2));
-    return brigrajsinhCache;
-  } catch (error) {
-    console.error('Error loading BRIGRAJSINH data:', error);
-    return [];
-  }
+  return loadZone(
+    "brigrajsinh",
+    () => brigrajsinhCache,
+    (d) => {
+      brigrajsinhCache = d;
+    }
+  );
+}
+
+/** Clear in-memory caches (e.g. after data updates in the same session). */
+export function clearZoneDataCaches() {
+  wastZoneCache = null;
+  eastZoneCache = null;
+  generalCache = null;
+  brigrajsinhCache = null;
 }
 
 // For backward compatibility, export empty arrays initially

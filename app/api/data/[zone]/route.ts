@@ -4,11 +4,12 @@ import path from 'path';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { zone: string } }
+  { params }: { params: Promise<{ zone: string }> }
 ) {
+  let zone = '';
   try {
-    const { zone } = params;
-    
+    ({ zone } = await params);
+
     // Validate zone name
     const validZones = ['wastZone', 'eastZone', 'general', 'brigrajsinh'];
     if (!validZones.includes(zone)) {
@@ -17,28 +18,28 @@ export async function GET(
         { status: 400 }
       );
     }
-    
+
     // Read the JSON file from data directory
     const filePath = path.join(process.cwd(), 'data', `${zone}.json`);
-    
+
     if (!fs.existsSync(filePath)) {
       return NextResponse.json(
         { error: 'Zone data not found' },
         { status: 404 }
       );
     }
-    
+
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(fileContent);
-    
-    // Return with caching headers for better performance
+
+    // no-store so newly added jobs appear in filters without waiting for CDN/browser cache
     return NextResponse.json(data, {
       headers: {
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        'Cache-Control': 'no-store',
       },
     });
   } catch (error) {
-    console.error(`Error loading zone data for ${params.zone}:`, error);
+    console.error(`Error loading zone data for ${zone || 'unknown'}:`, error);
     return NextResponse.json(
       { error: 'Failed to load zone data' },
       { status: 500 }
