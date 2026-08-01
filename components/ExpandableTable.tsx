@@ -88,7 +88,7 @@ export default function ExpandableTable({ data }: { data: any[] }) {
   }
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="w-full">
       <Table>
         <TableHeader>
           <TableRow>
