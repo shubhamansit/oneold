@@ -92,6 +92,7 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
     const daysInMonth = new Date(year, month, 0).getDate();
     
     const skippedRows = [];
+    let lastDayWithData = 0; // last Excel day column that has any value (partial months)
     // Skip header row and process data rows
     for (let i = 1; i < jsonData.length; i++) {
       const row = jsonData[i];
@@ -332,6 +333,7 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
           let missedCount = 0;
           if (missedValue !== null && missedValue !== undefined && missedValue !== '') {
             missedCount = parseInt(missedValue) || 0;
+            if (day > lastDayWithData) lastDayWithData = day;
           }
           
           dailyMissedCheckpoints.push(missedCount);
@@ -365,7 +367,14 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
     console.log(`\n📊 Successfully extracted missed checkpoint data for ${Object.keys(missedCheckpointData).length} vehicles`);
     console.log(`📊 Extracted T-POI for ${Object.keys(tpoiData).length} Excel vehicles`);
     console.log(`📊 Mapped T-POI to ${Object.keys(tpoiDataByTemplate).length} template vehicles`);
-    return { missedCheckpointData, tpoiData: tpoiDataByTemplate, excelTpoiData: tpoiData, skippedRows };
+    console.log(`📅 Last Excel day with data: ${lastDayWithData || daysInMonth}`);
+    return {
+      missedCheckpointData,
+      tpoiData: tpoiDataByTemplate,
+      excelTpoiData: tpoiData,
+      skippedRows,
+      lastDayWithData: lastDayWithData || daysInMonth,
+    };
     
   } catch (error) {
     console.error('❌ Error reading Excel file:', error);
@@ -374,7 +383,7 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
 }
 
 // Function to generate monthly data using actual missed checkpoint data and T-POI values
-function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData = {}) {
+function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData = {}, lastDayWithData = null) {
   try {
     console.log(`🔧 Generating monthly data for ${year}-${month.toString().padStart(2, '0')}...`);
     
@@ -382,21 +391,35 @@ function generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheck
     const vehicleTemplatesData = fs.readFileSync('vehicleTemplates.json', 'utf8');
     const vehicleTemplates = JSON.parse(vehicleTemplatesData);
     
-    // Get number of days in the month
+    // Get number of days in the month (cap at last Excel day so empty future days are not invented)
     const daysInMonth = new Date(year, month, 0).getDate();
+    const daysToGenerate =
+      lastDayWithData && lastDayWithData > 0
+        ? Math.min(daysInMonth, lastDayWithData)
+        : daysInMonth;
+    if (daysToGenerate < daysInMonth) {
+      console.log(`📅 Partial month: generating days 1–${daysToGenerate} only (Excel has no later days)`);
+    }
     
     // Array to store all monthly data
     const monthlyData = [];
     
-    // Generate data for each vehicle
-    vehicleTemplates.forEach(template => {
+    // Generate data for each vehicle that appears in the Excel mapping
+    const vehiclesToGenerate = vehicleTemplates.filter(
+      (t) => missedCheckpointData[t.Vehicle] || tpoiData[t.Vehicle] != null
+    );
+    const templatesForLoop = vehiclesToGenerate.length
+      ? vehiclesToGenerate
+      : vehicleTemplates;
+
+    templatesForLoop.forEach(template => {
       const vehicleName = template.Vehicle;
       
       // Get missed checkpoint pattern for this vehicle
       const missedPattern = missedCheckpointData[vehicleName] || new Array(daysInMonth).fill(0);
       
-      // Generate data for each day of the month
-      for (let day = 1; day <= daysInMonth; day++) {
+      // Generate data for each day present in Excel
+      for (let day = 1; day <= daysToGenerate; day++) {
         // Format date strings
         const dateStr = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
         const dateTimeStr = `${dateStr} 23:30:00`;
@@ -501,7 +524,7 @@ function processExcelToMonthlyData(excelFilePath, year, month) {
     console.log(`📅 Generating data for ${year}-${month.toString().padStart(2, '0')}`);
     
     // Step 1: Read missed checkpoint data and T-POI from Excel
-    const { missedCheckpointData, tpoiData, excelTpoiData } = readMissedCheckpointsFromExcel(excelFilePath, year, month);
+    const { missedCheckpointData, tpoiData, excelTpoiData, lastDayWithData } = readMissedCheckpointsFromExcel(excelFilePath, year, month);
     
     if (Object.keys(missedCheckpointData).length === 0) {
       console.error('❌ No missed checkpoint data found in Excel file');
@@ -512,7 +535,7 @@ function processExcelToMonthlyData(excelFilePath, year, month) {
     console.log(`📊 Total Excel vehicles with T-POI: ${Object.keys(excelTpoiData || {}).length}`);
     
     // Step 2: Generate monthly data using actual missed checkpoint data and T-POI values
-    const monthlyData = generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData);
+    const monthlyData = generateMonthlyDataWithActualMissedCheckpoints(year, month, missedCheckpointData, tpoiData, lastDayWithData);
     
     if (monthlyData.length === 0) {
       console.error('❌ Failed to generate monthly data');
