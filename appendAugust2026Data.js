@@ -149,7 +149,9 @@ function appendAugust2026Data() {
         const matchedVehicle = pickMonthlyVehicle(jobName, augustVehicleMap);
         if (!matchedVehicle) {
           unmatchedJobs.push({ zone: zoneName, jobName });
-          updatedRecord.more_details = Array.from(existingDates.values());
+          updatedRecord.more_details = Array.from(existingDates.values()).sort((a, b) =>
+            String(a.Date || '').localeCompare(String(b.Date || ''))
+          );
           return updatedRecord;
         }
 
@@ -164,7 +166,9 @@ function appendAugust2026Data() {
           totalAppended++;
         });
 
-        updatedRecord.more_details = Array.from(existingDates.values());
+        updatedRecord.more_details = Array.from(existingDates.values()).sort((a, b) =>
+          String(a.Date || '').localeCompare(String(b.Date || ''))
+        );
         return updatedRecord;
       });
 
