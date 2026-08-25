@@ -30,7 +30,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "cookies-next/client";
-import { isDaywiseDistanceUser, isHmcUser } from "@/lib/authUsers";
+import { isDaywiseDistanceUser, isHmcUser, isMorbiUser } from "@/lib/authUsers";
 
 interface customeJwtPayload extends JwtPayload {
   email: string;
@@ -261,6 +261,18 @@ function AppSidebarContent({
                       ],
                     },
                   ]
+                : isMorbiUser(email)
+                ? [
+                    {
+                      title: "Reports",
+                      items: [
+                        {
+                          name: "Route Detail Summary",
+                          href: "/morbi/reports",
+                        },
+                      ],
+                    },
+                  ]
                 : isDaywiseDistanceUser(email)
                 ? [
                     {
@@ -330,7 +342,7 @@ function AppSidebarContent({
 
               const menuItems = isDaywiseDistanceUser(email)
                 ? []
-                : isHmcUser(email)
+                : isHmcUser(email) || isMorbiUser(email)
                 ? [
                     {
                       id: "menu_03",
@@ -379,7 +391,21 @@ function AppSidebarContent({
                     asChild
                     className="flex h-20 flex-col items-center justify-center"
                   >
-                    <Button variant="ghost" className="h-full w-full">
+                    <Button
+                      variant="ghost"
+                      className={[
+                        "h-full w-full",
+                        item.subMenu?.some((group) =>
+                          group.items?.some(
+                            (subItem) =>
+                              pathname === subItem.href ||
+                              pathname.startsWith(`${subItem.href}/`)
+                          )
+                        )
+                          ? "bg-[#DB4848]/10 text-[#DB4848]"
+                          : "",
+                      ].join(" ")}
+                    >
                       <item.icon className="mb-1 h-6 w-6" />
                       <span className="text-xs">{item.title}</span>
                     </Button>
@@ -406,15 +432,26 @@ function AppSidebarContent({
                           <div className="border-b border-white/20 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-white">
                             {group.title}
                           </div>
-                          {group.items?.map((subItem, subIndex) => (
-                            <Link
-                              key={subIndex}
-                              href={subItem.href}
-                              className="block px-3 py-2.5 text-sm text-white transition-colors hover:bg-black/20"
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
+                          {group.items?.map((subItem, subIndex) => {
+                            const isSelected =
+                              pathname === subItem.href ||
+                              pathname.startsWith(`${subItem.href}/`);
+                            return (
+                              <Link
+                                key={subIndex}
+                                href={subItem.href}
+                                aria-current={isSelected ? "page" : undefined}
+                                className={[
+                                  "block px-3 py-2.5 text-sm text-white transition-colors",
+                                  isSelected
+                                    ? "bg-black/30 font-semibold"
+                                    : "hover:bg-black/20",
+                                ].join(" ")}
+                              >
+                                {subItem.name}
+                              </Link>
+                            );
+                          })}
                         </div>
                       ))}
                     </div>,
@@ -427,7 +464,8 @@ function AppSidebarContent({
         </SidebarContent>
         <SidebarFooter className="mt-auto">
           {isDaywiseDistanceUser(activeData.email) ||
-          isHmcUser(activeData.email) ? (
+          isHmcUser(activeData.email) ||
+          isMorbiUser(activeData.email) ? (
             <div className="flex flex-col items-center gap-2 p-2">
               <Button
                 variant="ghost"

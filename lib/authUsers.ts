@@ -17,12 +17,22 @@ export const HMC_ROUTE = "/jobdetails";
 
 export const HMC_WELCOME_ROUTE = "/welcome";
 
+export const MORBI_USERS = ["mmcshreeji@gmail.com"] as const;
+
+export const MORBI_WELCOME_ROUTE = "/morbi";
+
+export const MORBI_REPORTS_ROUTE = "/morbi/reports";
+
 export function isDaywiseDistanceUser(email?: string | null) {
   return !!email && DAYWISE_DISTANCE_USERS.some((user) => user === email.toLowerCase());
 }
 
 export function isHmcUser(email?: string | null) {
   return !!email && HMC_USERS.some((user) => user === email.toLowerCase());
+}
+
+export function isMorbiUser(email?: string | null) {
+  return !!email && MORBI_USERS.some((user) => user === email.toLowerCase());
 }
 
 export function getLoginRedirectForEmail(email: string) {
@@ -36,6 +46,10 @@ export function getLoginRedirectForEmail(email: string) {
     return HMC_WELCOME_ROUTE;
   }
 
+  if (isMorbiUser(normalizedEmail)) {
+    return MORBI_WELCOME_ROUTE;
+  }
+
   return EXISTING_USER_ROUTES[normalizedEmail] || "/";
 }
 
@@ -46,6 +60,7 @@ export function canAccessRoute(email: string | null | undefined, pathname: strin
   const isDaywiseRoute = pathname.startsWith(DAYWISE_DISTANCE_ROUTE);
   const isHmcRoute =
     pathname === HMC_WELCOME_ROUTE || pathname.startsWith(HMC_ROUTE);
+  const isMorbiRoute = pathname === MORBI_WELCOME_ROUTE || pathname.startsWith(`${MORBI_WELCOME_ROUTE}/`);
 
   if (isDaywiseDistanceUser(normalizedEmail)) {
     return isDaywiseRoute;
@@ -55,9 +70,14 @@ export function canAccessRoute(email: string | null | undefined, pathname: strin
     return isHmcRoute;
   }
 
+  if (isMorbiUser(normalizedEmail)) {
+    return isMorbiRoute;
+  }
+
   return (
     !isDaywiseRoute &&
     !isHmcRoute &&
+    !isMorbiRoute &&
     normalizedEmail in EXISTING_USER_ROUTES
   );
 }
