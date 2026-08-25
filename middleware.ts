@@ -54,5 +54,7 @@ export const config = {
     "/daywisedistance/:path*",
     "/jobdetails/:path*",
     "/welcome",
+    "/morbi",
+    "/morbi/:path*",
   ],
 };
