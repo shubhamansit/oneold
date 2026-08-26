@@ -49,9 +49,13 @@ const COLUMNS: { key: keyof MorbiRouteDetailRow; label: string }[] = [
 
 const ALL_DATA = morbiRouteData as MorbiRouteDetailRow[];
 const MONTH_OPTIONS = listMorbiMonths(ALL_DATA);
-const DEFAULT_EXPANDED = MONTH_OPTIONS[0]?.value
-  ? [MONTH_OPTIONS[0].value]
-  : [];
+/** Expand the earliest month by default (June before July). */
+const DEFAULT_EXPANDED = (() => {
+  const chronological = [...MONTH_OPTIONS].sort((a, b) =>
+    a.value.localeCompare(b.value)
+  );
+  return chronological[0]?.value ? [chronological[0].value] : [];
+})();
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -145,7 +149,7 @@ function groupRowsByMonth(rows: MorbiRouteDetailRow[]) {
   }
 
   return [...groups.entries()]
-    .sort((a, b) => b[0].localeCompare(a[0]))
+    .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([monthKey, monthRows]) => ({
       monthKey,
       label: formatMorbiMonthLabel(monthKey),
