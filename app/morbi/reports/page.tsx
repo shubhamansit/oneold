@@ -14,12 +14,14 @@ import MorbiFiltersForm, {
 import { isMorbiUser } from "@/lib/authUsers";
 import {
   formatMorbiMonthLabel,
+  isMorbiCanonicalRow,
   listMorbiMonths,
   morbiDateKey,
   morbiMonthKey,
   parseMorbiStartDate,
   type MorbiRouteDetailRow,
 } from "@/lib/morbiTypes";
+import { exportMorbiRowsToXlsx } from "@/lib/exportMorbiXlsx";
 import morbiRouteData from "@/data/morbi/routeDetailSummary.json";
 
 interface AuthPayload {
@@ -48,7 +50,8 @@ const COLUMNS: { key: keyof MorbiRouteDetailRow; label: string }[] = [
 ];
 
 const ALL_DATA = morbiRouteData as MorbiRouteDetailRow[];
-const MONTH_OPTIONS = listMorbiMonths(ALL_DATA);
+const CANONICAL_DATA = ALL_DATA.filter((r) => isMorbiCanonicalRow(r));
+const MONTH_OPTIONS = listMorbiMonths(CANONICAL_DATA);
 /** Expand the earliest month by default (June before July). */
 const DEFAULT_EXPANDED = (() => {
   const chronological = [...MONTH_OPTIONS].sort((a, b) =>
@@ -77,9 +80,14 @@ function filterMorbiRows(
   appliedFormData: MorbiFilterFormData,
   routeSearch: string,
   vehicleSearch: string,
-  appliedDateRange: DateRange | undefined
+  appliedDateRange: DateRange | undefined,
+  options?: { mode?: "canonical" | "report" }
 ) {
-  let filtered = rows;
+  const mode = options?.mode ?? "canonical";
+  let filtered =
+    mode === "report"
+      ? [...rows]
+      : rows.filter((r) => isMorbiCanonicalRow(r));
 
   if (appliedFormData.town.value !== "All") {
     filtered = filtered.filter((r) => r.Town === appliedFormData.town.value);
@@ -118,8 +126,13 @@ function filterMorbiRows(
     const to = endOfDay(
       appliedDateRange.to ?? appliedDateRange.from
     ).getTime();
+
     filtered = filtered.filter((r) => {
-      const parsed = parseMorbiStartDate(r["Start Date"]);
+      const dateStr =
+        mode === "report"
+          ? r["Report Date"] || r["Start Date"]
+          : r["Start Date"];
+      const parsed = parseMorbiStartDate(dateStr);
       if (!parsed) return false;
       const t = startOfDay(parsed).getTime();
       return t >= from && t <= to;
@@ -127,15 +140,46 @@ function filterMorbiRows(
   }
 
   return [...filtered].sort((a, b) => {
-    const da = morbiDateKey(a["Start Date"]) || "";
-    const db = morbiDateKey(b["Start Date"]) || "";
+    const da =
+      morbiDateKey(
+        mode === "report"
+          ? a["Report Date"] || a["Start Date"]
+          : a["Start Date"]
+      ) || "";
+    const db =
+      morbiDateKey(
+        mode === "report"
+          ? b["Report Date"] || b["Start Date"]
+          : b["Start Date"]
+      ) || "";
     if (da !== db) return da.localeCompare(db);
+    const sa = Number(a.Seq);
+    const sb = Number(b.Seq);
+    if (Number.isFinite(sa) && Number.isFinite(sb) && sa !== sb) return sa - sb;
     return String(a["Route Name"] || "").localeCompare(
       String(b["Route Name"] || ""),
       undefined,
       { numeric: true }
     );
   });
+}
+
+function rowsForExport(
+  rows: MorbiRouteDetailRow[],
+  appliedFormData: MorbiFilterFormData,
+  routeSearch: string,
+  vehicleSearch: string,
+  appliedDateRange: DateRange | undefined
+) {
+  // Export always uses report-day rows so each day sheet matches the source Excel.
+  return filterMorbiRows(
+    rows,
+    appliedFormData,
+    routeSearch,
+    vehicleSearch,
+    appliedDateRange,
+    { mode: "report" }
+  );
 }
 
 function groupRowsByMonth(rows: MorbiRouteDetailRow[]) {
@@ -264,7 +308,7 @@ export default function MorbiReportsPage() {
 
       <main className="w-full px-1 py-4">
         <div className="mb-3 text-sm text-muted-foreground">
-          Showing {filteredData.length} of {ALL_DATA.length} day records
+          Showing {filteredData.length} of {CANONICAL_DATA.length} day records
           {monthGroups.length
             ? ` · ${monthGroups.length} month${monthGroups.length === 1 ? "" : "s"}`
             : ""}
@@ -327,9 +371,22 @@ export default function MorbiReportsPage() {
           allData={ALL_DATA}
           appliedFormData={appliedFormData}
           appliedDateRange={appliedDateRange}
+          resolveExportRows={(form, dates) =>
+            rowsForExport(ALL_DATA, form, routeSearch, vehicleSearch, dates)
+          }
           onApply={(nextForm, nextDates) => {
             setAppliedFormData(nextForm);
             setAppliedDateRange(nextDates);
+          }}
+          onExport={async (form, dates) => {
+            const rows = rowsForExport(
+              ALL_DATA,
+              form,
+              routeSearch,
+              vehicleSearch,
+              dates
+            );
+            await exportMorbiRowsToXlsx(rows);
           }}
           onClose={() => setIsFilterOpen(false)}
         />

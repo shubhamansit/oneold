@@ -139,15 +139,23 @@ function parseWorkbook(filePath) {
 
 function sortRows(rows) {
   return [...rows].sort((a, b) => {
+    const ra = parseDateKey(a["Report Date"]) || parseDateKey(a["Start Date"]) || "";
+    const rb = parseDateKey(b["Report Date"]) || parseDateKey(b["Start Date"]) || "";
+    if (ra !== rb) return ra.localeCompare(rb);
+    const sa = Number(a.Seq);
+    const sb = Number(b.Seq);
+    if (Number.isFinite(sa) && Number.isFinite(sb) && sa !== sb) return sa - sb;
     const da = parseDateKey(a["Start Date"]) || "";
     const db = parseDateKey(b["Start Date"]) || "";
-    if (da !== db) return da.localeCompare(db);
-    return String(a["Route Name"] || "").localeCompare(
-      String(b["Route Name"] || ""),
-      undefined,
-      { numeric: true }
-    );
+    return da.localeCompare(db);
   });
+}
+
+function rowReportMonth(row) {
+  return (
+    monthKeyFromDateKey(parseDateKey(row["Report Date"])) ||
+    monthKeyFromDateKey(parseDateKey(row["Start Date"]))
+  );
 }
 
 function main() {
@@ -188,22 +196,26 @@ function main() {
   const uniqueFiles = [...byDay.values()];
 
   const monthRows = [];
+  let seq = 0;
   for (const file of uniqueFiles) {
     const rows = parseWorkbook(file.full);
+    const [y, m, d] = file.dateKey.split("-");
+    const reportDate = `${d}-${m}-${y}`; // DD-MM-YYYY = daily report file date
+
+    let sameDay = 0;
+    let spillover = 0;
     for (const row of rows) {
-      const rowKey = parseDateKey(row["Start Date"]);
-      if (!rowKey || monthKeyFromDateKey(rowKey) !== targetMonth) {
-        const [y, m, d] = file.dateKey.split("-");
-        row["Start Date"] = `${d}-${m}-${y}`;
+      if (!parseDateKey(row["Start Date"])) {
+        row["Start Date"] = reportDate;
       }
+      row["Report Date"] = reportDate;
+      row.Seq = seq++;
+      if (row["Start Date"] === reportDate) sameDay++;
+      else spillover++;
+      monthRows.push(row);
     }
-    // Keep only rows that belong to the target month after normalization
-    const kept = rows.filter(
-      (r) => monthKeyFromDateKey(parseDateKey(r["Start Date"])) === targetMonth
-    );
-    monthRows.push(...kept);
     console.log(
-      `${file.dateKey}  ${String(kept.length).padStart(3)} rows  ${file.name}`
+      `${file.dateKey}  ${String(rows.length).padStart(3)} rows  (${sameDay} same-day, ${spillover} spillover)  ${file.name}`
     );
   }
 
@@ -214,51 +226,46 @@ function main() {
   }
 
   const keptOtherMonths = existing.filter(
-    (r) => monthKeyFromDateKey(parseDateKey(r["Start Date"])) !== targetMonth
+    (r) => rowReportMonth(r) !== targetMonth
   );
   const merged = sortRows([...keptOtherMonths, ...monthRows]);
 
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(merged, null, 2));
 
-  const dates = [
-    ...new Set(
-      monthRows
-        .map((r) => parseDateKey(r["Start Date"]))
-        .filter(Boolean)
-        .sort()
-    ),
-  ];
+  const reportDays = [
+    ...new Set(monthRows.map((r) => r["Report Date"]).filter(Boolean)),
+  ].sort((a, b) => {
+    const pa = parseDateKey(a) || "";
+    const pb = parseDateKey(b) || "";
+    return pa.localeCompare(pb);
+  });
   const months = [
-    ...new Set(
-      merged
-        .map((r) => monthKeyFromDateKey(parseDateKey(r["Start Date"])))
-        .filter(Boolean)
-        .sort()
-    ),
+    ...new Set(merged.map((r) => rowReportMonth(r)).filter(Boolean).sort()),
   ];
 
   console.log("\nSaved", OUT_FILE);
   console.log(
-    `Month ${targetMonth}: ${uniqueFiles.length} days, ${monthRows.length} rows`
+    `Month ${targetMonth}: ${uniqueFiles.length} report days, ${monthRows.length} rows (includes spillover)`
   );
-  if (dates.length) {
-    console.log(`Day span: ${dates[0]} … ${dates[dates.length - 1]}`);
+  if (reportDays.length) {
+    console.log(`Report span: ${reportDays[0]} … ${reportDays[reportDays.length - 1]}`);
   }
   console.log("All months in JSON:", months.join(", "));
   console.log("Total rows:", merged.length);
 
-  // Report missing calendar days in target month
   const [y, m] = targetMonth.split("-").map(Number);
   const daysInMonth = new Date(y, m, 0).getDate();
-  const present = new Set(dates.map((d) => Number(d.slice(-2))));
+  const present = new Set(
+    reportDays.map((d) => Number(String(d).slice(0, 2)))
+  );
   const missing = [];
   for (let d = 1; d <= daysInMonth; d++) {
     if (!present.has(d)) missing.push(String(d).padStart(2, "0"));
   }
   if (missing.length) {
     console.log(
-      `Missing ${targetMonth} days (no matching file):`,
+      `Missing ${targetMonth} report files:`,
       missing.join(", ")
     );
   }
