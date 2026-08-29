@@ -286,9 +286,6 @@ export default function MorbiFiltersForm({
 
         <div className="flex flex-1 flex-col gap-4">
           <Label>Date Range</Label>
-          <p className="text-xs text-muted-foreground">
-            Dates in data use DD-MM-YYYY (e.g. 11-06-2026 = 11 June 2026).
-          </p>
           <Calendar
             key={`morbi-cal-${open}-${defaultMonth.getFullYear()}-${defaultMonth.getMonth()}`}
             mode="range"
