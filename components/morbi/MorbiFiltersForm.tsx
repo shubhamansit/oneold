@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import SelectBox from "react-select";
-import { X } from "lucide-react";
+import { Download, X } from "lucide-react";
 import { DateRange } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -43,7 +43,20 @@ type Props = {
   appliedFormData: MorbiFilterFormData;
   appliedDateRange?: DateRange;
   /** Commit draft filters to the table. */
-  onApply: (formData: MorbiFilterFormData, dateRange: DateRange | undefined) => void;
+  onApply: (
+    formData: MorbiFilterFormData,
+    dateRange: DateRange | undefined
+  ) => void;
+  /** Build the row set that will be exported for the given filters. */
+  resolveExportRows: (
+    formData: MorbiFilterFormData,
+    dateRange: DateRange | undefined
+  ) => MorbiRouteDetailRow[];
+  /** Export using the draft filters currently selected in the drawer. */
+  onExport: (
+    formData: MorbiFilterFormData,
+    dateRange: DateRange | undefined
+  ) => void | Promise<void>;
   onClose: () => void;
   open: boolean;
 };
@@ -75,6 +88,8 @@ export default function MorbiFiltersForm({
   appliedFormData,
   appliedDateRange,
   onApply,
+  resolveExportRows,
+  onExport,
   onClose,
   open,
 }: Props) {
@@ -83,6 +98,7 @@ export default function MorbiFiltersForm({
   const [draftDateRange, setDraftDateRange] = useState<DateRange | undefined>(
     appliedDateRange
   );
+  const [isExporting, setIsExporting] = useState(false);
 
   // Sync draft from applied values whenever the drawer opens
   useEffect(() => {
@@ -90,6 +106,24 @@ export default function MorbiFiltersForm({
     setDraftForm(appliedFormData);
     setDraftDateRange(appliedDateRange);
   }, [open, appliedFormData, appliedDateRange]);
+
+  const hasExportSelection = useMemo(() => {
+    const hasDate = Boolean(draftDateRange?.from);
+    const hasDropdown =
+      draftForm.town.value !== "All" ||
+      draftForm.zone.value !== "All" ||
+      draftForm.ward.value !== "All" ||
+      draftForm.routeName.value !== "All" ||
+      draftForm.status.value !== "All";
+    return hasDate || hasDropdown;
+  }, [draftForm, draftDateRange]);
+
+  const exportRowCount = useMemo(() => {
+    if (!hasExportSelection) return 0;
+    return resolveExportRows(draftForm, draftDateRange).length;
+  }, [resolveExportRows, draftForm, draftDateRange, hasExportSelection]);
+
+  const canExport = hasExportSelection && exportRowCount > 0 && !isExporting;
 
   const defaultMonth = useMemo(
     () => draftDateRange?.from ?? earliestDataMonth(allData),
@@ -179,9 +213,21 @@ export default function MorbiFiltersForm({
     onClose();
   };
 
+  const handleExport = async () => {
+    if (!hasExportSelection || isExporting) return;
+    setIsExporting(true);
+    try {
+      // Keep table in sync with what we export
+      onApply(draftForm, draftDateRange);
+      await onExport(draftForm, draftDateRange);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   return (
-    <div className="flex h-full flex-col overflow-y-auto">
-      <div className="flex items-center justify-between border-b p-4">
+    <div className="flex h-full flex-col">
+      <div className="flex shrink-0 items-center justify-between border-b p-4">
         <h2 className="text-lg font-semibold">Filters</h2>
         <Button variant="ghost" size="icon" onClick={onClose}>
           <X className="h-4 w-4" />
@@ -189,7 +235,7 @@ export default function MorbiFiltersForm({
         </Button>
       </div>
 
-      <div className="flex gap-4 p-4">
+      <div className="flex min-h-0 flex-1 gap-4 overflow-y-auto p-4">
         <div className="flex w-72 flex-col gap-4">
           <Label>Town</Label>
           <SelectBox
@@ -240,9 +286,6 @@ export default function MorbiFiltersForm({
 
         <div className="flex flex-1 flex-col gap-4">
           <Label>Date Range</Label>
-          <p className="text-xs text-muted-foreground">
-            Dates in data use DD-MM-YYYY (e.g. 11-06-2026 = 11 June 2026).
-          </p>
           <Calendar
             key={`morbi-cal-${open}-${defaultMonth.getFullYear()}-${defaultMonth.getMonth()}`}
             mode="range"
@@ -252,12 +295,28 @@ export default function MorbiFiltersForm({
             className="rounded-md border"
             numberOfMonths={1}
           />
-          <div className="flex gap-2">
-            <Button className="w-full bg-[#DB4848]" onClick={handleApply}>
-              Apply
-            </Button>
-            <Button variant="outline" className="w-full" onClick={handleReset}>
-              Reset
+
+          <div className="mt-auto space-y-2 pt-4">
+            <div className="flex gap-2">
+              <Button className="w-full bg-[#DB4848]" onClick={handleApply}>
+                Apply
+              </Button>
+              <Button variant="outline" className="w-full" onClick={handleReset}>
+                Reset
+              </Button>
+            </div>
+            <Button
+              variant="outline"
+              className="w-full gap-2"
+              onClick={handleExport}
+              disabled={!canExport}
+            >
+              <Download className="h-4 w-4" />
+              {isExporting
+                ? "Exporting..."
+                : hasExportSelection
+                  ? `Export XLSX (${exportRowCount} records)`
+                  : "Export XLSX"}
             </Button>
           </div>
         </div>

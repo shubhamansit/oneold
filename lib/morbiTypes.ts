@@ -6,6 +6,10 @@ export type MorbiRouteDetailRow = {
   "Route Type": string;
   Status: string;
   "Start Date": string;
+  /** Daily Excel report date (filename day). May differ from Start Date for spillover rows. */
+  "Report Date"?: string;
+  /** Stable order within imported Excel files. */
+  Seq?: number;
   Vehicle: string;
   "Start Time": string;
   "End Time": string;
@@ -18,6 +22,13 @@ export type MorbiRouteDetailRow = {
   "Total Visited POIs": number;
   "Missed POIs": number;
 };
+
+/** Canonical day rows: belong to the report dated the same as Start Date. */
+export function isMorbiCanonicalRow(row: MorbiRouteDetailRow) {
+  const report = String(row["Report Date"] || "").trim();
+  if (!report) return true;
+  return report === String(row["Start Date"] || "").trim();
+}
 
 /** Parse DD-MM-YYYY into a local Date at midnight, or null if invalid. */
 export function parseMorbiStartDate(dateStr: string): Date | null {
