@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Source Excel / import dumps (app uses processed JSON only)
+*.xlsx
+*.xls
+public/hmc-excel/
+public/MMC_June/
+public/MMC_July/
+public/MMC_*/
+
+# Local data backups (not needed for deploy)
+data/backups/
