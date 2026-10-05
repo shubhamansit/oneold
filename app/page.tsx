@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,6 +20,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import jwt from "jsonwebtoken";
+import { Loader2 } from "lucide-react";
 import { getLoginRedirectForEmail } from "@/lib/authUsers";
 
 // Set to true to disable login and show "contact administrator" message
@@ -31,6 +33,7 @@ const formSchema = z.object({
 
 const LoginPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,35 +44,43 @@ const LoginPage = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { email, password } = values;
+    setIsLoading(true);
 
-    // Specific hard-coded credentials for login
-    const normalizedEmail = email.toLowerCase();
-    const isValidLogin =
-      (normalizedEmail === "bhavnagar@gmail.com" &&
-        password === "Bhadresh@1234") ||
-      (normalizedEmail === "bmcswippr@gmail.com" &&
-        password == "Ans@1234") ||
-      (normalizedEmail === "osc@swm.com" && password === "98765432") ||
-      (normalizedEmail === "nasikwaste123@gmail.com" &&
-        password === "Nasik@1212") ||
-      (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@") ||
-      (normalizedEmail === "hmc@gmail.com" &&
-        password === "Corporation@hisar2025") ||
-      (normalizedEmail === "mmcshreeji@gmail.com" &&
-        password === "Ans@123");
+    try {
+      // Specific hard-coded credentials for login
+      const normalizedEmail = email.toLowerCase();
+      const isValidLogin =
+        (normalizedEmail === "bhavnagar@gmail.com" &&
+          password === "Bhadresh@1234") ||
+        (normalizedEmail === "bmcswippr@gmail.com" &&
+          password == "Ans@1234") ||
+        (normalizedEmail === "osc@swm.com" && password === "98765432") ||
+        (normalizedEmail === "nasikwaste123@gmail.com" &&
+          password === "Nasik@1212") ||
+        (normalizedEmail === "nmc123@gmail.com" && password === "Nmc1234@") ||
+        (normalizedEmail === "hmc@gmail.com" &&
+          password === "Corporation@hisar2025") ||
+        (normalizedEmail === "mmcshreeji@gmail.com" &&
+          password === "Ans@123");
 
-    if (isValidLogin) {
-      const token = jwt.sign({ email: normalizedEmail }, "SUPERSECRET");
+      if (isValidLogin) {
+        const token = jwt.sign({ email: normalizedEmail }, "SUPERSECRET");
 
-      Cookies.set("isAuthenticated", token, {
-        expires: 1,
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      });
-      toast.success("Login Successful");
-      router.push(getLoginRedirectForEmail(normalizedEmail));
-    } else {
-      toast.error("Invalid email or password");
+        Cookies.set("isAuthenticated", token, {
+          expires: 1,
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+        });
+        toast.success("Login Successful");
+        router.push(getLoginRedirectForEmail(normalizedEmail));
+        // Keep loader until navigation completes
+      } else {
+        toast.error("Invalid email or password");
+        setIsLoading(false);
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+      setIsLoading(false);
     }
   }
 
@@ -124,8 +135,15 @@ const LoginPage = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
-                  Login
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Logging in...
+                    </>
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
               </form>
             </Form>
