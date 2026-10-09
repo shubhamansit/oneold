@@ -258,11 +258,22 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
           }
         }
         
-        // Create new template - use baseIdMatch to support "GJ 06 BX 0309 E1" style IDs
+        // Create new template - support GJ plates and C-XXXX style IDs (e.g. C-6866)
         const vehicleMatch = vehicleIdentifier.replace(/\s/g, '').match(/GJ(\d{2})([A-Z]+)(\d{4})/i) || vehicleIdentifier.match(/GJ\s*(\d{2})\s*([A-Z]+)\s*(\d{4})/i);
-        if (vehicleMatch && finalRouteCode) {
-          const [, district, type, number] = vehicleMatch;
-          const newVehicleName = `GJ ${district} ${type} ${number} RUT ${finalRouteCode}`;
+        const cMatch = vehicleIdentifier.trim().match(/^C-(\d{4})$/i);
+        if ((vehicleMatch || cMatch) && finalRouteCode) {
+          let newVehicleName;
+          if (vehicleMatch) {
+            const [, district, type, number] = vehicleMatch;
+            newVehicleName = `GJ ${district} ${type} ${number} RUT ${finalRouteCode}`;
+          } else {
+            newVehicleName = `C-${cMatch[1]} RUT ${finalRouteCode}`;
+            if (!similarTemplate) {
+              similarTemplate = vehicleTemplates.find(
+                (t) => t.Vehicle && /\d{2}-\d{2}-\d{4}/.test(t.Vehicle)
+              );
+            }
+          }
           
           // Create template
           const newTemplate = similarTemplate ? { ...similarTemplate } : {
@@ -299,6 +310,8 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
           
           newTemplate.Vehicle = newVehicleName;
           newTemplate["Planned Checkpoints"] = tpoi || 50;
+          newTemplate.Assigned = `${vehicleIdentifier.trim()} ${vehicleIdentifier.trim()}`;
+          newTemplate.Present = `${vehicleIdentifier.trim()} ${vehicleIdentifier.trim()}`;
           
           // Add to templates and vehicle map
           vehicleTemplates.push(newTemplate);
