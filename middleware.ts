@@ -56,5 +56,7 @@ export const config = {
     "/welcome",
     "/morbi",
     "/morbi/:path*",
+    "/bardoli",
+    "/bardoli/:path*",
   ],
 };
