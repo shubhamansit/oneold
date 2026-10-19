@@ -23,6 +23,10 @@ export const MORBI_WELCOME_ROUTE = "/morbi";
 
 export const MORBI_REPORTS_ROUTE = "/morbi/reports";
 
+export const BARDOLI_USERS = ["karni.bardoli@ansitindia.com"] as const;
+
+export const BARDOLI_WELCOME_ROUTE = "/bardoli";
+
 export function isDaywiseDistanceUser(email?: string | null) {
   return !!email && DAYWISE_DISTANCE_USERS.some((user) => user === email.toLowerCase());
 }
@@ -33,6 +37,10 @@ export function isHmcUser(email?: string | null) {
 
 export function isMorbiUser(email?: string | null) {
   return !!email && MORBI_USERS.some((user) => user === email.toLowerCase());
+}
+
+export function isBardoliUser(email?: string | null) {
+  return !!email && BARDOLI_USERS.some((user) => user === email.toLowerCase());
 }
 
 export function getLoginRedirectForEmail(email: string) {
@@ -50,6 +58,10 @@ export function getLoginRedirectForEmail(email: string) {
     return MORBI_WELCOME_ROUTE;
   }
 
+  if (isBardoliUser(normalizedEmail)) {
+    return BARDOLI_WELCOME_ROUTE;
+  }
+
   return EXISTING_USER_ROUTES[normalizedEmail] || "/";
 }
 
@@ -61,6 +73,9 @@ export function canAccessRoute(email: string | null | undefined, pathname: strin
   const isHmcRoute =
     pathname === HMC_WELCOME_ROUTE || pathname.startsWith(HMC_ROUTE);
   const isMorbiRoute = pathname === MORBI_WELCOME_ROUTE || pathname.startsWith(`${MORBI_WELCOME_ROUTE}/`);
+  const isBardoliRoute =
+    pathname === BARDOLI_WELCOME_ROUTE ||
+    pathname.startsWith(`${BARDOLI_WELCOME_ROUTE}/`);
 
   if (isDaywiseDistanceUser(normalizedEmail)) {
     return isDaywiseRoute;
@@ -74,10 +89,15 @@ export function canAccessRoute(email: string | null | undefined, pathname: strin
     return isMorbiRoute;
   }
 
+  if (isBardoliUser(normalizedEmail)) {
+    return isBardoliRoute;
+  }
+
   return (
     !isDaywiseRoute &&
     !isHmcRoute &&
     !isMorbiRoute &&
+    !isBardoliRoute &&
     normalizedEmail in EXISTING_USER_ROUTES
   );
 }

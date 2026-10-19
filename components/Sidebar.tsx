@@ -30,7 +30,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getCookie } from "cookies-next/client";
-import { isDaywiseDistanceUser, isHmcUser, isMorbiUser } from "@/lib/authUsers";
+import {
+  isBardoliUser,
+  isDaywiseDistanceUser,
+  isHmcUser,
+  isMorbiUser,
+} from "@/lib/authUsers";
 
 interface customeJwtPayload extends JwtPayload {
   email: string;
@@ -273,6 +278,8 @@ function AppSidebarContent({
                       ],
                     },
                   ]
+                : isBardoliUser(email)
+                ? []
                 : isDaywiseDistanceUser(email)
                 ? [
                     {
@@ -340,7 +347,7 @@ function AppSidebarContent({
                   ]
                 : [];
 
-              const menuItems = isDaywiseDistanceUser(email)
+              const menuItems = isDaywiseDistanceUser(email) || isBardoliUser(email)
                 ? []
                 : isHmcUser(email) || isMorbiUser(email)
                 ? [
