@@ -9,6 +9,7 @@ let wastZoneCache: any[] | null = null;
 let eastZoneCache: any[] | null = null;
 let generalCache: any[] | null = null;
 let brigrajsinhCache: any[] | null = null;
+let bardoliCache: any[] | null = null;
 
 function ensureArray(data: any): any[] {
   if (Array.isArray(data)) {
@@ -101,12 +102,25 @@ export async function getBRIGRAJSINH(): Promise<any[]> {
   );
 }
 
+export async function getBardoli(): Promise<any[]> {
+  if (bardoliCache) return bardoliCache;
+  try {
+    const mod = await import("./bardoli.json");
+    bardoliCache = ensureArray(mod.default || mod);
+    return bardoliCache;
+  } catch (error) {
+    console.error("Error loading bardoli data:", error);
+    return [];
+  }
+}
+
 /** Clear in-memory caches (e.g. after data updates in the same session). */
 export function clearZoneDataCaches() {
   wastZoneCache = null;
   eastZoneCache = null;
   generalCache = null;
   brigrajsinhCache = null;
+  bardoliCache = null;
 }
 
 // For backward compatibility, export empty arrays initially

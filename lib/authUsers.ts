@@ -27,6 +27,8 @@ export const BARDOLI_USERS = ["karni.bardoli@ansitindia.com"] as const;
 
 export const BARDOLI_WELCOME_ROUTE = "/bardoli";
 
+export const BARDOLI_JOB_SUMMARY_ROUTE = "/bardoli/jobsummary";
+
 export function isDaywiseDistanceUser(email?: string | null) {
   return !!email && DAYWISE_DISTANCE_USERS.some((user) => user === email.toLowerCase());
 }
@@ -59,7 +61,7 @@ export function getLoginRedirectForEmail(email: string) {
   }
 
   if (isBardoliUser(normalizedEmail)) {
-    return BARDOLI_WELCOME_ROUTE;
+    return BARDOLI_JOB_SUMMARY_ROUTE;
   }
 
   return EXISTING_USER_ROUTES[normalizedEmail] || "/";

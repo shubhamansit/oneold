@@ -279,7 +279,17 @@ function AppSidebarContent({
                     },
                   ]
                 : isBardoliUser(email)
-                ? []
+                ? [
+                    {
+                      title: "Job",
+                      items: [
+                        {
+                          name: "Job Summary",
+                          href: "/bardoli/jobsummary",
+                        },
+                      ],
+                    },
+                  ]
                 : isDaywiseDistanceUser(email)
                 ? [
                     {
@@ -347,9 +357,9 @@ function AppSidebarContent({
                   ]
                 : [];
 
-              const menuItems = isDaywiseDistanceUser(email) || isBardoliUser(email)
+              const menuItems = isDaywiseDistanceUser(email)
                 ? []
-                : isHmcUser(email) || isMorbiUser(email)
+                : isHmcUser(email) || isMorbiUser(email) || isBardoliUser(email)
                 ? [
                     {
                       id: "menu_03",
