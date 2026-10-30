@@ -102,7 +102,24 @@ function readMissedCheckpointsFromExcel(excelFilePath, year, month) {
       }
       
       // Extract route code from column 1 (index 1) - " RUTE"
-      const routeCode = row[1] != null ? String(row[1]).trim() : null;
+      // Excel may coerce values like "12-09-7820" into a date serial (year=7820).
+      let routeCode = null;
+      if (row[1] != null && row[1] !== '') {
+        if (typeof row[1] === 'number') {
+          try {
+            const parsed = XLSX.SSF.parse_date_code(row[1]);
+            if (parsed && parsed.y >= 2000) {
+              routeCode = `${String(parsed.m).padStart(2, '0')}-${String(parsed.d).padStart(2, '0')}-${parsed.y}`;
+            } else {
+              routeCode = String(row[1]).trim();
+            }
+          } catch {
+            routeCode = String(row[1]).trim();
+          }
+        } else {
+          routeCode = String(row[1]).trim();
+        }
+      }
       
       // Vehicle identifier is in column 3 (index 2) - handle both string and number
       const rawVehicle = row[2];
